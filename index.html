@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fiqi Pedia - Neon Edition</title>
+  <title>Fiqi Pedia - Jasa Suntik Sosmed</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
@@ -30,817 +30,981 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
-      overflow-x: hidden;
+      transition: background-color 0.5s ease;
+      position: relative;
+      /* Ensure body can contain absolute video */
     }
-    #welcome-screen {
+
+    /* Video Background Styles */
+    #background-video {
       position: fixed;
-      top: 0;
-      left: 0;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -2;
+      /* Placed below the main content and other elements */
+      object-fit: cover;
+    }
+    .content-overlay {
+      position: relative;
+      z-index: -1;
+      /* Placed above the video but below the main content */
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.95);
-      backdrop-filter: blur(5px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
+      background-color: rgba(0, 0, 0, 0.5);
+      /* Semi-transparent overlay to make text readable */
+    }
+    .main-content, .welcome-screen {
+        position: relative;
+        z-index: 1; /* Ensure content is on top of the video */
+    }
+
+    .hidden {
+      display: none !important;
+    }
+    .welcome-screen {
       text-align: center;
-      z-index: 1000;
-      transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+      padding: 50px;
+      animation: fadeIn 2s ease-in-out;
     }
-    #welcome-screen.hidden {
-      opacity: 0;
-      visibility: hidden;
-    }
-    .welcome-content {
-      animation: fadeIn 1.5s ease-in-out;
-    }
-    .welcome-content h1 {
+    .welcome-screen h1 {
       font-family: 'Orbitron', sans-serif;
-      font-size: clamp(3rem, 8vw, 5rem);
-      font-weight: 700;
-      margin-bottom: 20px;
-      text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue), 0 0 30px var(--neon-blue), 0 0 40px var(--neon-blue), 0 0 50px var(--neon-blue);
-      animation: flicker 1.5s infinite alternate;
+      font-size: 3em;
+      text-transform: uppercase;
+      text-shadow: 0 0 5px #fff, 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue), 0 0 40px var(--neon-magenta), 0 0 80px var(--neon-magenta);
+      animation: glow 1.5s infinite alternate;
     }
-    .welcome-content p {
-      font-size: clamp(1rem, 3vw, 1.5rem);
-      color: var(--subtle-text);
-      max-width: 600px;
-      margin-bottom: 40px;
+    .welcome-screen p {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: var(--neon-green);
     }
     .enter-btn {
-      padding: 15px 40px;
-      background: transparent;
-      color: var(--neon-magenta);
-      text-decoration: none;
-      border: 2px solid var(--neon-magenta);
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--neon-magenta);
-      box-shadow: 0 0 10px var(--neon-magenta);
-      text-transform: uppercase;
+      background: linear-gradient(45deg, var(--neon-magenta), var(--neon-blue));
+      color: var(--dark-bg);
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-top: 30px;
       cursor: pointer;
+      border-radius: 50px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-transform: uppercase;
     }
     .enter-btn:hover {
-      background: var(--neon-magenta);
-      color: var(--dark-bg);
-      text-shadow: none;
-      box-shadow: 0 0 20px var(--neon-magenta);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px var(--neon-magenta), 0 0 30px var(--neon-blue);
     }
-    .main-content-wrapper {
-      display: none;
+    .main-content {
       width: 100%;
-      max-width: 1200px;
+      max-width: 900px;
+      animation: fadeIn 2s ease-in-out;
     }
-    header {
+    .profile-section {
       text-align: center;
-      margin-bottom: 40px;
-      padding-top: 20px;
-      animation: slideInDown 1s ease-in-out;
+      padding: 30px 0;
+      border-bottom: 2px solid var(--neon-green);
+      margin-bottom: 30px;
     }
-    .profile-pic-container {
+    .profile-photo {
       width: 120px;
       height: 120px;
       border-radius: 50%;
-      overflow: hidden;
-      margin: 20px auto 30px auto;
-      border: 3px solid var(--neon-magenta);
-      box-shadow: 0 0 15px var(--neon-magenta), 0 0 30px rgba(255, 0, 255, 0.4);
-      animation: pulseBorder 3s infinite alternate;
-    }
-    .profile-pic {
-      width: 100%;
-      height: 100%;
+      border: 3px solid var(--neon-green);
       object-fit: cover;
+      margin-bottom: 10px;
+      box-shadow: 0 0 10px var(--neon-green);
     }
-    header h1 {
+    .profile-name {
       font-family: 'Orbitron', sans-serif;
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      font-weight: 700;
-      text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green);
-      animation: pulse 2s infinite;
-      margin-top: 15px;
-    }
-    header p {
-      font-size: clamp(0.9rem, 2vw, 1.2rem);
-      color: var(--subtle-text);
+      font-size: 2.5em;
+      text-shadow: 0 0 5px var(--neon-green);
       margin-top: 10px;
+    }
+    .profile-bio {
+      font-size: 1em;
+      color: var(--subtle-text);
     }
     .main-nav {
       display: flex;
-      gap: 15px;
-      width: 100%;
       justify-content: center;
-      margin-top: 15px;
+      gap: 15px;
+      margin-bottom: 30px;
     }
     .nav-btn {
-      padding: 12px 25px;
-      background: transparent;
+      background: var(--card-bg);
       color: var(--neon-blue);
+      border: 1px solid var(--neon-blue);
+      padding: 10px 20px;
+      border-radius: 5px;
       text-decoration: none;
-      border: 2px solid var(--neon-blue);
-      border-radius: 50px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--neon-blue);
-      box-shadow: 0 0 10px var(--neon-blue);
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.3s ease;
     }
     .nav-btn:hover {
-      background: var(--neon-blue);
+      background-color: var(--neon-blue);
       color: var(--dark-bg);
-      text-shadow: none;
-      box-shadow: 0 0 20px var(--neon-blue);
+      transform: translateY(-3px);
     }
-    .container {
+    .nav-btn i {
+      margin-right: 8px;
+    }
+    .social-links-section {
+      text-align: center;
+      padding: 30px;
+      background: var(--card-bg);
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
+      margin-bottom: 30px;
+    }
+    .social-links-section h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-magenta);
+      margin-bottom: 10px;
+      text-shadow: 0 0 5px var(--neon-magenta);
+    }
+    .social-text {
+      font-size: 1em;
+      color: var(--subtle-text);
+      max-width: 600px;
+      margin: 0 auto 20px auto;
+    }
+    .social-icons-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .social-link {
+      color: var(--text-color);
+      font-size: 2em;
+      transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
+    }
+    .social-link.whatsapp:hover {
+      color: var(--neon-green);
+      transform: scale(1.2);
+      text-shadow: 0 0 10px var(--neon-green);
+    }
+    .social-link.instagram:hover {
+      color: var(--neon-magenta);
+      transform: scale(1.2);
+      text-shadow: 0 0 10px var(--neon-magenta);
+    }
+    .social-link.tiktok:hover {
+      color: var(--neon-blue);
+      transform: scale(1.2);
+      text-shadow: 0 0 10px var(--neon-blue);
+    }
+    .content-section {
+      display: none;
+      padding: 20px;
+      border-radius: 10px;
+      background: var(--card-bg);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    }
+    .menu-container {
       display: grid;
-      gap: 25px;
-      padding: 10px;
-      width: 100%;
-      max-width: 1200px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
     }
     .menu-card {
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      animation: slideInUp 0.8s ease-out;
-      border: 2px solid var(--neon-blue);
+      background: #111;
+      border: 1px solid var(--neon-magenta);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
     .menu-card:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 0 30px var(--neon-blue), 0 0 50px var(--neon-magenta);
-      border-color: var(--neon-magenta);
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px var(--neon-magenta);
     }
     .menu-card h2 {
       font-family: 'Orbitron', sans-serif;
-      font-size: clamp(1.6rem, 4vw, 2.2rem);
-      color: var(--neon-blue);
-      margin-bottom: 25px;
-      text-align: center;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      text-shadow: 0 0 5px var(--neon-blue);
-    }
-    .menu-card h2 i {
-      font-size: 1.8em;
-      color: var(--neon-magenta);
-      text-shadow: 0 0 10px var(--neon-magenta);
+      color: var(--neon-green);
+      text-shadow: 0 0 5px var(--neon-green);
+      margin-bottom: 5px;
     }
     .service-category {
-      background: #222222;
-      color: var(--neon-green);
-      font-weight: 600;
-      padding: 15px;
-      margin-bottom: 10px;
-      border-radius: 10px;
-      text-align: center;
-      font-size: 1.1rem;
-      letter-spacing: 1px;
-      box-shadow: inset 0 0 5px var(--neon-green);
+      font-size: 0.9em;
+      color: var(--subtle-text);
+      font-style: italic;
     }
-    .service-list {
-      display: grid;
-      gap: 10px;
-    }
-    .service-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 20px;
-      background: #1a1a1a;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: 1px solid #333333;
-      box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.1);
-    }
-    .service-item:hover {
-      background: #222222;
-      transform: scale(1.02);
-      box-shadow: 0 0 15px var(--neon-blue), 0 0 25px var(--neon-blue);
-      border-color: var(--neon-blue);
-    }
-    .service-item .service-name {
-      font-weight: 500;
-      flex-grow: 1;
+    .menu-card p {
+      margin-top: 10px;
       color: var(--text-color);
     }
-    .service-item .service-price {
-      font-weight: 700;
+    .menu-card .price {
+      font-size: 1.1em;
+      font-weight: bold;
       color: var(--neon-magenta);
-      font-size: 1.1rem;
-      text-shadow: 0 0 5px var(--neon-magenta);
     }
-    .note-cheap-price {
-        margin-top: 30px;
-        text-align: center;
-        padding: 15px;
-        background-color: rgba(255, 0, 255, 0.1);
-        color: var(--neon-magenta);
-        border: 1px dashed var(--neon-magenta);
-        border-radius: 10px;
-        font-weight: 600;
-        text-shadow: 0 0 5px var(--neon-magenta);
-    }
-    .free-service-note {
-        margin-top: 15px;
-        text-align: center;
-        padding: 10px;
-        background-color: rgba(0, 255, 0, 0.1);
-        color: var(--neon-green);
-        border: 1px dashed var(--neon-green);
-        border-radius: 10px;
-        font-size: 0.9rem;
-    }
-    #cta-container {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      max-width: 450px;
-      z-index: 1000;
-      display: flex;
-      justify-content: center;
-    }
-    .whatsapp-cta {
-      display: none;
-      width: 100%;
-      background: transparent;
-      color: var(--neon-green);
-      border: 2px solid var(--neon-green);
-      font-weight: 700;
-      text-align: center;
-      padding: 18px;
-      border-radius: 50px;
-      text-decoration: none;
-      box-shadow: 0 0 15px var(--neon-green);
-      animation: fadeIn 0.5s forwards, pulse 2s infinite;
-      font-size: 1.1rem;
-      text-transform: uppercase;
-      text-shadow: 0 0 5px var(--neon-green);
-    }
-    .whatsapp-cta:hover {
-      background: var(--neon-green);
-      color: var(--dark-bg);
-      box-shadow: 0 0 30px var(--neon-green);
-      transform: scale(1.05);
+    .service-section-divider {
+      grid-column: 1 / -1;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--neon-blue), transparent);
+      margin: 20px 0;
     }
     .whatsapp-footer {
-      display: block;
-      width: 90%;
-      max-width: 450px;
-      background: transparent;
-      border: 2px solid var(--neon-blue);
-      color: var(--neon-blue);
-      padding: 18px 25px;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 1.2rem;
-      text-decoration: none;
       text-align: center;
-      margin: 50px auto;
-      transition: all 0.4s ease;
-      box-shadow: 0 0 15px var(--neon-blue);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      text-shadow: 0 0 5px var(--neon-blue);
+      margin-top: 30px;
+      padding: 15px;
+      background: var(--card-bg);
+      border-top: 2px solid var(--neon-blue);
     }
-    .whatsapp-footer:hover {
-      background: var(--neon-blue);
-      color: var(--dark-bg);
-      transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 0 30px var(--neon-blue);
+    .whatsapp-footer a {
+      color: var(--neon-blue);
+      text-decoration: none;
+      font-weight: bold;
     }
-    @media (min-width: 768px) {
-      .container {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .service-list {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-      }
+    .buy-now-btn {
+      display: none;
+      background: linear-gradient(45deg, #FF69B4, #8A2BE2);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.1em;
+      font-weight: bold;
+      margin-top: 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
     }
-    @media (min-width: 1024px) {
-      .container {
-        grid-template-columns: repeat(3, 1fr);
-      }
-      .service-list {
-        grid-template-columns: repeat(1, 1fr);
-      }
+    .buy-now-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #FF69B4;
+    }
+    .music-control {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      cursor: pointer;
+      font-size: 1.5em;
+      color: var(--neon-green);
+      z-index: 101;
+    }
+    .music-control:hover {
+      transform: scale(1.1);
+      text-shadow: 0 0 10px var(--neon-green);
     }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
-    @keyframes slideInUp {
-      from { opacity: 0; transform: translateY(50px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes slideInDown {
-      from { opacity: 0; transform: translateY(-50px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes pulse {
-      0% { text-shadow: 0 0 5px var(--neon-green), 0 0 10px var(--neon-green); }
-      50% { text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green); }
-      100% { text-shadow: 0 0 5px var(--neon-green), 0 0 10px var(--neon-green); }
-    }
-    @keyframes pulseBorder {
-      0% {
-        box-shadow: 0 0 10px var(--neon-magenta), 0 0 20px rgba(255, 0, 255, 0.3);
-        border-color: var(--neon-magenta);
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px #fff, 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
       }
-      100% {
-        box-shadow: 0 0 20px var(--neon-magenta), 0 0 40px rgba(255, 0, 255, 0.6);
-        border-color: var(--neon-blue);
-      }
-    }
-    @keyframes flicker {
-      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-        text-shadow:
-          0 0 5px var(--neon-blue),
-          0 0 10px var(--neon-blue),
-          0 0 20px var(--neon-blue),
-          0 0 40px var(--neon-blue),
-          0 0 80px var(--neon-blue);
-      }
-      20%, 24%, 55% {
-        text-shadow: none;
+      to {
+        text-shadow: 0 0 10px #fff, 0 0 20px var(--neon-magenta), 0 0 40px var(--neon-magenta), 0 0 80px var(--neon-blue), 0 0 120px var(--neon-blue);
       }
     }
   </style>
 </head>
 <body>
-  <audio id="background-music" loop>
-    <source src="https://files.catbox.moe/b7qx5u.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
 
-  <div id="welcome-screen">
-    <div class="welcome-content">
-      <h1>Fiqi Pedia</h1>
-      <p>Tingkatkan Kualitas Media Sosial Anda dengan Cepat, Aman, dan Terjangkau. Dapatkan Solusi Terbaik untuk Pertumbuhan Digital Anda.</p>
-      <button id="enter-btn" class="enter-btn">Masuk</button>
-    </div>
-  </div>
+  <video autoplay muted loop id="background-video">
+    <source src="https://files.catbox.moe/tenyf4.mp4" type="video/mp4">
+  </video>
 
-  <div id="main-content" class="main-content-wrapper">
-    <header>
-      <div class="profile-pic-container">
-        <img src="https://files.catbox.moe/159nw2.jpg" alt="Profile Picture" class="profile-pic">
-      </div>
-      <h1>FIQI PEDIA</h1>
-      <p>Tingkatkan Kualitas Media Sosial Anda Sekarang Juga.</p>
-      <div class="main-nav">
-        <a href="#" id="show-menu" class="nav-btn">Menu Utama</a>
-      </div>
-    </header>
+  <div class="main-content" id="mainContent">
     
-    <div id="menu-container" class="container">
-      <section class="menu-card">
-        <h2><i class="fas fa-gift"></i>LAYANAN GRATIS</h2>
-        <div class="note-cheap-price">
-          Catatan: Pastikan Anda mengisi data dengan benar.
-          Akun wajib public
-        </div>
-        <div class="free-service-note">
-          ( Ketika Sudah mengisi data, followers akan secara otomatis terkirim oleh sistem) Proses 3x 24 jam
-        </div>
-        <div class="service-list">
-            <div class="service-item free-service-item" data-service="Berbagi Followers Instagram" data-price="0" data-url="http://localhost:3000">
-                <span class="service-name">200 Folowers Instagram</span><span class="service-price">Rp 0</span>
-            </div>
-        </div>
-      </section>
-      <section class="menu-card">
-        <h2><i class="fab fa-instagram"></i>MENU INSTAGRAM</h2>
-        <div class="service-category">𝗩𝗶𝗲𝘄 𝗜𝗻𝘀𝘁𝗮𝗴𝗿𝗮𝗺</div>
-        <div class="service-list">
-            <div class="service-item" data-service="100.000 View Instagram" data-price="3.500">
-                <span class="service-name">100.000 View</span><span class="service-price">3.500</span>
-            </div>
-            <div class="service-item" data-service="200.000 View Instagram" data-price="5.500">
-                <span class="service-name">200.000 View</span><span class="service-price">5.500</span>
-            </div>
-            <div class="service-item" data-service="300.000 View Instagram" data-price="8.000">
-                <span class="service-name">300.000 View</span><span class="service-price">8.000</span>
-            </div>
-            <div class="service-item" data-service="500.000 View Instagram" data-price="13.000">
-                <span class="service-name">500.000 View</span><span class="service-price">13.000</span>
-            </div>
-            <div class="service-item" data-service="1.000.000 View Instagram" data-price="25.000">
-                <span class="service-name">1.000.000 View</span><span class="service-price">25.000</span>
-            </div>
-        </div>
-        <div class="service-category">𝗟𝗶𝗸𝗲 𝗜𝗻𝘀𝘁𝗮gram ( akun indo )</div>
-        <div class="service-list">
-            <div class="service-item" data-service="1.000 Likes Instagram" data-price="5.000">
-                <span class="service-name">1.000 Likes</span><span class="service-price">5.000</span>
-            </div>
-            <div class="service-item" data-service="2.000 Likes Instagram" data-price="10.000">
-                <span class="service-name">2.000 Likes</span><span class="service-price">10.000</span>
-            </div>
-            <div class="service-item" data-service="3.000 Likes Instagram" data-price="15.000">
-                <span class="service-name">3.000 Likes</span><span class="service-price">15.000</span>
-            </div>
-            <div class="service-item" data-service="5.000 Likes Instagram" data-price="21.000">
-                <span class="service-name">5.000 Likes</span><span class="service-price">21.000</span>
-            </div>
-            <div class="service-item" data-service="10.000 Likes Instagram" data-price="45.000">
-                <span class="service-name">10.000 Likes</span><span class="service-price">45.000</span>
-            </div>
-        </div>
-        <div class="service-category">𝗦𝗮𝘃𝗲</div>
-        <div class="service-list">
-            <div class="service-item" data-service="1.000 Save Instagram" data-price="3.000">
-                <span class="service-name">1.000 Save</span><span class="service-price">3.000</span>
-            </div>
-            <div class="service-item" data-service="2.000 Save Instagram" data-price="5.000">
-                <span class="service-name">2.000 Save</span><span class="service-price">5.000</span>
-            </div>
-            <div class="service-item" data-service="3.000 Save Instagram" data-price="7.500">
-                <span class="service-name">3.000 Save</span><span class="service-price">7.500</span>
-            </div>
-            <div class="service-item" data-service="5.000 Save Instagram" data-price="12.000">
-                <span class="service-name">5.000 Save</span><span class="service-price">12.000</span>
-            </div>
-            <div class="service-item" data-service="10.000 Save Instagram" data-price="25.000">
-                <span class="service-name">10.000 Save</span><span class="service-price">25.000</span>
-            </div>
-        </div>
-        <div class="service-category">𝗙𝗼𝗹𝗹𝗼𝘄𝗲𝗿𝘀 ( indo aktif )</div>
-        <div class="service-list">
-            <div class="service-item" data-service="100 Followers Instagram (Indo aktif)" data-price="3.000">
-                <span class="service-name">100 Followers</span><span class="service-price">3.000</span>
-            </div>
-            <div class="service-item" data-service="200 Followers Instagram (Indo aktif)" data-price="6.000">
-                <span class="service-name">200 Followers</span><span class="service-price">6.000</span>
-            </div>
-            <div class="service-item" data-service="300 Followers Instagram (Indo aktif)" data-price="9.000">
-                <span class="service-name">300 Followers</span><span class="service-price">9.000</span>
-            </div>
-            <div class="service-item" data-service="500 Followers Instagram (Indo aktif)" data-price="15.000">
-                <span class="service-name">500 Followers</span><span class="service-price">15.000</span>
-            </div>
-            <div class="service-item" data-service="1000 Followers Instagram (Indo aktif)" data-price="28.000">
-                <span class="service-name">1000 Followers</span><span class="service-price">28.000</span>
-            </div>
-        </div>
-        <div class="service-category">𝗙𝗼𝗹𝗹𝗼𝘄𝗲𝗿𝘀 ( working, akun bule )</div>
-        <div class="service-list">
-            <div class="service-item" data-service="100 Followers Instagram (Working)" data-price="2.000">
-                <span class="service-name">100 Followers</span><span class="service-price">2.000</span>
-            </div>
-            <div class="service-item" data-service="200 Followers Instagram (Working)" data-price="4.000">
-                <span class="service-name">200 Followers</span><span class="service-price">4.000</span>
-            </div>
-            <div class="service-item" data-service="300 Followers Instagram (Working)" data-price="6.000">
-                <span class="service-name">300 Followers</span><span class="service-price">6.000</span>
-            </div>
-            <div class="service-item" data-service="500 Followers Instagram (Working)" data-price="8.000">
-                <span class="service-name">500 Followers</span><span class="service-price">8.000</span>
-            </div>
-            <div class="service-item" data-service="1000 Followers Instagram (Working)" data-price="18.000">
-                <span class="service-name">1000 Followers</span><span class="service-price">18.000</span>
-            </div>
-        </div>
-      </section> 
-      <section class="menu-card">
-        <h2><i class="fab fa-tiktok"></i>MENU TIKTOK</h2>
-        <div class="service-category">𝗟𝗶𝘀𝘁 𝗩𝗶𝗲𝘄 𝗧𝗶𝗸𝘁𝗼𝗸</div>
-        <div class="service-list">
-            <div class="service-item" data-service="10.000 View Tiktok" data-price="1.000">
-                <span class="service-name">10.000 View</span><span class="service-price">1.000</span>
-            </div>
-            <div class="service-item" data-service="50.000 View Tiktok" data-price="4.000">
-                <span class="service-name">50.000 View</span><span class="service-price">4.000</span>
-            </div>
-            <div class="service-item" data-service="100.000 View Tiktok" data-price="8.000">
-                <span class="service-name">100.000 View</span><span class="service-price">8.000</span>
-            </div>
-        </div>
-        <div class="service-category">𝗟𝗶𝗸𝗲𝘀 𝗧𝗶𝗸𝘁𝗼𝗸 ( Akun Indo )</div>
-        <div class="service-list">
-            <div class="service-item" data-service="1.000 Likes Tiktok" data-price="5.000">
-                <span class="service-name">1.000 Likes</span><span class="service-price">5.000</span>
-            </div>
-            <div class="service-item" data-service="2.000 Likes Tiktok" data-price="10.000">
-                <span class="service-name">2.000 Likes</span><span class="service-price">10.000</span>
-            </div>
-            <div class="service-item" data-service="3.000 Likes Tiktok" data-price="15.000">
-                <span class="service-name">3.000 Likes</span><span class="service-price">15.000</span>
-            </div>
-            <div class="service-item" data-service="4.000 Likes Tiktok" data-price="20.000">
-                <span class="service-name">4.000 Likes</span><span class="service-price">20.000</span>
-            </div>
-            <div class="service-item" data-service="5.000 Likes Tiktok" data-price="23.000">
-                <span class="service-name">5.000 Likes</span><span class="service-price">23.000</span>
-            </div>
-            <div class="service-item" data-service="10.000 Likes Tiktok" data-price="45.000">
-                <span class="service-name">10.000 Likes</span><span class="service-price">45.000</span>
-            </div>
-        </div>
-        <div class="service-category">𝗙𝗮𝘃𝗼𝗿𝗶𝘁 / 𝗦𝗮𝘃𝗲</div>
-        <div class="service-list">
-            <div class="service-item" data-service="100 Save Tiktok" data-price="2.000">
-                <span class="service-name">100 Save</span><span class="service-price">2.000</span>
-            </div>
-            <div class="service-item" data-service="300 Save Tiktok" data-price="5.000">
-                <span class="service-name">300 Save</span><span class="service-price">5.000</span>
-            </div>
-            <div class="service-item" data-service="500 Save Tiktok" data-price="8.500">
-                <span class="service-name">500 Save</span><span class="service-price">8.500</span>
-            </div>
-            <div class="service-item" data-service="1.000 Save Tiktok" data-price="16.500">
-                <span class="service-name">1.000 Save</span><span class="service-price">16.500</span>
-            </div>
-        </div>
-        <div class="service-category">𝗙𝗼𝗹𝗹𝗼𝘄𝗲𝗿𝘀 ( Emergency )</div>
-        <div class="service-list">
-            <div class="service-item" data-service="100 Followers Tiktok" data-price="2.500">
-                <span class="service-name">100 Followers</span><span class="service-price">2.500</span>
-            </div>
-            <div class="service-item" data-service="200 Followers Tiktok" data-price="3.500">
-                <span class="service-name">200 Followers</span><span class="service-price">3.500</span>
-            </div>
-            <div class="service-item" data-service="300 Followers Tiktok" data-price="4.500">
-                <span class="service-name">300 Followers</span><span class="service-price">4.500</span>
-            </div>
-            <div class="service-item" data-service="500 Followers Tiktok" data-price="8.000">
-                <span class="service-name">500 Followers</span><span class="service-price">8.000</span>
-            </div>
-            <div class="service-item" data-service="1000 Followers Tiktok" data-price="14.000">
-                <span class="service-name">1000 Followers</span><span class="service-price">14.000</span>
-            </div>
-        </div>
-      </section>
-      
-      <section class="menu-card">
-        <h2><i class="fab fa-facebook"></i>MENU FACEBOOK</h2>
-        <div class="service-category">𝗙𝗼𝗹𝗹𝗼𝘄𝗲𝗿𝘀 𝗙𝗮𝗰𝗲𝗯𝗼𝗼𝗸 ( Page )</div>
-        <div class="service-list">
-            <div class="service-item" data-service="100 Followers Facebook" data-price="1.200">
-                <span class="service-name">100 Followers</span><span class="service-price">1.200</span>
-            </div>
-            <div class="service-item" data-service="200 Followers Facebook" data-price="2.200">
-                <span class="service-name">200 Followers</span><span class="service-price">2.200</span>
-            </div>
-            <div class="service-item" data-service="300 Followers Facebook" data-price="3.200">
-                <span class="service-name">300 Followers</span><span class="service-price">3.200</span>
-            </div>
-            <div class="service-item" data-service="500 Followers Facebook" data-price="5.500">
-                <span class="service-name">500 Followers</span><span class="service-price">5.500</span>
-            </div>
-            <div class="service-item" data-service="1000 Followers Facebook" data-price="12.000">
-                <span class="service-name">1000 Followers</span><span class="service-price">12.000</span>
-            </div>
-        </div>
-        <div class="service-category">𝗙𝗼𝗹𝗹𝗼𝘄𝗲𝗿𝘀 𝗙𝗮𝗰𝗲𝗯𝗼𝗼𝗸 ( Profile )</div>
-        <div class="service-list">
-            <div class="service-item" data-service="100 Followers Facebook" data-price="1.200">
-                <span class="service-name">100 Followers</span><span class="service-price">1.000</span>
-            </div>
-            <div class="service-item" data-service="200 Followers Facebook" data-price="2.000">
-                <span class="service-name">200 Followers</span><span class="service-price">2.200</span>
-            </div>
-            <div class="service-item" data-service="300 Followers Facebook" data-price="3.000">
-                <span class="service-name">300 Followers</span><span class="service-price">3.000</span>
-            </div>
-            <div class="service-item" data-service="500 Followers Facebook" data-price="5.000">
-                <span class="service-name">500 Followers</span><span class="service-price">5.000</span>
-            </div>
-            <div class="service-item" data-service="1000 Followers Facebook" data-price="10.000">
-                <span class="service-name">1000 Followers</span><span class="service-price">10.000</span>
-            </div>
-        </div>
-        <div class="service-category">𝗟𝗶𝗸𝗲 𝗙𝗮𝗰𝗲𝗯𝗼𝗼𝗸</div>
-        <div class="service-list">
-            <div class="service-item" data-service="1.000 Likes Facebook" data-price="5.000">
-                <span class="service-name">1.000 Likes</span><span class="service-price">5.000</span>
-            </div>
-            <div class="service-item" data-service="2.000 Likes Facebook" data-price="10.000">
-                <span class="service-name">2.000 Likes</span><span class="service-price">10.000</span>
-            </div>
-            <div class="service-item" data-service="3.000 Likes Facebook" data-price="15.000">
-                <span class="service-name">3.000 Likes</span><span class="service-price">15.000</span>
-            </div>
-            <div class="service-item" data-service="5.000 Likes Facebook" data-price="23.000">
-                <span class="service-name">5.000 Likes</span><span class="service-price">23.000</span>
-            </div>
-            <div class="service-item" data-service="10.000 Likes Facebook" data-price="45.000">
-                <span class="service-name">1000 Likes</span><span class="service-price">45.000</span>
-            </div>
-        </div>
-     <div class="service-category">𝗞𝗼𝗺𝗲𝗻 𝗙𝗮𝗰𝗲𝗯𝗼𝗼𝗸 ( Indonesia )</div>
-        <div class="service-list">
-            <div class="service-item" data-service="KOMEN FB" data-price="xxxxx">
-                <span class="service-name">TIDAK TERSEDIA</span><span class="service-price"></span>
-            </div>
-        </div>
-      </section>
-
-      <section class="menu-card">
-        <h2><i class="fas fa-video"></i>MENU SNACK VIDEO</h2>
-        <div class="service-category">𝗙𝗼𝗹𝗹𝗼𝘄𝗲𝗿𝘀 𝗦𝗻𝗮𝗰𝗸 𝗩𝗶𝗱𝗲𝗼</div>
-        <div class="service-list">
-            
-            <div class="service-item" data-service="1000 Followers Snack Video" data-price="KOSONG">
-                <span class="service-name">TIDAK TERSEDIA</span>
-            </div>
-        </div>
-        <div class="service-category">𝗟𝗶𝗸𝗲 𝗦𝗻𝗮𝗰𝗸 𝗩𝗶𝗱𝗲𝗼</div>
-        <div class="service-list">
-            <div class="service-item" data-service="100 Likes Snack Video" data-price="2.500">
-                <span class="service-name">100 Likes</span><span class="service-price">2.500</span>
-            </div>
-            <div class="service-item" data-service="200 Likes Snack Video" data-price="4.500">
-                <span class="service-name">200 Likes</span><span class="service-price">4.500</span>
-            </div>
-            <div class="service-item" data-service="300 Likes Snack Video" data-price="7.000">
-                <span class="service-name">300 Likes</span><span class="service-price">7.000</span>
-            </div>
-            <div class="service-item" data-service="500 Likes Snack Video" data-price="11.000">
-                <span class="service-name">500 Likes</span><span class="service-price">11.000</span>
-            </div>
-            <div class="service-item" data-service="1000 Likes Snack Video" data-price="23.500">
-                <span class="service-name">1000 Likes</span><span class="service-price">23.500</span>
-            </div>
-        </div>
-        <div class="service-category">𝗞𝗼𝗺𝗲𝗻 𝗦𝗻𝗮𝗰𝗸 𝗩𝗶𝗱𝗲𝗼</div>
-        <div class="service-list">
-            <div class="service-item" data-service="100 Komen Snack Video" data-price="$$$$$$">
-                <span class="service-name">TIDAK TERSEDIA</span><span class="service-price"></span>
-            
-      </section>
-
-      <section class="menu-card">
-        <h2><i class="fab fa-youtube"></i>MENU YOUTUBE</h2>
-        <div class="service-category">𝗦𝘂𝗯𝘀𝗰𝗿𝗶𝗯𝗲 𝗬𝗼𝘂𝘁𝘂𝗯𝗲</div>
-        <div class="service-list">
-            <div class="service-item" data-service="100 Subscribe Youtube" data-price="6.000">
-                <span class="service-name">100 Subscribe</span><span class="service-price">6.000</span>
-            </div>
-            <div class="service-item" data-service="200 Subscribe Youtube" data-price="12.000">
-                <span class="service-name">200 Subscribe</span><span class="service-price">12.000</span>
-            </div>
-            <div class="service-item" data-service="300 Subscribe Youtube" data-price="16.000">
-                <span class="service-name">300 Subscribe</span><span class="service-price">16.000</span>
-            </div>
-            <div class="service-item" data-service="500 Subscribe Youtube" data-price="26.000">
-                <span class="service-name">500 Subscribe</span><span class="service-price">26.000</span>
-            </div>
-            <div class="service-item" data-service="1000 Subscribe Youtube" data-price="51.000">
-                <span class="service-name">1000 Subscribe</span><span class="service-price">51.000</span>
-            </div>
-        </div>
-        <div class="service-category">𝗟𝗶𝗸𝗲 𝗬𝗼𝘂𝘁𝘂𝗯𝗲</div>
-        <div class="service-list">
-            <div class="service-item" data-service="1.000 Likes Youtube" data-price="1.500">
-                <span class="service-name">1.000 Likes</span><span class="service-price">1.500</span>
-            </div>
-            <div class="service-item" data-service="2.000 Likes Youtube" data-price="3.000">
-                <span class="service-name">2.000 Likes</span><span class="service-price">3.000</span>
-            </div>
-            <div class="service-item" data-service="3.000 Likes Youtube" data-price="5.000">
-                <span class="service-name">3.000 Likes</span><span class="service-price">5.000</span>
-            </div>
-            <div class="service-item" data-service="5.000 Likes Youtube" data-price="7.500">
-                <span class="service-name">5.000 Likes</span><span class="service-price">7.500</span>
-            </div>
-            <div class="service-item" data-service="10.000 Likes Youtube" data-price="16.000">
-                <span class="service-name">10.000 Likes</span><span class="service-price">16.000</span>
-            </div>
-        </div>
-        <div class="service-category">𝗩𝗶𝗲𝘄 𝗬𝗼𝘂𝘁𝘂𝗯𝗲</div>
-        <div class="service-list">
-            <div class="service-item" data-service="1000 Views Youtube" data-price="$$$$$$">
-                <span class="service-name">1000 Views</span><span class="service-price">$$$$$$</span>
-            </div>
-            <div class="service-item" data-service="5000 Views Youtube" data-price="$$$$$$">
-                <span class="service-name">5000 Views</span><span class="service-price">$$$$$$</span>
-            </div>
-            <div class="service-item" data-service="10000 Views Youtube" data-price="$$$$$$">
-                <span class="service-name">10000 Views</span><span class="service-price">$$$$$$</span>
-            </div>
-            <div class="service-item" data-service="50000 Views Youtube" data-price="$$$$$$">
-                <span class="service-name">50000 Views</span><span class="service-price">$$$$$$</span>
-            </div>
-            <div class="service-item" data-service="100000 Views Youtube" data-price="$$$$$$">
-                <span class="service-name">100000 Views</span><span class="service-price">$$$$$$</span>
-            </div>
-        </div>
-        <div class="service-category">𝗞𝗼𝗺𝗲𝗻 𝗬𝗼𝘂𝘁𝘂𝗯𝗲</div>
-        <div class="service-list">
-            <div class="service-item" data-service="10 Komen Youtube" data-price="$$$$$$">
-                <span class="service-name">10 Komen</span><span class="service-price">$$$$$$</span>
-            </div>
-            <div class="service-item" data-service="20 Komen Youtube" data-price="$$$$$$">
-                <span class="service-name">20 Komen</span><span class="service-price">$$$$$$</span>
-            </div>
-            <div class="service-item" data-service="50 Komen Youtube" data-price="$$$$$$">
-                <span class="service-name">50 Komen</span><span class="service-price">$$$$$$</span>
-            </div>
-            <div class="service-item" data-service="100 Komen Youtube" data-price="$$$$$$">
-                <span class="service-name">100 Komen</span><span class="service-price">$$$$$$</span>
-            </div>
-            <div class="service-item" data-service="500 Komen Youtube" data-price="$$$$$$">
-                <span class="service-name">500 Komen</span><span class="service-price">$$$$$$</span>
-            </div>
-        </div>
-      </section>
-
-      <section class="menu-card">
-        <h2><i class="fab fa-spotify"></i>MENU SPOTIFY</h2>
-        <div class="service-category">𝗙𝗼𝗹𝗹𝗼𝘄𝗲𝗿𝘀 𝗦𝗽𝗼𝘁𝗶𝗳𝘆</div>
-        <div class="service-list">
-            <div class="service-item" data-service="100 Followers Spotify" data-price="1.000">
-                <span class="service-name">100 Followers</span><span class="service-price">1.000</span>
-            </div>
-            <div class="service-item" data-service="200 Followers Spotify" data-price="2.000">
-                <span class="service-name">200 Followers</span><span class="service-price">2.000</span>
-            </div>
-            <div class="service-item" data-service="300 Followers Spotify" data-price="3.000">
-                <span class="service-name">300 Followers</span><span class="service-price">3.000</span>
-            </div>
-            <div class="service-item" data-service="500 Followers Spotify" data-price="4.000">
-                <span class="service-name">500 Followers</span><span class="service-price">4.000</span>
-            </div>
-            <div class="service-item" data-service="1000 Followers Spotify" data-price="6.000">
-                <span class="service-name">1000 Followers</span><span class="service-price">6.000</span>
-            </div>
-        </div>
-        
-        </div>
-      </section>
-
-      <section class="menu-card">
-        <h2><i class="fas fa-shopping-bag"></i>MENU SHOPEE</h2>
-        <div class="service-category">Followers 𝗦𝗵𝗼𝗽𝗲𝗲 𝗜𝗻𝗱𝗼𝗻𝗲𝘀𝗶𝗮</div>
-        <div class="service-list">
-            <div class="service-item" data-service="1.000 Foll Shopee Indonesia" data-price="3.000">
-                <span class="service-name">1.000 Followers</span><span class="service-price">3.000</span>
-            </div>
-            <div class="service-item" data-service="2.000 Foll Shopee Indonesia" data-price="6.000">
-                <span class="service-name">2.000 Followers</span><span class="service-price">6.000</span>
-            </div>
-            <div class="service-item" data-service="3.000 Foll Shopee Indonesia" data-price="9.000">
-                <span class="service-name">3.000 Followers</span><span class="service-price">9.000</span>
-            </div>
-            <div class="service-item" data-service="5.000 Foll Shopee Indonesia" data-price="15.000">
-                <span class="service-name">5.000 Followers</span><span class="service-price">15.000</span>
-            </div>
-            <div class="service-item" data-service="10.000 Foll Shopee Indonesia" data-price="30.000">
-                <span class="service-name">1000 Followers</span><span class="service-price">30.000</span>
-            </div>
-        </div>
-        <div class="service-category">𝗩𝗶𝗲𝘄𝘀 𝗦𝗵𝗼𝗽𝗲𝗲 𝗩𝗶𝗱𝗲𝗼 𝗜𝗻𝗱𝗼𝗻𝗲𝘀𝗶𝗮</div>
-        <div class="service-list">
-            <div class="service-item" data-service="1000 Views Shopee Video Indonesia" data-price="$$$$$$">
-                <span class="service-name">1000 Views</span><span class="service-price">$$$$$$</span>
-            </div>
-            <div class="service-item" data-service="5000 Views Shopee Video Indonesia" data-price="$$$$$$">
-                <span class="service-name">5000 Views</span><span class="service-price">$$$$$$</span>
-            </div>
-            <div class="service-item" data-service="10000 Views Shopee Video Indonesia" data-price="$$$$$$">
-                <span class="service-name">10000 Views</span><span class="service-price">$$$$$$</span>
-            </div>
-            <div class="service-item" data-service="50000 Views Shopee Video Indonesia" data-price="$$$$$$">
-                <span class="service-name">50000 Views</span><span class="service-price">$$$$$$</span>
+    <div class="profile-section">
+      <h1 class="profile-name">FIQI PEDIA</h1>
+      <p class="profile-bio">Sedia Jasa, Akun, dan Top Up Berbagai Game</p>
     </div>
+    
+    <nav class="main-nav">
+      <a href="#" class="nav-btn"><i class="fas fa-home"></i> Home</a>
+      <a href="https://poki.com/id" class="nav-btn" target="_blank"><i class="fas fa-gamepad"></i> Game</a>
+      <a href="#" id="showMenuBtn" class="nav-btn"><i class="fas fa-bars"></i> Show Menu</a>
+    </nav>
 
+    <div class="social-links-section">
+      <h2>Terhubung dengan Kami</h2>
+      <p class="social-text">
+        Kami bukan sekadar layanan, kami adalah komunitas. Ikuti perjalanan kami di media sosial untuk mendapatkan pembaruan eksklusif, penawaran spesial, dan melihat bukti nyata dari setiap layanan yang kami berikan. Jadikan interaksi digital Anda lebih dari sekadar transaksi. Mari kita bangun koneksi!
+      </p>
+      <div class="social-icons-container">
+        <a href="https://wa.me/6287715125270" target="_blank" class="social-link whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://www.instagram.com/kulo.putra08" target="_blank" class="social-link instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.tiktok.com/@sallye_08" target="_blank" class="social-link tiktok">
+          <i class="fab fa-tiktok"></i>
+        </a>
+      </div>
     </div>
+    <div class="menu-container" id="menuContainer">
 
-    <div class="note-cheap-price">
-      **Catatan:** Kalau ada yang lebih murah hubungi aku yaa kak.
+      <div class="service-category-title">TikTok Services</div>
+      <div class="menu-card" data-service="Jasa 1000 Followers TikTok" data-price="45.000">
+        <h2>Jasa 1000 Followers TikTok</h2>
+        <div class="service-category">Jasa TikTok</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 45.000</span>
+      </div>
+      <div class="menu-card" data-service="Jasa 1000 Likes TikTok" data-price="25.000">
+        <h2>Jasa 1000 Likes TikTok</h2>
+        <div class="service-category">Jasa TikTok</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 25.000</span>
+      </div>
+      <div class="menu-card" data-service="10.000 View Tiktok" data-price="1.000">
+        <h2>10.000 View Tiktok</h2>
+        <div class="service-category">List View TikTok</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 1.000</span>
+      </div>
+      <div class="menu-card" data-service="50.000 View Tiktok" data-price="4.000">
+        <h2>50.000 View Tiktok</h2>
+        <div class="service-category">List View TikTok</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 4.000</span>
+      </div>
+      <div class="menu-card" data-service="100.000 View Tiktok" data-price="8.000">
+        <h2>100.000 View Tiktok</h2>
+        <div class="service-category">List View TikTok</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 8.000</span>
+      </div>
+      <div class="menu-card" data-service="1.000 Likes Tiktok" data-price="5.000">
+        <h2>1.000 Likes Tiktok</h2>
+        <div class="service-category">Likes TikTok (Akun Indo)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 5.000</span>
+      </div>
+      <div class="menu-card" data-service="2.000 Likes Tiktok" data-price="10.000">
+        <h2>2.000 Likes Tiktok</h2>
+        <div class="service-category">Likes TikTok (Akun Indo)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 10.000</span>
+      </div>
+      <div class="menu-card" data-service="3.000 Likes Tiktok" data-price="15.000">
+        <h2>3.000 Likes Tiktok</h2>
+        <div class="service-category">Likes TikTok (Akun Indo)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 15.000</span>
+      </div>
+      <div class="menu-card" data-service="4.000 Likes Tiktok" data-price="20.000">
+        <h2>4.000 Likes Tiktok</h2>
+        <div class="service-category">Likes TikTok (Akun Indo)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 20.000</span>
+      </div>
+      <div class="menu-card" data-service="5.000 Likes Tiktok" data-price="23.000">
+        <h2>5.000 Likes Tiktok</h2>
+        <div class="service-category">Likes TikTok (Akun Indo)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 23.000</span>
+      </div>
+      <div class="menu-card" data-service="10.000 Likes Tiktok" data-price="45.000">
+        <h2>10.000 Likes Tiktok</h2>
+        <div class="service-category">Likes TikTok (Akun Indo)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 45.000</span>
+      </div>
+      <div class="menu-card" data-service="100 Save Tiktok" data-price="2.000">
+        <h2>100 Save Tiktok</h2>
+        <div class="service-category">Favorit / Save TikTok</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 2.000</span>
+      </div>
+      <div class="menu-card" data-service="300 Save Tiktok" data-price="5.000">
+        <h2>300 Save Tiktok</h2>
+        <div class="service-category">Favorit / Save TikTok</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 5.000</span>
+      </div>
+      <div class="menu-card" data-service="500 Save Tiktok" data-price="8.500">
+        <h2>500 Save Tiktok</h2>
+        <div class="service-category">Favorit / Save TikTok</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 8.500</span>
+      </div>
+      <div class="menu-card" data-service="1.000 Save Tiktok" data-price="16.500">
+        <h2>1.000 Save Tiktok</h2>
+        <div class="service-category">Favorit / Save TikTok</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 16.500</span>
+      </div>
+      <div class="menu-card" data-service="100 Followers Tiktok" data-price="2.500">
+        <h2>100 Followers Tiktok</h2>
+        <div class="service-category">Followers TikTok (Emergency)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 2.500</span>
+      </div>
+      <div class="menu-card" data-service="200 Followers Tiktok" data-price="3.500">
+        <h2>200 Followers Tiktok</h2>
+        <div class="service-category">Followers TikTok (Emergency)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 3.500</span>
+      </div>
+      <div class="menu-card" data-service="300 Followers Tiktok" data-price="4.500">
+        <h2>300 Followers Tiktok</h2>
+        <div class="service-category">Followers TikTok (Emergency)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 4.500</span>
+      </div>
+      <div class="menu-card" data-service="500 Followers Tiktok" data-price="8.000">
+        <h2>500 Followers Tiktok</h2>
+        <div class="service-category">Followers TikTok (Emergency)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 8.000</span>
+      </div>
+      <div class="menu-card" data-service="1000 Followers Tiktok" data-price="14.000">
+        <h2>1000 Followers Tiktok</h2>
+        <div class="service-category">Followers TikTok (Emergency)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 14.000</span>
+      </div>
+      <div class="service-section-divider"></div>
+
+      <div class="service-category-title">Instagram Services</div>
+      <div class="menu-card" data-service="100.000 View Instagram" data-price="3.500">
+        <h2>100.000 View Instagram</h2>
+        <div class="service-category">View Instagram</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 3.500</span>
+      </div>
+      <div class="menu-card" data-service="200.000 View Instagram" data-price="5.500">
+        <h2>200.000 View Instagram</h2>
+        <div class="service-category">View Instagram</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 5.500</span>
+      </div>
+      <div class="menu-card" data-service="300.000 View Instagram" data-price="8.000">
+        <h2>300.000 View Instagram</h2>
+        <div class="service-category">View Instagram</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 8.000</span>
+      </div>
+      <div class="menu-card" data-service="500.000 View Instagram" data-price="13.000">
+        <h2>500.000 View Instagram</h2>
+        <div class="service-category">View Instagram</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 13.000</span>
+      </div>
+      <div class="menu-card" data-service="1.000.000 View Instagram" data-price="25.000">
+        <h2>1.000.000 View Instagram</h2>
+        <div class="service-category">View Instagram</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 25.000</span>
+      </div>
+      <div class="menu-card" data-service="1.000 Likes Instagram" data-price="5.000">
+        <h2>1.000 Likes Instagram</h2>
+        <div class="service-category">Like Instagram (Akun Indo)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 5.000</span>
+      </div>
+      <div class="menu-card" data-service="2.000 Likes Instagram" data-price="10.000">
+        <h2>2.000 Likes Instagram</h2>
+        <div class="service-category">Like Instagram (Akun Indo)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 10.000</span>
+      </div>
+      <div class="menu-card" data-service="3.000 Likes Instagram" data-price="15.000">
+        <h2>3.000 Likes Instagram</h2>
+        <div class="service-category">Like Instagram (Akun Indo)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 15.000</span>
+      </div>
+      <div class="menu-card" data-service="5.000 Likes Instagram" data-price="21.000">
+        <h2>5.000 Likes Instagram</h2>
+        <div class="service-category">Like Instagram (Akun Indo)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 21.000</span>
+      </div>
+      <div class="menu-card" data-service="10.000 Likes Instagram" data-price="45.000">
+        <h2>10.000 Likes Instagram</h2>
+        <div class="service-category">Like Instagram (Akun Indo)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 45.000</span>
+      </div>
+      <div class="menu-card" data-service="1.000 Save Instagram" data-price="3.000">
+        <h2>1.000 Save Instagram</h2>
+        <div class="service-category">Save Instagram</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 3.000</span>
+      </div>
+      <div class="menu-card" data-service="2.000 Save Instagram" data-price="5.000">
+        <h2>2.000 Save Instagram</h2>
+        <div class="service-category">Save Instagram</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 5.000</span>
+      </div>
+      <div class="menu-card" data-service="3.000 Save Instagram" data-price="7.500">
+        <h2>3.000 Save Instagram</h2>
+        <div class="service-category">Save Instagram</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 7.500</span>
+      </div>
+      <div class="menu-card" data-service="5.000 Save Instagram" data-price="12.000">
+        <h2>5.000 Save Instagram</h2>
+        <div class="service-category">Save Instagram</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 12.000</span>
+      </div>
+      <div class="menu-card" data-service="10.000 Save Instagram" data-price="25.000">
+        <h2>10.000 Save Instagram</h2>
+        <div class="service-category">Save Instagram</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 25.000</span>
+      </div>
+      <div class="menu-card" data-service="100 Followers Instagram (Indo aktif)" data-price="3.000">
+        <h2>100 Followers Instagram (Indo aktif)</h2>
+        <div class="service-category">Followers Instagram (Indo aktif)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 3.000</span>
+      </div>
+      <div class="menu-card" data-service="200 Followers Instagram (Indo aktif)" data-price="6.000">
+        <h2>200 Followers Instagram (Indo aktif)</h2>
+        <div class="service-category">Followers Instagram (Indo aktif)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 6.000</span>
+      </div>
+      <div class="menu-card" data-service="300 Followers Instagram (Indo aktif)" data-price="9.000">
+        <h2>300 Followers Instagram (Indo aktif)</h2>
+        <div class="service-category">Followers Instagram (Indo aktif)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 9.000</span>
+      </div>
+      <div class="menu-card" data-service="500 Followers Instagram (Indo aktif)" data-price="15.000">
+        <h2>500 Followers Instagram (Indo aktif)</h2>
+        <div class="service-category">Followers Instagram (Indo aktif)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 15.000</span>
+      </div>
+      <div class="menu-card" data-service="1000 Followers Instagram (Indo aktif)" data-price="28.000">
+        <h2>1000 Followers Instagram (Indo aktif)</h2>
+        <div class="service-category">Followers Instagram (Indo aktif)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 28.000</span>
+      </div>
+      <div class="menu-card" data-service="100 Followers Instagram (Working)" data-price="2.000">
+        <h2>100 Followers Instagram (Working)</h2>
+        <div class="service-category">Followers Instagram (Working, Akun Bule)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 2.000</span>
+      </div>
+      <div class="menu-card" data-service="200 Followers Instagram (Working)" data-price="4.000">
+        <h2>200 Followers Instagram (Working)</h2>
+        <div class="service-category">Followers Instagram (Working, Akun Bule)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 4.000</span>
+      </div>
+      <div class="menu-card" data-service="300 Followers Instagram (Working)" data-price="6.000">
+        <h2>300 Followers Instagram (Working)</h2>
+        <div class="service-category">Followers Instagram (Working, Akun Bule)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 6.000</span>
+      </div>
+      <div class="menu-card" data-service="500 Followers Instagram (Working)" data-price="8.000">
+        <h2>500 Followers Instagram (Working)</h2>
+        <div class="service-category">Followers Instagram (Working, Akun Bule)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 8.000</span>
+      </div>
+      <div class="menu-card" data-service="1000 Followers Instagram (Working)" data-price="18.000">
+        <h2>1000 Followers Instagram (Working)</h2>
+        <div class="service-category">Followers Instagram (Working, Akun Bule)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 18.000</span>
+      </div>
+      <div class="service-section-divider"></div>
+
+      <div class="service-category-title">Facebook Services</div>
+      <div class="menu-card" data-service="100 Followers Facebook" data-price="1.200">
+        <h2>100 Followers Facebook</h2>
+        <div class="service-category">Followers Facebook (Page)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 1.200</span>
+      </div>
+      <div class="menu-card" data-service="200 Followers Facebook" data-price="2.200">
+        <h2>200 Followers Facebook</h2>
+        <div class="service-category">Followers Facebook (Page)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 2.200</span>
+      </div>
+      <div class="menu-card" data-service="300 Followers Facebook" data-price="3.200">
+        <h2>300 Followers Facebook</h2>
+        <div class="service-category">Followers Facebook (Page)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 3.200</span>
+      </div>
+      <div class="menu-card" data-service="500 Followers Facebook" data-price="5.500">
+        <h2>500 Followers Facebook</h2>
+        <div class="service-category">Followers Facebook (Page)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 5.500</span>
+      </div>
+      <div class="menu-card" data-service="1000 Followers Facebook" data-price="12.000">
+        <h2>1000 Followers Facebook</h2>
+        <div class="service-category">Followers Facebook (Page)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 12.000</span>
+      </div>
+      <div class="menu-card" data-service="100 Followers Facebook" data-price="1.000">
+        <h2>100 Followers Facebook</h2>
+        <div class="service-category">Followers Facebook (Profile)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 1.000</span>
+      </div>
+      <div class="menu-card" data-service="200 Followers Facebook" data-price="2.200">
+        <h2>200 Followers Facebook</h2>
+        <div class="service-category">Followers Facebook (Profile)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 2.200</span>
+      </div>
+      <div class="menu-card" data-service="300 Followers Facebook" data-price="3.000">
+        <h2>300 Followers Facebook</h2>
+        <div class="service-category">Followers Facebook (Profile)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 3.000</span>
+      </div>
+      <div class="menu-card" data-service="500 Followers Facebook" data-price="5.000">
+        <h2>500 Followers Facebook</h2>
+        <div class="service-category">Followers Facebook (Profile)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 5.000</span>
+      </div>
+      <div class="menu-card" data-service="1000 Followers Facebook" data-price="10.000">
+        <h2>1000 Followers Facebook</h2>
+        <div class="service-category">Followers Facebook (Profile)</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 10.000</span>
+      </div>
+      <div class="menu-card" data-service="1.000 Likes Facebook" data-price="5.000">
+        <h2>1.000 Likes Facebook</h2>
+        <div class="service-category">Like Facebook</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 5.000</span>
+      </div>
+      <div class="menu-card" data-service="2.000 Likes Facebook" data-price="10.000">
+        <h2>2.000 Likes Facebook</h2>
+        <div class="service-category">Like Facebook</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 10.000</span>
+      </div>
+      <div class="menu-card" data-service="3.000 Likes Facebook" data-price="15.000">
+        <h2>3.000 Likes Facebook</h2>
+        <div class="service-category">Like Facebook</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 15.000</span>
+      </div>
+      <div class="menu-card" data-service="5.000 Likes Facebook" data-price="23.000">
+        <h2>5.000 Likes Facebook</h2>
+        <div class="service-category">Like Facebook</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 23.000</span>
+      </div>
+      <div class="menu-card" data-service="10.000 Likes Facebook" data-price="45.000">
+        <h2>10.000 Likes Facebook</h2>
+        <div class="service-category">Like Facebook</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 45.000</span>
+      </div>
+      <div class="menu-card" data-service="KOMEN FB" data-price="xxxxx">
+        <h2>Komen Facebook (Indonesia)</h2>
+        <div class="service-category">Komen Facebook (Indonesia)</div>
+        <p>TIDAK TERSEDIA</p>
+        <span class="price">TIDAK TERSEDIA</span>
+      </div>
+      <div class="service-section-divider"></div>
+
+      <div class="service-category-title">Snack Video Services</div>
+      <div class="menu-card" data-service="1000 Followers Snack Video" data-price="KOSONG">
+        <h2>1000 Followers Snack Video</h2>
+        <div class="service-category">Followers Snack Video</div>
+        <p>TIDAK TERSEDIA</p>
+        <span class="price">TIDAK TERSEDIA</span>
+      </div>
+      <div class="menu-card" data-service="100 Likes Snack Video" data-price="2.500">
+        <h2>100 Likes Snack Video</h2>
+        <div class="service-category">Like Snack Video</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 2.500</span>
+      </div>
+      <div class="menu-card" data-service="200 Likes Snack Video" data-price="4.500">
+        <h2>200 Likes Snack Video</h2>
+        <div class="service-category">Like Snack Video</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 4.500</span>
+      </div>
+      <div class="menu-card" data-service="300 Likes Snack Video" data-price="7.000">
+        <h2>300 Likes Snack Video</h2>
+        <div class="service-category">Like Snack Video</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 7.000</span>
+      </div>
+      <div class="menu-card" data-service="500 Likes Snack Video" data-price="11.000">
+        <h2>500 Likes Snack Video</h2>
+        <div class="service-category">Like Snack Video</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 11.000</span>
+      </div>
+      <div class="menu-card" data-service="1000 Likes Snack Video" data-price="23.500">
+        <h2>1000 Likes Snack Video</h2>
+        <div class="service-category">Like Snack Video</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 23.500</span>
+      </div>
+      <div class="menu-card" data-service="100 Komen Snack Video" data-price="$$$$$$">
+        <h2>100 Komen Snack Video</h2>
+        <div class="service-category">Komen Snack Video</div>
+        <p>TIDAK TERSEDIA</p>
+        <span class="price">TIDAK TERSEDIA</span>
+      </div>
+      <div class="service-section-divider"></div>
+
+      <div class="service-category-title">YouTube Services</div>
+      <div class="menu-card" data-service="100 Subscribe Youtube" data-price="6.000">
+        <h2>100 Subscribe Youtube</h2>
+        <div class="service-category">Subscribe YouTube</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 6.000</span>
+      </div>
+      <div class="menu-card" data-service="200 Subscribe Youtube" data-price="12.000">
+        <h2>200 Subscribe Youtube</h2>
+        <div class="service-category">Subscribe YouTube</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 12.000</span>
+      </div>
+      <div class="menu-card" data-service="300 Subscribe Youtube" data-price="16.000">
+        <h2>300 Subscribe Youtube</h2>
+        <div class="service-category">Subscribe YouTube</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 16.000</span>
+      </div>
+      <div class="menu-card" data-service="500 Subscribe Youtube" data-price="26.000">
+        <h2>500 Subscribe Youtube</h2>
+        <div class="service-category">Subscribe YouTube</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 26.000</span>
+      </div>
+      <div class="menu-card" data-service="1000 Subscribe Youtube" data-price="51.000">
+        <h2>1000 Subscribe Youtube</h2>
+        <div class="service-category">Subscribe YouTube</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 51.000</span>
+      </div>
+      <div class="menu-card" data-service="1.000 Likes Youtube" data-price="1.500">
+        <h2>1.000 Likes Youtube</h2>
+        <div class="service-category">Like YouTube</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 1.500</span>
+      </div>
+      <div class="menu-card" data-service="2.000 Likes Youtube" data-price="3.000">
+        <h2>2.000 Likes Youtube</h2>
+        <div class="service-category">Like YouTube</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 3.000</span>
+      </div>
+      <div class="menu-card" data-service="3.000 Likes Youtube" data-price="5.000">
+        <h2>3.000 Likes Youtube</h2>
+        <div class="service-category">Like YouTube</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 5.000</span>
+      </div>
+      <div class="menu-card" data-service="5.000 Likes Youtube" data-price="7.500">
+        <h2>5.000 Likes Youtube</h2>
+        <div class="service-category">Like YouTube</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 7.500</span>
+      </div>
+      <div class="menu-card" data-service="10.000 Likes Youtube" data-price="16.000">
+        <h2>10.000 Likes Youtube</h2>
+        <div class="service-category">Like YouTube</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 16.000</span>
+      </div>
+      <div class="menu-card" data-service="1000 Views Youtube" data-price="$$$$$$">
+        <h2>1000 Views Youtube</h2>
+        <div class="service-category">View YouTube</div>
+        <p>TIDAK TERSEDIA</p>
+        <span class="price">TIDAK TERSEDIA</span>
+      </div>
+      <div class="menu-card" data-service="5000 Views Youtube" data-price="$$$$$$">
+        <h2>5000 Views Youtube</h2>
+        <div class="service-category">View YouTube</div>
+        <p>TIDAK TERSEDIA</p>
+        <span class="price">TIDAK TERSEDIA</span>
+      </div>
+      <div class="menu-card" data-service="10000 Views Youtube" data-price="$$$$$$">
+        <h2>10000 Views Youtube</h2>
+        <div class="service-category">View YouTube</div>
+        <p>TIDAK TERSEDIA</p>
+        <span class="price">TIDAK TERSEDIA</span>
+      </div>
+      <div class="menu-card" data-service="50000 Views Youtube" data-price="$$$$$$">
+        <h2>50000 Views Youtube</h2>
+        <div class="service-category">View YouTube</div>
+        <p>TIDAK TERSEDIA</p>
+        <span class="price">TIDAK TERSEDIA</span>
+      </div>
+      <div class="menu-card" data-service="100000 Views Youtube" data-price="$$$$$$">
+        <h2>100000 Views Youtube</h2>
+        <div class="service-category">View YouTube</div>
+        <p>TIDAK TERSEDIA</p>
+        <span class="price">TIDAK TERSEDIA</span>
+      </div>
+      <div class="menu-card" data-service="10 Komen Youtube" data-price="$$$$$$">
+        <h2>10 Komen Youtube</h2>
+        <div class="service-category">Komen YouTube</div>
+        <p>TIDAK TERSEDIA</p>
+        <span class="price">TIDAK TERSEDIA</span>
+      </div>
+      <div class="menu-card" data-service="20 Komen Youtube" data-price="$$$$$$">
+        <h2>20 Komen Youtube</h2>
+        <div class="service-category">Komen YouTube</div>
+        <p>TIDAK TERSEDIA</p>
+        <span class="price">TIDAK TERSEDIA</span>
+      </div>
+      <div class="menu-card" data-service="50 Komen Youtube" data-price="$$$$$$">
+        <h2>50 Komen Youtube</h2>
+        <div class="service-category">Komen YouTube</div>
+        <p>TIDAK TERSEDIA</p>
+        <span class="price">TIDAK TERSEDIA</span>
+      </div>
+      <div class="menu-card" data-service="100 Komen Youtube" data-price="$$$$$$">
+        <h2>100 Komen Youtube</h2>
+        <div class="service-category">Komen YouTube</div>
+        <p>TIDAK TERSEDIA</p>
+        <span class="price">TIDAK TERSEDIA</span>
+      </div>
+      <div class="menu-card" data-service="500 Komen Youtube" data-price="$$$$$$">
+        <h2>500 Komen Youtube</h2>
+        <div class="service-category">Komen YouTube</div>
+        <p>TIDAK TERSEDIA</p>
+        <span class="price">TIDAK TERSEDIA</span>
+      </div>
+      <div class="service-section-divider"></div>
+
+      <div class="service-category-title">Spotify Services</div>
+      <div class="menu-card" data-service="100 Followers Spotify" data-price="1.000">
+        <h2>100 Followers Spotify</h2>
+        <div class="service-category">Followers Spotify</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 1.000</span>
+      </div>
+      <div class="menu-card" data-service="200 Followers Spotify" data-price="2.000">
+        <h2>200 Followers Spotify</h2>
+        <div class="service-category">Followers Spotify</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 2.000</span>
+      </div>
+      <div class="menu-card" data-service="300 Followers Spotify" data-price="3.000">
+        <h2>300 Followers Spotify</h2>
+        <div class="service-category">Followers Spotify</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 3.000</span>
+      </div>
+      <div class="menu-card" data-service="500 Followers Spotify" data-price="4.000">
+        <h2>500 Followers Spotify</h2>
+        <div class="service-category">Followers Spotify</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 4.000</span>
+      </div>
+      <div class="menu-card" data-service="1000 Followers Spotify" data-price="6.000">
+        <h2>1000 Followers Spotify</h2>
+        <div class="service-category">Followers Spotify</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 6.000</span>
+      </div>
+      <div class="service-section-divider"></div>
+
+      <div class="service-category-title">Shopee Services</div>
+      <div class="menu-card" data-service="1.000 Foll Shopee Indonesia" data-price="3.000">
+        <h2>1.000 Followers Shopee</h2>
+        <div class="service-category">Followers Shopee Indonesia</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 3.000</span>
+      </div>
+      <div class="menu-card" data-service="2.000 Foll Shopee Indonesia" data-price="6.000">
+        <h2>2.000 Followers Shopee</h2>
+        <div class="service-category">Followers Shopee Indonesia</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 6.000</span>
+      </div>
+      <div class="menu-card" data-service="3.000 Foll Shopee Indonesia" data-price="9.000">
+        <h2>3.000 Followers Shopee</h2>
+        <div class="service-category">Followers Shopee Indonesia</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 9.000</span>
+      </div>
+      <div class="menu-card" data-service="5.000 Foll Shopee Indonesia" data-price="15.000">
+        <h2>5.000 Followers Shopee</h2>
+        <div class="service-category">Followers Shopee Indonesia</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 15.000</span>
+      </div>
+      <div class="menu-card" data-service="10.000 Foll Shopee Indonesia" data-price="30.000">
+        <h2>10.000 Followers Shopee</h2>
+        <div class="service-category">Followers Shopee Indonesia</div>
+        <p>Proses Cepat | Akun dijamin Aman | Harga Terjangkau</p>
+        <span class="price">Rp 30.000</span>
+      </div>
+      <div class="menu-card" data-service="1000 Views Shopee Video Indonesia" data-price="$$$$$$">
+        <h2>1000 Views Shopee Video</h2>
+        <div class="service-category">Views Shopee Video Indonesia</div>
+        <p>TIDAK TERSEDIA</p>
+        <span class="price">TIDAK TERSEDIA</span>
+      </div>
+      <div class="menu-card" data-service="5000 Views Shopee Video Indonesia" data-price="$$$$$$">
+        <h2>5000 Views Shopee Video</h2>
+        <div class="service-category">Views Shopee Video Indonesia</div>
+        <p>TIDAK TERSEDIA</p>
+        <span class="price">TIDAK TERSEDIA</span>
+      </div>
+      <div class="menu-card" data-service="10000 Views Shopee Video Indonesia" data-price="$$$$$$">
+        <h2>10000 Views Shopee Video</h2>
+        <div class="service-category">Views Shopee Video Indonesia</div>
+        <p>TIDAK TERSEDIA</p>
+        <span class="price">TIDAK TERSEDIA</span>
+      </div>
+      <div class="menu-card" data-service="50000 Views Shopee Video Indonesia" data-price="$$$$$$">
+        <h2>50000 Views Shopee Video</h2>
+        <div class="service-category">Views Shopee Video Indonesia</div>
+        <p>TIDAK TERSEDIA</p>
+        <span class="price">TIDAK TERSEDIA</span>
+      </div>
     </div>
+    
+    <div class="whatsapp-footer" id="whatsappFooter">
+      <p>Jika ada pertanyaan atau butuh bantuan, hubungi kami di WhatsApp: <a href="https://wa.me/6287715125270" target="_blank">0877-1512-5270</a></p>
+    </div>
+    
+    <a href="#" class="buy-now-btn" id="buyNowBtn" target="_blank">BELI SEKARANG</a>
+
   </div>
-
-  <div id="cta-container">
-    <a id="buy-now-btn" class="whatsapp-cta" href="#">Pilih Layanan</a>
+  
+  <audio id="background-music" loop>
+    <source src="https://files.catbox.moe/v4mtjq.mp3" type="audio/mpeg">
+  </audio>
+  <div class="music-control" onclick="toggleMusic()">
+    <i class="fas fa-volume-up" id="music-icon"></i>
   </div>
-
-  <a href="https://wa.me/6287715125270?text=Halo%20saya%20mau%20order%20jasa%20suntik" class="whatsapp-footer">Pesan via WhatsApp</a>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      const welcomeScreen = document.getElementById('welcome-screen');
-      const enterBtn = document.getElementById('enter-btn');
-      const mainContent = document.getElementById('main-content');
-      const menuItems = document.querySelectorAll('.service-item');
-      const buyNowBtn = document.getElementById('buy-now-btn');
-      const showMenuBtn = document.getElementById('show-menu');
-      const menuContainer = document.getElementById('menu-container');
-      const whatsappFooter = document.querySelector('.whatsapp-footer');
+      const mainContent = document.getElementById('mainContent');
+      const showMenuBtn = document.getElementById('showMenuBtn');
+      const menuContainer = document.getElementById('menuContainer');
+      const menuItems = document.querySelectorAll('.menu-card');
+      const buyNowBtn = document.getElementById('buyNowBtn');
+      const whatsappFooter = document.getElementById('whatsappFooter');
       const backgroundMusic = document.getElementById('background-music');
+      const musicIcon = document.getElementById('music-icon');
 
       function showMainMenu() {
         menuContainer.style.display = 'grid';
@@ -848,46 +1012,48 @@
         buyNowBtn.style.display = 'none';
       }
 
-      enterBtn.addEventListener('click', function() {
-        welcomeScreen.classList.add('hidden');
-        mainContent.style.display = 'block';
-        backgroundMusic.play().catch(error => {
-          console.error("Autoplay was prevented:", error);
-        });
+      // Automatically show main content on page load
+      mainContent.style.display = 'block';
+      backgroundMusic.play().catch(error => {
+        console.error("Autoplay was prevented:", error);
       });
 
       showMenuBtn.addEventListener('click', function(e) {
         e.preventDefault();
         showMainMenu();
       });
-
+      
       menuItems.forEach(item => {
         item.addEventListener('click', function() {
           const serviceName = this.getAttribute('data-service');
           const servicePrice = this.getAttribute('data-price');
-          
-          if (this.classList.contains('free-service-item')) {
-            const redirectUrl = this.getAttribute('data-url');
-            window.open(redirectUrl, '_blank');
-            buyNowBtn.style.display = 'none';
-          } else {
-            const phoneNumber = '6287715125270';
-            const message = `Halo saya mau order ${serviceName} seharga ${servicePrice}. Terima kasih.`;
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+          const phoneNumber = '6287715125270';
+          const message = `Halo saya mau order ${serviceName} seharga ${servicePrice}. Terima kasih.`;
+          const encodedMessage = encodeURIComponent(message);
+          const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
-            buyNowBtn.href = whatsappUrl;
-            buyNowBtn.textContent = `BELI SEKARANG (Rp ${servicePrice})`;
-            buyNowBtn.style.display = 'block';
-            
-            buyNowBtn.scrollIntoView({
-              behavior: 'smooth',
-              block: 'center'
-            });
-          }
+          buyNowBtn.href = whatsappUrl;
+          buyNowBtn.textContent = `BELI SEKARANG (Rp ${servicePrice})`;
+          buyNowBtn.style.display = 'block';
+          
+          buyNowBtn.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          });
         });
       });
-      mainContent.style.display = 'none';
+
+      window.toggleMusic = function() {
+        if (backgroundMusic.paused) {
+          backgroundMusic.play();
+          musicIcon.classList.remove('fa-volume-mute');
+          musicIcon.classList.add('fa-volume-up');
+        } else {
+          backgroundMusic.pause();
+          musicIcon.classList.remove('fa-volume-up');
+          musicIcon.classList.add('fa-volume-mute');
+        }
+      };
     });
   </script>
 </body>
