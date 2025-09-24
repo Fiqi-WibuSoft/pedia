@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiqi Pedia - SMM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS untuk styling halaman */
+        :root {
+            --primary-color: #007BFF; /* Biru terang */
+            --secondary-color: #FFFFFF; /* Putih */
+            --text-color: #333;
+            --accent-color: #87CEEB; /* Biru muda */
+            --warning-color: #FFC107; /* Kuning */
+            --dark-blue: #0056b3;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F8F9FA;
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s ease;
+        }
+
+        .header {
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            color: var(--secondary-color);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom-left-radius: 50% 20px;
+            border-bottom-right-radius: 50% 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+            position: relative; /* Untuk posisi hamburger icon */
+            z-index: 10;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .grid-container {
+            display: grid;
+            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .category {
+            background-color: var(--secondary-color);
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-header {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .category-header i {
+            font-size: 2em;
+            color: var(--accent-color);
+        }
+        
+        .category-header h2 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        .service-list {
+            padding: 20px;
+        }
+
+        .service-group {
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+        }
+        
+        .service-group:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .service-group h3 {
+            color: var(--primary-color);
+            font-size: 1.1em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .price-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .price-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .price-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .price {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .disclaimer {
+            background-color: #FFF3CD;
+            border-left: 5px solid var(--warning-color);
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #856404;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .disclaimer i {
+            color: var(--warning-color);
+            font-size: 1.2em;
+        }
+
+        /* --- Hamburger Menu & Sidebar Styles --- */
+        #menu-toggle {
+            display: none; /* Sembunyikan checkbox asli */
+        }
+
+        .hamburger {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 30px;
+            height: 25px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 1001; /* Pastikan di atas semua elemen lain */
+        }
+
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: var(--secondary-color);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Animasi Hamburger ke X */
+        #menu-toggle:checked + .hamburger span:nth-child(1) {
+            transform: translateY(11px) rotate(45deg);
+        }
+        #menu-toggle:checked + .hamburger span:nth-child(2) {
+            opacity: 0;
+        }
+        #menu-toggle:checked + .hamburger span:nth-child(3) {
+            transform: translateY(-11px) rotate(-45deg);
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px; /* Sembunyikan di luar layar */
+            width: 280px;
+            height: 100%;
+            background-color: var(--dark-blue);
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+            padding-top: 80px; /* Sesuaikan dengan tinggi header */
+            transition: left 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #menu-toggle:checked ~ .sidebar {
+            left: 0; /* Tampilkan sidebar */
+        }
+
+        .sidebar-item {
+            padding: 15px 20px;
+            color: var(--secondary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1em;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .sidebar-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-item i {
+            font-size: 1.3em;
+            color: var(--accent-color);
+        }
+
+        /* --- Overlay Styles --- */
+        .overlay-toggle {
+            display: none; /* Sembunyikan checkbox overlay */
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 2000;
+        }
+
+        .overlay-content {
+            background-color: var(--secondary-color);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .overlay-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8em;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .overlay-close:hover {
+            color: var(--primary-color);
+        }
+        
+        .overlay-content h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+
+        .overlay-content p, .overlay-content ul {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            font-size: 0.95em;
+        }
+
+        .overlay-content ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .overlay-content ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .overlay-content ul li i {
+            color: var(--primary-color);
+            font-size: 1.2em;
+            padding-top: 3px;
+        }
+
+        .overlay-content .platform-section h4 {
+            color: var(--dark-blue);
+            margin-top: 20px;
+            margin-bottom: 5px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        /* Tampilkan overlay ketika checkbox overlay-toggle dicentang */
+        #contact-overlay-toggle:checked ~ .overlay#contact-info-overlay,
+        #example-overlay-toggle:checked ~ .overlay#example-target-overlay {
+            opacity: 1;
+            visibility: visible;
+        }
+        #contact-overlay-toggle:checked ~ .overlay#contact-info-overlay .overlay-content,
+        #example-overlay-toggle:checked ~ .overlay#example-target-overlay .overlay-content {
+            transform: scale(1);
+        }
+
+        /* Menutup sidebar ketika overlay dibuka (opsional, tapi UX lebih baik) */
+        #contact-overlay-toggle:checked ~ #menu-toggle,
+        #example-overlay-toggle:checked ~ #menu-toggle {
+            /* This is a tricky part with pure CSS. To close the sidebar, we'd need to uncheck menu-toggle.
+               This is not directly possible with CSS alone without making menu-toggle also a radio button,
+               which makes the hamburger functionality complex. For simplicity, the sidebar will remain open
+               if an overlay is opened, and the user can close it manually. */
+        }
+        
+        /* Media Queries untuk responsif */
+        @media (max-width: 768px) {
+            .header {
+                padding: 30px 15px;
+            }
+            .header h1 {
+                font-size: 2em;
+            }
+            .container {
+                padding: 0 15px;
+            }
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                width: 250px;
+                left: -250px;
+            }
+            .overlay-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<input type="checkbox" id="menu-toggle">
+
+<label for="menu-toggle" class="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+</label>
+
+<div class="sidebar">
+    <label for="contact-overlay-toggle" class="sidebar-item">
+        <i class="fas fa-phone"></i>
+        <span>Kontak Kami</span>
+    </label>
+    <label for="example-overlay-toggle" class="sidebar-item">
+        <i class="fas fa-file-alt"></i>
+        <span>Contoh Pengisian Target</span>
+    </label>
+</div>
+
+<div class="header">
+    <h1>Fiqi Pedia - SMM</h1>
+    <p>Daftar Harga Layanan Sosial Media Paling Terjangkau</p>
+</div>
+
+<div class="container">
+    <div class="grid-container">
+
+        <div class="category">
+            <div class="category-header">
+                <i class="fab fa-instagram"></i>
+                <h2>Layanan Instagram</h2>
+            </div>
+            <div class="service-list">
+                <div class="service-group">
+                    <h3>View Instagram</h3>
+                    <ul class="price-list">
+                        <li><span>100.000 View</span> <span class="price">Rp3.500</span></li>
+                        <li><span>200.000 View</span> <span class="price">Rp5.500</span></li>
+                        <li><span>300.000 View</span> <span class="price">Rp8.000</span></li>
+                        <li><span>500.000 View</span> <span class="price">Rp13.000</span></li>
+                        <li><span>1.000.000 View</span> <span class="price">Rp25.000</span></li>
+                    </ul>
+                </div>
+                <div class="service-group">
+                    <h3>Like Instagram (akun Indo)</h3>
+                    <ul class="price-list">
+                        <li><span>1.000 Likes</span> <span class="price">Rp5.000</span></li>
+                        <li><span>2.000 Likes</span> <span class="price">Rp10.000</span></li>
+                        <li><span>3.000 Likes</span> <span class="price">Rp15.000</span></li>
+                        <li><span>5.000 Likes</span> <span class="price">Rp21.000</span></li>
+                        <li><span>10.000 Likes</span> <span class="price">Rp45.000</span></li>
+                    </ul>
+                </div>
+                <div class="service-group">
+                    <h3>Save Instagram</h3>
+                    <ul class="price-list">
+                        <li><span>1.000 Save</span> <span class="price">Rp3.000</span></li>
+                        <li><span>2.000 Save</span> <span class="price">Rp5.000</span></li>
+                        <li><span>3.000 Save</span> <span class="price">Rp7.500</span></li>
+                        <li><span>5.000 Save</span> <span class="price">Rp12.000</span></li>
+                        <li><span>10.000 Save</span> <span class="price">Rp25.000</span></li>
+                    </ul>
+                </div>
+                <div class="service-group">
+                    <h3>Followers Instagram (Indo aktif)</h3>
+                    <ul class="price-list">
+                        <li><span>100 Followers</span> <span class="price">Rp3.000</span></li>
+                        <li><span>200 Followers</span> <span class="price">Rp6.000</span></li>
+                        <li><span>300 Followers</span> <span class="price">Rp9.000</span></li>
+                        <li><span>500 Followers</span> <span class="price">Rp15.000</span></li>
+                        <li><span>1000 Followers</span> <span class="price">Rp28.000</span></li>
+                    </ul>
+                </div>
+                <div class="service-group">
+                    <h3>Followers Instagram (working, akun bule)</h3>
+                    <ul class="price-list">
+                        <li><span>100 Followers</span> <span class="price">Rp2.000</span></li>
+                        <li><span>200 Followers</span> <span class="price">Rp4.000</span></li>
+                        <li><span>300 Followers</span> <span class="price">Rp6.000</span></li>
+                        <li><span>500 Followers</span> <span class="price">Rp8.000</span></li>
+                        <li><span>1000 Followers</span> <span class="price">Rp18.000</span></li>
+                    </ul>
+                </div>
+                <div class="disclaimer">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span><strong>Catatan:</strong> Setiap harga layanan tidak bersifat tetap, bisa berubah-ubah setiap waktu mengikuti server.</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category">
+            <div class="category-header">
+                <i class="fab fa-tiktok"></i>
+                <h2>Layanan TikTok</h2>
+            </div>
+            <div class="service-list">
+                <div class="service-group">
+                    <h3>View TikTok</h3>
+                    <ul class="price-list">
+                        <li><span>10.000 View</span> <span class="price">Rp1.000</span></li>
+                        <li><span>50.000 View</span> <span class="price">Rp4.000</span></li>
+                        <li><span>100.000 View</span> <span class="price">Rp8.000</span></li>
+                    </ul>
+                </div>
+                <div class="service-group">
+                    <h3>Like TikTok (Akun Indo)</h3>
+                    <ul class="price-list">
+                        <li><span>1.000 Likes</span> <span class="price">Rp5.000</span></li>
+                        <li><span>2.000 Likes</span> <span class="price">Rp10.000</span></li>
+                        <li><span>3.000 Likes</span> <span class="price">Rp15.000</span></li>
+                        <li><span>4.000 Likes</span> <span class="price">Rp20.000</span></li>
+                        <li><span>5.000 Likes</span> <span class="price">Rp23.000</span></li>
+                        <li><span>10.000 Likes</span> <span class="price">Rp45.000</span></li>
+                    </ul>
+                </div>
+                <div class="service-group">
+                    <h3>Favorit / Save TikTok</h3>
+                    <ul class="price-list">
+                        <li><span>100 Save</span> <span class="price">Rp2.000</span></li>
+                        <li><span>300 Save</span> <span class="price">Rp5.000</span></li>
+                        <li><span>500 Save</span> <span class="price">Rp8.500</span></li>
+                        <li><span>1.000 Save</span> <span class="price">Rp16.500</span></li>
+                    </ul>
+                </div>
+                <div class="service-group">
+                    <h3>Followers TikTok (Emergency)</h3>
+                    <ul class="price-list">
+                        <li><span>100 Followers</span> <span class="price">Rp2.500</span></li>
+                        <li><span>200 Followers</span> <span class="price">Rp3.500</span></li>
+                        <li><span>300 Followers</span> <span class="price">Rp4.500</span></li>
+                        <li><span>500 Followers</span> <span class="price">Rp8.000</span></li>
+                        <li><span>1000 Followers</span> <span class="price">Rp14.000</span></li>
+                    </ul>
+                </div>
+                <div class="disclaimer">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span><strong>Catatan:</strong> Setiap harga layanan tidak bersifat tetap, bisa berubah-ubah setiap waktu mengikuti server.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="category">
+            <div class="category-header">
+                <i class="fab fa-facebook"></i>
+                <h2>Layanan Facebook</h2>
+            </div>
+            <div class="service-list">
+                <div class="service-group">
+                    <h3>Followers Facebook (Page)</h3>
+                    <ul class="price-list">
+                        <li><span>100 Followers</span> <span class="price">Rp1.200</span></li>
+                        <li><span>200 Followers</span> <span class="price">Rp2.200</span></li>
+                        <li><span>300 Followers</span> <span class="price">Rp3.200</span></li>
+                        <li><span>500 Followers</span> <span class="price">Rp5.500</span></li>
+                        <li><span>1000 Followers</span> <span class="price">Rp12.000</span></li>
+                    </ul>
+                </div>
+                <div class="service-group">
+                    <h3>Followers Facebook (Profile)</h3>
+                    <ul class="price-list">
+                        <li><span>100 Followers</span> <span class="price">Rp1.000</span></li>
+                        <li><span>200 Followers</span> <span class="price">Rp2.200</span></li>
+                        <li><span>300 Followers</span> <span class="price">Rp3.000</span></li>
+                        <li><span>500 Followers</span> <span class="price">Rp5.000</span></li>
+                        <li><span>1000 Followers</span> <span class="price">Rp10.000</span></li>
+                    </ul>
+                </div>
+                <div class="service-group">
+                    <h3>Like Facebook</h3>
+                    <ul class="price-list">
+                        <li><span>1.000 Likes</span> <span class="price">Rp5.000</span></li>
+                        <li><span>2.000 Likes</span> <span class="price">Rp10.000</span></li>
+                        <li><span>3.000 Likes</span> <span class="price">Rp15.000</span></li>
+                        <li><span>5.000 Likes</span> <span class="price">Rp23.000</span></li>
+                        <li><span>10.000 Likes</span> <span class="price">Rp45.000</span></li>
+                    </ul>
+                </div>
+                <div class="disclaimer">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span><strong>Catatan:</strong> Setiap harga layanan tidak bersifat tetap, bisa berubah-ubah setiap waktu mengikuti server.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="category">
+            <div class="category-header">
+                <i class="fas fa-video"></i>
+                <h2>Layanan Snack Video</h2>
+            </div>
+            <div class="service-list">
+                <div class="service-group">
+                    <h3>Like Snack Video</h3>
+                    <ul class="price-list">
+                        <li><span>100 Likes</span> <span class="price">Rp2.500</span></li>
+                        <li><span>200 Likes</span> <span class="price">Rp4.500</span></li>
+                        <li><span>300 Likes</span> <span class="price">Rp7.000</span></li>
+                        <li><span>500 Likes</span> <span class="price">Rp11.000</span></li>
+                        <li><span>1000 Likes</span> <span class="price">Rp23.500</span></li>
+                    </ul>
+                </div>
+                <div class="disclaimer">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span><strong>Catatan:</strong> Setiap harga layanan tidak bersifat tetap, bisa berubah-ubah setiap waktu mengikuti server.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="category">
+            <div class="category-header">
+                <i class="fab fa-youtube"></i>
+                <h2>Layanan YouTube</h2>
+            </div>
+            <div class="service-list">
+                <div class="service-group">
+                    <h3>Subscribe YouTube</h3>
+                    <ul class="price-list">
+                        <li><span>100 Subscribe</span> <span class="price">Rp6.000</span></li>
+                        <li><span>200 Subscribe</span> <span class="price">Rp12.000</span></li>
+                        <li><span>300 Subscribe</span> <span class="price">Rp16.000</span></li>
+                        <li><span>500 Subscribe</span> <span class="price">Rp26.000</span></li>
+                        <li><span>1000 Subscribe</span> <span class="price">Rp51.000</span></li>
+                    </ul>
+                </div>
+                <div class="service-group">
+                    <h3>Like YouTube</h3>
+                    <ul class="price-list">
+                        <li><span>1.000 Likes</span> <span class="price">Rp1.500</span></li>
+                        <li><span>2.000 Likes</span> <span class="price">Rp3.000</span></li>
+                        <li><span>3.000 Likes</span> <span class="price">Rp5.000</span></li>
+                        <li><span>5.000 Likes</span> <span class="price">Rp7.500</span></li>
+                        <li><span>10.000 Likes</span> <span class="price">Rp16.000</span></li>
+                    </ul>
+                </div>
+                <div class="disclaimer">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span><strong>Catatan:</strong> Setiap harga layanan tidak bersifat tetap, bisa berubah-ubah setiap waktu mengikuti server.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="category">
+            <div class="category-header">
+                <i class="fab fa-spotify"></i>
+                <h2>Layanan Spotify</h2>
+            </div>
+            <div class="service-list">
+                <div class="service-group">
+                    <h3>Followers Spotify</h3>
+                    <ul class="price-list">
+                        <li><span>100 Followers</span> <span class="price">Rp1.000</span></li>
+                        <li><span>200 Followers</span> <span class="price">Rp2.000</span></li>
+                        <li><span>300 Followers</span> <span class="price">Rp3.000</span></li>
+                        <li><span>500 Followers</span> <span class="price">Rp4.000</span></li>
+                        <li><span>1000 Followers</span> <span class="price">Rp6.000</span></li>
+                    </ul>
+                </div>
+                <div class="disclaimer">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span><strong>Catatan:</strong> Setiap harga layanan tidak bersifat tetap, bisa berubah-ubah setiap waktu mengikuti server.</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category">
+            <div class="category-header">
+                <i class="fas fa-shopping-bag"></i>
+                <h2>Layanan Shopee</h2>
+            </div>
+            <div class="service-list">
+                <div class="service-group">
+                    <h3>Followers Shopee Indonesia</h3>
+                    <ul class="price-list">
+                        <li><span>1.000 Followers</span> <span class="price">Rp3.000</span></li>
+                        <li><span>2.000 Followers</span> <span class="price">Rp6.000</span></li>
+                        <li><span>3.000 Followers</span> <span class="price">Rp9.000</span></li>
+                        <li><span>5.000 Followers</span> <span class="price">Rp15.000</span></li>
+                        <li><span>10.000 Followers</span> <span class="price">Rp30.000</span></li>
+                    </ul>
+                </div>
+                <div class="disclaimer">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span><strong>Catatan:</strong> Setiap harga layanan tidak bersifat tetap, bisa berubah-ubah setiap waktu mengikuti server.</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<input type="checkbox" id="contact-overlay-toggle" class="overlay-toggle">
+<div class="overlay" id="contact-info-overlay">
+    <label for="contact-overlay-toggle" class="overlay-close"><i class="fas fa-times"></i></label>
+    <div class="overlay-content">
+        <h3><i class="fas fa-phone"></i> Kontak Kami</h3>
+        <p>Silakan hubungi kami melalui saluran berikut:</p>
+        <ul>
+            <li><i class="fab fa-instagram"></i> <strong>Instagram:</strong> <a href="https://www.instagram.com/fiqiptra_08" target="_blank">fiqiptra_08</a></li>
+            <li><i class="fab fa-whatsapp"></i> <strong>WhatsApp:</strong> <a href="https://wa.me/6287715125270" target="_blank">6287715125270</a></li>
+            <li><i class="fab fa-facebook"></i> <strong>Facebook:</strong> <a href="https://www.facebook.com/KuloPiqii" target="_blank">Kulo Piqii</a></li>
+            <li><i class="fas fa-envelope"></i> <strong>Gmail:</strong> <a href="mailto:syahdev.suport@gmail.com">syahdev.suport@gmail.com</a></li>
+        </ul>
+    </div>
+</div>
+
+<input type="checkbox" id="example-overlay-toggle" class="overlay-toggle">
+<div class="overlay" id="example-target-overlay">
+    <label for="example-overlay-toggle" class="overlay-close"><i class="fas fa-times"></i></label>
+    <div class="overlay-content">
+        <h3><i class="fas fa-file-alt"></i> Contoh Pengisian Target</h3>
+        <p>Berikut adalah beberapa contoh pengisian pada target pesanan. Pastikan untuk periksa kembali target pesanan Anda sebelum pesanan dibuat sehingga pesanan dapat diproses.</p>
+        <p>Jika ada hal yang ingin anda tanyakan, bisa langsung tanyakan dengan cara masuk ke halaman kontak pada website kami ya.</p>
+
+        <div class="platform-section">
+            <h4>Instagram</h4>
+            <ul>
+                <li><i class="fas fa-caret-right"></i> Instagram Followers, Story, Live Video, Profile Visits : Username akun Instagram tanpa tanda @<br/>Contoh : <code>fiqipedia.id</code></li>
+                <li><i class="fas fa-caret-right"></i> Instagram Likes, Views, Comments, Impressions, Saves, TV : Link postingan akun Instagram<br/>Contoh : <code>https://www.instagram.com/p/CJLkpdPFjahsh/</code></li>
+                <li><i class="fas fa-caret-right"></i> Instagram story : Username akun Instagram tanpa tanda @<br/>Contoh : <code>fiqipedia.id</code></li>
+                <li><i class="fas fa-caret-right"></i> Instagram reels : Link postingan Reels<br/>Contoh : <code>https://www.instagram.com/reel/C1icn9VNrsh/</code></li>
+            </ul>
+        </div>
+
+        <div class="platform-section">
+            <h4>YouTube</h4>
+            <ul>
+                <li><i class="fas fa-caret-right"></i> YouTube Likes, Views, Shares : Link video YouTube<br/>Contoh : <code>https://www.youtube.com/watch?v=xxxxxxxx</code></li>
+                <li><i class="fas fa-caret-right"></i> YouTube Live Stream : Link video live YouTube<br/>Contoh : <code>https://www.youtube.com/watch?v=yyyyyyyy</code></li>
+                <li><i class="fas fa-caret-right"></i> YouTube Subscribers : Link channel YouTube<br/>Contoh : <code>https://www.youtube.com/channel/UCzzzzzzzzzz</code></li>
+            </ul>
+        </div>
+        
+        <div class="platform-section">
+            <h4>Facebook</h4>
+            <ul>
+                <li><i class="fas fa-caret-right"></i> Facebook Page Likes, Page Followers : Link halaman atau fanspage Facebook<br/>Contoh : <code>https://www.facebook.com/indihome/</code></li>
+                <li><i class="fas fa-caret-right"></i> Facebook Post Likes, Post Video : Link postingan Facebook<br/>Contoh : <code>https://www.facebook.com/fiqipedia/posts/123124312524321</code></li>
+                <li><i class="fas fa-caret-right"></i> Facebook Followers, Friends : Link profile Facebook<br/>Contoh : <code>https://www.facebook.com/fiqipedia</code></li>
+                <li><i class="fas fa-caret-right"></i> Facebook Group Members : Link group Facebook<br/>Contoh : <code>https://www.facebook.com/groups/namagroup</code></li>
+                <li><i class="fas fa-caret-right"></i> Facebook Video post : Link Postingan Video<br/>Contoh : <code>https://www.facebook.com/namaprofile/videos/1234567890</code></li>
+            </ul>
+        </div>
+
+        <div class="platform-section">
+            <h4>Twitter</h4>
+            <ul>
+                <li><i class="fas fa-caret-right"></i> Twitter Followers : Username akun Twitter tanpa tanda @<br/>Contoh : <code>fiqipedia</code></li>
+                <li><i class="fas fa-caret-right"></i> Twitter Retweet, Favorite : Link tweet atau postingan Twitter<br/>Contoh : <code>https://twitter.com/fiqipedia/status/1232131231231312</code></li>
+            </ul>
+        </div>
+
+        <div class="platform-section">
+            <h4>TikTok</h4>
+            <ul>
+                <li><i class="fas fa-caret-right"></i> TikTok Followers : Link profile TikTok atau username<br/>Contoh : <code>https://tiktok.com/@fiqipedia</code></li>
+                <li><i class="fas fa-caret-right"></i> TikTok Likes / Views : Link video TikTok<br/>Contoh : <code>https://vt.tiktok.com/xxxxx/</code></li>
+            </ul>
+        </div>
+
+        <div class="platform-section">
+            <h4>Shopee</h4>
+            <ul>
+                <li><i class="fas fa-caret-right"></i> Shopee Followers : Username akun Shopee<br/>Contoh : <code>fiqipedia</code></li>
+                <li><i class="fas fa-caret-right"></i> Shopee Product Likes : Link produk Shopee<br/>Contoh : <code>https://shopee.co.id/-tv-kabel-i.12345678.123456789</code></li>
+            </ul>
+        </div>
+
+        <div class="platform-section">
+            <h4>Tokopedia</h4>
+            <ul>
+                <li><i class="fas fa-caret-right"></i> Tokopedia Followers : Username akun Tokopedia atau link profile<br/>Contoh : <code>https://www.tokopedia.com/fiqipedia</code></li>
+                <li><i class="fas fa-caret-right"></i> Tokopedia Wishlist atau Favorite : Link produk Tokopedia<br/>Contoh : <code>https://www.tokopedia.com/alida/alquran-cover-emas-ukuran-a5-al-quran-mushaf-tanggung</code></li>
+            </ul>
+        </div>
+
+        <div class="platform-section">
+            <h4>Website Traffic</h4>
+            <ul>
+                <li><i class="fas fa-caret-right"></i> Website Traffic : Link website<br/>Contoh : <code>fiqipedia.vercel.app/</code></li>
+            </ul>
+        </div>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold; color: #dc3545;">APABILA CONTOH DIATAS MASIH BELUM LENGKAP DAN MASIH ADA KEBINGUNGAN. SILAHKAN HUBUNGI ADMIN. AGAR ANDA TIDAK SALAH ISI TARGET.</p>
+    </div>
+</div>
+
+</body>
+</html>
