@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiqi Store & App Premium! - SMM & Premium Apps Termurah</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://files.catbox.moe/j65dur.webp" type="image/webp">
+    <style>
+        /* CSS untuk styling halaman */
+        :root {
+            --premium-color: #9B59B6; /* Ungu untuk premium */
+            --smm-color: #007BFF; /* Biru untuk SMM */
+            --secondary-color: #FFFFFF; /* Putih */
+            --text-color: #333;
+            --accent-color: #E6B5FF; /* Ungu muda */
+            --warning-color: #FFC107; /* Kuning */
+            --dark-color: #6C3483; /* Ungu tua */
+            --buy-button-color: #2ECC71; /* Hijau untuk tombol Beli */
+            --buy-button-hover: #27AE60; /* Hijau gelap untuk hover */
+            --sold-out-color: #BDC3C7; /* Abu-abu untuk habis */
+            --negotiable-color: #F39C12; /* Orange untuk nego */
+            --dark-blue: #0056b3; /* Biru tua untuk SMM sidebar */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F4F4F9; /* Abu-abu muda untuk latar */
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s ease;
+            
+            /* --- PERLINDUNGAN 1: ANTI-COPY TEXT GLOBAL --- */
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard: Mencegah teks disalin */
+            /* ------------------------------------------- */
+        }
+
+        .header {
+            background: linear-gradient(45deg, var(--premium-color), var(--dark-color));
+            color: var(--secondary-color);
+            padding: 40px 20px 20px;
+            text-align: center;
+            border-bottom-left-radius: 50% 20px;
+            border-bottom-right-radius: 50% 20px;
+            margin-bottom: 0;
+            box-shadow: 0 4px 15px rgba(155, 89, 182, 0.4);
+            position: relative;
+            z-index: 10;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+        
+        /* --- Tabs Navigation Styles --- */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: -20px auto 30px auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 15;
+        }
+        
+        .tab-button {
+            flex: 1;
+            padding: 15px 10px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.0em;
+            color: var(--secondary-color);
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .tab-smm {
+            background-color: var(--smm-color);
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .tab-premium {
+            background-color: var(--premium-color);
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .tab-button.active {
+            filter: brightness(1.15);
+            transform: translateY(-5px);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .grid-container {
+            display: grid;
+            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .category {
+            background-color: var(--secondary-color);
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+        }
+
+        #premium-content .category-header {
+            background-color: var(--premium-color);
+        }
+        #smm-content .category-header {
+            background-color: var(--smm-color);
+        }
+
+        .category-header {
+            color: var(--secondary-color);
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .category-header i {
+            font-size: 2em;
+            color: var(--accent-color);
+        }
+        
+        .category-header h2 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        .service-list {
+            padding: 20px;
+        }
+
+        .service-group {
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+        }
+        
+        .service-group:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .service-group h3 {
+            color: var(--dark-color);
+            font-size: 1.1em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .price-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 5px;
+            border-radius: 5px;
+            border-bottom: 1px dashed #ddd;
+            cursor: pointer; 
+            transition: all 0.2s ease;
+            font-size: 0.95em;
+        }
+
+        .price-item:hover {
+            background-color: #f0f0f0;
+            padding-left: 10px;
+        }
+        #premium-content .price-item:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* ANIAMSI KEREN SAAT DIKLIK */
+        .price-item:active {
+            transform: scale(0.98); 
+            box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.3);
+            background-color: #e0e0e0;
+        }
+        #premium-content .price-item:active {
+            background-color: var(--accent-color);
+        }
+        #smm-content .price-item:active {
+             background-color: #d0e0ff; 
+        }
+        
+        .price-item:last-child {
+            border-bottom: none;
+        }
+
+        .service-name-wrapper {
+             flex-grow: 1;
+             margin-right: 5px;
+        }
+        .service-name {
+            display: block;
+        }
+
+        #premium-content .service-desc {
+            display: block;
+            font-size: 0.75em;
+            color: #777;
+            margin-top: 2px;
+            font-style: italic;
+        }
+        
+        #premium-content .stock {
+            font-size: 0.85em;
+            color: #008000;
+            margin-right: 10px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        #premium-content .price {
+            font-weight: bold;
+            color: var(--premium-color);
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        #smm-content .price {
+            font-weight: bold;
+            color: var(--smm-color);
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+        
+        .buy-button {
+            background-color: var(--buy-button-color);
+            color: var(--secondary-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-left: 15px;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(46, 204, 113, 0.4);
+        }
+
+        .buy-button:hover {
+            background-color: var(--buy-button-hover);
+            box-shadow: 0 4px 10px rgba(46, 204, 113, 0.7);
+            transform: translateY(-2px);
+        }
+
+        .buy-button:active {
+            transform: translateY(0) scale(0.95); 
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); 
+            filter: brightness(0.9);
+        }
+        
+        .price-item:active .buy-button {
+            transform: scale(1);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 15px rgba(46, 204, 113, 0.9);
+            filter: brightness(1.2);
+        }
+        
+        .price-item.sold-out {
+            cursor: not-allowed;
+            background-color: #FCF3CF;
+        }
+        
+        .price-item.sold-out .stock {
+            color: #D35400 !important; 
+        }
+        
+        .price-item.sold-out .buy-button {
+            background-color: var(--sold-out-color);
+            pointer-events: none;
+            cursor: default;
+        }
+
+        .price-item.sold-out .service-name-wrapper {
+            color: #999;
+        }
+        
+        .disclaimer {
+            background-color: #FEF9E7;
+            border-left: 5px solid var(--warning-color);
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #856404;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .disclaimer.smm-note {
+            background-color: #D1ECF1;
+            border-left-color: var(--smm-color);
+            color: #0C5460;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        .disclaimer.smm-note i {
+            color: var(--smm-color);
+        }
+        
+        .update-info {
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+            font-weight: 600;
+            border: 1px solid var(--premium-color);
+        }
+        .update-info i {
+            margin-right: 5px;
+            color: var(--premium-color);
+        }
+        #smm-content .update-info {
+            background-color: #D1ECF1;
+            color: #0C5460;
+            border: 1px solid var(--smm-color);
+        }
+        #smm-content .update-info i {
+            color: var(--smm-color);
+        }
+        
+        #menu-toggle { display: none; }
+        .hamburger {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 30px;
+            height: 25px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 1001;
+        }
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: var(--secondary-color);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        #menu-toggle:checked + .hamburger span:nth-child(1) { transform: translateY(11px) rotate(45deg); background-color: var(--secondary-color); }
+        #menu-toggle:checked + .hamburger span:nth-child(2) { opacity: 0; }
+        #menu-toggle:checked + .hamburger span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); background-color: var(--secondary-color); }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100%;
+            background-color: var(--dark-color);
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+            padding-top: 80px;
+            transition: left 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #menu-toggle:checked ~ .sidebar { left: 0; }
+        
+        .main-nav-button {
+            display: none;
+        }
+        .main-nav-rule {
+            display: none;
+        }
+        
+        .sidebar-item {
+            padding: 15px 20px;
+            color: var(--secondary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1em;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .sidebar-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .sidebar-item i {
+            font-size: 1.3em;
+            color: var(--accent-color);
+        }
+        
+        .overlay-toggle { display: none; }
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); display: flex;
+            justify-content: center; align-items: center; opacity: 0;
+            visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 2000;
+        }
+        .overlay-content {
+            background-color: var(--secondary-color); padding: 30px;
+            border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 90%; max-height: 90%; overflow-y: auto; position: relative;
+            transform: scale(0.9); transition: transform 0.3s ease;
+        }
+        .overlay-close {
+            position: absolute; top: 15px; right: 20px; font-size: 1.8em;
+            color: #999; cursor: pointer; transition: color 0.2s ease;
+        }
+        
+        #contact-overlay-toggle:checked ~ .overlay#contact-info-overlay,
+        #terms-overlay-toggle:checked ~ .overlay#terms-conditions-overlay,
+        #example-overlay-toggle:checked ~ .overlay#example-target-overlay,
+        #qris-overlay-toggle:checked ~ .overlay#qris-payment-overlay {
+            opacity: 1; visibility: visible;
+        }
+        #contact-overlay-toggle:checked ~ .overlay#contact-info-overlay .overlay-content,
+        #terms-overlay-toggle:checked ~ .overlay#terms-conditions-overlay .overlay-content,
+        #example-overlay-toggle:checked ~ .overlay#example-target-overlay .overlay-content,
+        #qris-overlay-toggle:checked ~ .overlay#qris-payment-overlay .overlay-content {
+            transform: scale(1);
+        }
+        
+        /* --- QRIS Specific Styles --- */
+        .qris-content {
+            max-width: 400px;
+            text-align: center;
+        }
+        .qris-image-container {
+            padding: 10px;
+            border: 2px solid var(--premium-color);
+            border-radius: 10px;
+            background-color: var(--secondary-color);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .qris-image {
+            width: 100%;
+            height: auto;
+            max-width: 300px;
+            display: block;
+            margin: 0 auto;
+            border-radius: 5px;
+            /* --- PERLINDUNGAN 2: ANTI-DOWNLOAD POINTER --- */
+            pointer-events: none; /* Mencegah interaksi langsung pada gambar */
+            /* ------------------------------------------- */
+        }
+
+        /* --- CSS BARU UNTUK POPUP RESELLER --- */
+        #resellerModal {
+            z-index: 2005; /* Di atas overlay lain */
+        }
+
+        #resellerModal .modal-content {
+            background: linear-gradient(135deg, var(--premium-color), var(--smm-color)); /* Gradasi Ungu-Biru */
+            margin: 10% auto; 
+            padding: 30px;
+            width: 85%;
+            max-width: 450px;
+            border-radius: 15px; 
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            color: var(--secondary-color);
+            animation: bounce-in 0.6s ease-out; /* Animasi muncul lebih menarik */
+        }
+        
+        @keyframes bounce-in {
+            0% { transform: scale(0.5); opacity: 0; }
+            70% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        #resellerModal .modal-header {
+            font-size: 1.8em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        #resellerModal .modal-body {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        #resellerModal .modal-body strong {
+            display: block;
+            font-size: 1.2em;
+            color: var(--warning-color); /* Kuning untuk penekanan */
+            margin-top: 10px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        #resellerModal .contact-button {
+            background-color: var(--buy-button-color);
+            color: var(--secondary-color);
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 10px;
+        }
+
+        #resellerModal .contact-button:hover {
+            background-color: var(--buy-button-hover);
+            transform: translateY(-2px);
+        }
+
+        #resellerModal .close-btn {
+            color: var(--secondary-color);
+            opacity: 0.8;
+            float: right;
+            font-size: 35px;
+            font-weight: bold;
+            line-height: 25px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        #resellerModal .close-btn:hover,
+        #resellerModal .close-btn:focus {
+            opacity: 1;
+        }
+        /* ----------------------------------------- */
+        
+        /* Media Queries untuk responsif */
+        @media (max-width: 768px) {
+            .header { padding: 30px 15px 15px; }
+            .header h1 { font-size: 2em; }
+            .container { padding: 0 15px; }
+            .grid-container { grid-template-columns: 1fr; }
+            .sidebar { width: 250px; left: -250px; padding-top: 20px; }
+            .overlay-content { padding: 20px; }
+            .price-item { 
+                flex-wrap: wrap; 
+                gap: 5px;
+            }
+            .service-name-wrapper {
+                flex-basis: 100%;
+                font-weight: 600;
+            }
+            .service-desc {
+                margin-left: 0 !important;
+                text-align: left;
+                font-style: normal !important;
+            }
+            .stock, .price, .buy-button {
+                margin: 0;
+                padding: 3px 5px;
+                font-size: 0.9em;
+            }
+            .tab-nav {
+                margin: -20px auto 20px auto;
+            }
+            .tab-button {
+                font-size: 0.9em;
+                padding: 12px 5px;
+            }
+            #resellerModal .modal-content {
+                margin: 20% auto;
+                padding: 20px;
+            }
+            #resellerModal .modal-header {
+                font-size: 1.5em;
+            }
+            #resellerModal .modal-body {
+                font-size: 1em;
+            }
+            #resellerModal .modal-body strong {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="resellerModal" class="modal overlay">
+    <div class="modal-content">
+        <span class="close-btn" id="closeResellerModal">&times;</span>
+        <div class="modal-header">
+            <i class="fas fa-handshake" style="color: var(--warning-color); margin-right: 10px;"></i>
+            Info Partner/Reseller Digital Marketing
+        </div>
+        <div class="modal-body">
+            <p>
+                <strong>Ingin bisnis digital tanpa modal awal? Fiqi Pedia solusinya!!</strong>
+            </p>
+            <p>
+                Jika berminat hubungi 087715125270 atau kunjungi informasi kontak di website kami.
+            </p>
+		<strong>FULL AJARAN</strong>
+            <a href="https://wa.me/6287715125270?text=Halo%20Admin%2C%20saya%20tertarik%20menjadi%20Partner%2FReseller%20Digital%20Marketing%20Fiqi%20Pedia.%20Mohon%20info%20lebih%20lanjut.%20Terima%20kasih." target="_blank" class="contact-button">
+                Chat Via WhatsApp
+            </a>
+        </div>
+    </div>
+</div>
+<input type="checkbox" id="menu-toggle">
+<label for="menu-toggle" class="hamburger">
+    <span style="background-color: var(--secondary-color);"></span>
+    <span style="background-color: var(--secondary-color);"></span>
+    <span style="background-color: var(--secondary-color);"></span>
+</label>
+
+<div class="sidebar">
+    <label for="contact-overlay-toggle" class="sidebar-item">
+        <i class="fas fa-phone"></i>
+        <span>Kontak Kami</span>
+    </label>
+    <label for="qris-overlay-toggle" class="sidebar-item">
+        <i class="fas fa-qrcode"></i>
+        <span>Pembayaran (QRIS)</span>
+    </label>
+    <label for="terms-overlay-toggle" class="sidebar-item">
+        <i class="fas fa-file-contract"></i>
+        <span>Syarat & Ketentuan</span>
+    </label>
+    <label for="example-overlay-toggle" class="sidebar-item">
+        <i class="fas fa-file-alt"></i>
+        <span>Contoh Pengisian Target</span>
+    </label>
+</div>
+
+<div class="header">
+    <h1>Fiqi Store & Media</h1>
+    <p>Pusat Akun Premium Anti-Banned & Layanan SMM Cepat Mulai dari Rp1.000</p>
+</div>
+
+<div class="tab-nav">
+    <button class="tab-button tab-smm active" onclick="showContent('smm')">
+        LAYANAN SMM 🛍️
+    </button>
+    <button class="tab-button tab-premium" onclick="showContent('premium')">
+        PREMIUM APPS 💎
+    </button>
+</div>
+
+<div class="container">
+    
+    <div id="smm-content" class="main-store-content">
+        <h2 style="text-align: center; color: var(--smm-color); margin-bottom: 25px;">Daftar Harga Layanan Suntik Sosial Media</h2>
+        
+        <div class="update-info">
+            <i class="fas fa-calendar-alt"></i>
+            <span><strong>Update Harga Terakhir:</strong> 11.00 WIB, Rabu, 5/11/2025</span>
+        </div>
+        <div class="grid-container">
+
+            <div class="category">
+                <div class="category-header">
+                    <i class="fab fa-instagram"></i>
+                    <h2>Layanan Instagram</h2>
+                </div>
+                <div class="service-list">
+                    <div class="service-group" data-platform="View Instagram">
+                        <h3>View Instagram</h3>
+                        <ul class="price-list">
+                            <div class="price-item" data-service="View Instagram - 100.000 View" data-price="Rp3.500">
+                                <span class="service-name-wrapper"><span class="service-name">100.000 View</span></span> <span class="price">Rp3.500</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="View Instagram - 200.000 View" data-price="Rp5.500">
+                                <span class="service-name-wrapper"><span class="service-name">200.000 View</span></span> <span class="price">Rp5.500</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="View Instagram - 300.000 View" data-price="Rp8.000">
+                                <span class="service-name-wrapper"><span class="service-name">300.000 View</span></span> <span class="price">Rp8.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="View Instagram - 500.000 View" data-price="Rp13.000">
+                                <span class="service-name-wrapper"><span class="service-name">500.000 View</span></span> <span class="price">Rp13.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="View Instagram - 1.000.000 View" data-price="Rp25.000">
+                                <span class="service-name-wrapper"><span class="service-name">1.000.000 View</span></span> <span class="price">Rp25.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="service-group" data-platform="Like Instagram (akun Indo)">
+                        <h3>Like Instagram (akun Indo)</h3>
+                        <ul class="price-list">
+                            <div class="price-item" data-service="Like Instagram (akun Indo) - 100 Likes" data-price="Rp3.000">
+                                <span class="service-name-wrapper"><span class="service-name">100 Likes</span></span> <span class="price">Rp3.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Like Instagram (akun Indo) - 200 Likes" data-price="Rp6.000">
+                                <span class="service-name-wrapper"><span class="service-name">200 Likes</span></span> <span class="price">Rp6.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Like Instagram (akun Indo) - 300 Likes" data-price="Rp9.000">
+                                <span class="service-name-wrapper"><span class="service-name">300 Likes</span></span> <span class="price">Rp9.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Like Instagram (akun Indo) - 500 Likes" data-price="Rp15.000">
+                                <span class="service-name-wrapper"><span class="service-name">500 Likes</span></span> <span class="price">Rp15.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Like Instagram (akun Indo) - 1.000 Likes" data-price="Rp20.000">
+                                <span class="service-name-wrapper"><span class="service-name">1.000 Likes</span></span> <span class="price">Rp20.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="service-group" data-platform="Save Instagram">
+                        <h3>Save Instagram</h3>
+                        <ul class="price-list">
+                            <div class="price-item" data-service="Save Instagram - 1.000 Save" data-price="Rp3.000">
+                                <span class="service-name-wrapper"><span class="service-name">1.000 Save</span></span> <span class="price">Rp3.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Save Instagram - 2.000 Save" data-price="Rp5.000">
+                                <span class="service-name-wrapper"><span class="service-name">2.000 Save</span></span> <span class="price">Rp5.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Save Instagram - 3.000 Save" data-price="Rp7.500">
+                                <span class="service-name-wrapper"><span class="service-name">3.000 Save</span></span> <span class="price">Rp7.500</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Save Instagram - 5.000 Save" data-price="Rp12.000">
+                                <span class="service-name-wrapper"><span class="service-name">5.000 Save</span></span> <span class="price">Rp12.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Save Instagram - 10.000 Save" data-price="Rp23.000">
+                                <span class="service-name-wrapper"><span class="service-name">10.000 Save</span></span> <span class="price">Rp23.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="service-group" data-platform="Followers Instagram (Indo aktif)">
+                        <h3>Followers Instagram (Indo aktif)</h3>
+                        <ul class="price-list">
+                            <div class="price-item" data-service="Followers Instagram (Indo aktif) - 100 Followers" data-price="Rp10.000">
+                                <span class="service-name-wrapper"><span class="service-name">100 Followers</span></span> <span class="price">Rp10.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Followers Instagram (Indo aktif) - 200 Followers" data-price="Rp20.000">
+                                <span class="service-name-wrapper"><span class="service-name">200 Followers</span></span> <span class="price">Rp20.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Followers Instagram (Indo aktif) - 300 Followers" data-price="Rp30.000">
+                                <span class="service-name-wrapper"><span class="service-name">300 Followers</span></span> <span class="price">Rp30.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Followers Instagram (Indo aktif) - 500 Followers" data-price="Rp40.000">
+                                <span class="service-name-wrapper"><span class="service-name">500 Followers</span></span> <span class="price">Rp40.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Followers Instagram (Indo aktif) - 1000 Followers" data-price="Rp60.000">
+                                <span class="service-name-wrapper"><span class="service-name">1000 Followers</span></span> <span class="price">Rp60.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="service-group" data-platform="Followers Instagram (UPDATE WORKING)">
+                        <h3>Followers Instagram (UPDATE WORKING)</h3>
+                        <ul class="price-list">
+                            <div class="price-item" data-service="Followers Instagram (UPDATE WORKING) - 100 Followers" data-price="Rp3.000">
+                                <span class="service-name-wrapper"><span class="service-name">100 Followers</span></span> <span class="price">Rp3.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Followers Instagram (UPDATE WORKING) - 200 Followers" data-price="Rp6.000">
+                                <span class="service-name-wrapper"><span class="service-name">200 Followers</span></span> <span class="price">Rp6.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Followers Instagram (UPDATE WORKING) - 300 Followers" data-price="Rp9.000">
+                                <span class="service-name-wrapper"><span class="service-name">300 Followers</span></span> <span class="price">Rp9.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Followers Instagram (UPDATE WORKING) - 500 Followers" data-price="Rp15.000">
+                                <span class="service-name-wrapper"><span class="service-name">500 Followers</span></span> <span class="price">Rp15.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Followers Instagram (UPDATE WORKING) - 1000 Followers" data-price="Rp24.000">
+                                <span class="service-name-wrapper"><span class="service-name">1000 Followers</span></span> <span class="price">Rp24.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="disclaimer">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span><strong>Catatan:</strong> Setiap harga layanan tidak bersifat tetap, bisa berubah-ubah setiap waktu mengikuti server.</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category">
+                <div class="category-header">
+                    <i class="fab fa-tiktok"></i>
+                    <h2>Layanan TikTok</h2>
+                </div>
+                <div class="service-list">
+                    <div class="service-group" data-platform="View TikTok">
+                        <h3>View TikTok</h3>
+                        <ul class="price-list">
+                            <div class="price-item" data-service="View TikTok - 10.000 View" data-price="Rp1.000">
+                                <span class="service-name-wrapper"><span class="service-name">10.000 View</span></span> <span class="price">Rp1.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="View TikTok - 50.000 View" data-price="Rp4.000">
+                                <span class="service-name-wrapper"><span class="service-name">50.000 View</span></span> <span class="price">Rp4.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="View TikTok - 100.000 View" data-price="Rp8.000">
+                                <span class="service-name-wrapper"><span class="service-name">100.000 View</span></span> <span class="price">Rp8.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="service-group" data-platform="Followers TikTok Indonesia">
+                        <h3>Followers TikTok Indonesia</h3>
+                        <ul class="price-list">
+                            <div class="price-item" data-service="Followers TikTok Indonesia - 100 Followers" data-price="Rp10.000">
+                                <span class="service-name-wrapper"><span class="service-name">100 Followers</span></span> <span class="price">Rp10.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Followers TikTok Indonesia - 200 Followers" data-price="Rp20.000">
+                                <span class="service-name-wrapper"><span class="service-name">200 Followers</span></span> <span class="price">Rp20.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Followers TikTok Indonesia - 300 Followers" data-price="Rp30.000">
+                                <span class="service-name-wrapper"><span class="service-name">300 Followers</span></span> <span class="price">Rp30.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Followers TikTok Indonesia - 500 Followers" data-price="Rp50.000">
+                                <span class="service-name-wrapper"><span class="service-name">500 Followers</span></span> <span class="price">Rp50.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Followers TikTok Indonesia - 1000 Followers" data-price="Rp100.000">
+                                <span class="service-name-wrapper"><span class="service-name">1000 Followers</span></span> <span class="price">Rp100.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="service-group" data-platform="Like TikTok (Akun Indo)">
+                        <h3>Like TikTok (Akun Indo)</h3>
+                        <ul class="price-list">
+                            <div class="price-item" data-service="Like TikTok (Akun Indo) - 100 Likes" data-price="Rp5.000">
+                                <span class="service-name-wrapper"><span class="service-name">100 Likes</span></span> <span class="price">Rp5.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Like TikTok (Akun Indo) - 200 Likes" data-price="Rp8.000">
+                                <span class="service-name-wrapper"><span class="service-name">200 Likes</span></span> <span class="price">Rp8.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Like TikTok (Akun Indo) - 300 Likes" data-price="Rp12.000">
+                                <span class="service-name-wrapper"><span class="service-name">300 Likes</span></span> <span class="price">Rp12.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Like TikTok (Akun Indo) - 400 Likes" data-price="Rp16.000">
+                                <span class="service-name-wrapper"><span class="service-name">400 Likes</span></span> <span class="price">Rp16.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Like TikTok (Akun Indo) - 500 Likes" data-price="Rp20.000">
+                                <span class="service-name-wrapper"><span class="service-name">500 Likes</span></span> <span class="price">Rp20.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Like TikTok (Akun Indo) - 1000 Likes" data-price="Rp24.000">
+                                <span class="service-name-wrapper"><span class="service-name">1000 Likes</span></span> <span class="price">Rp24.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="disclaimer">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span><strong>Catatan:</strong> Setiap harga layanan tidak bersifat tetap, bisa berubah-ubah setiap waktu mengikuti server.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <div class="category-header">
+                    <i class="fab fa-facebook"></i>
+                    <h2>Layanan Facebook</h2>
+                </div>
+                <div class="service-list">
+                    <div class="service-group" data-platform="Followers Facebook (Page)">
+                        <h3>Followers Facebook (Page)</h3>
+                        <ul class="price-list">
+                            <div class="price-item" data-service="Followers Facebook (Page) - 100 Followers" data-price="Rp1.200">
+                                <span class="service-name-wrapper"><span class="service-name">100 Followers</span></span> <span class="price">Rp1.200</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Followers Facebook (Page) - 200 Followers" data-price="Rp2.200">
+                                <span class="service-name-wrapper"><span class="service-name">200 Followers</span></span> <span class="price">Rp2.200</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Followers Facebook (Page) - 300 Followers" data-price="Rp3.200">
+                                <span class="service-name-wrapper"><span class="service-name">300 Followers</span></span> <span class="price">Rp3.200</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Followers Facebook (Page) - 500 Followers" data-price="Rp5.500">
+                                <span class="service-name-wrapper"><span class="service-name">500 Followers</span></span> <span class="price">Rp5.500</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Followers Facebook (Page) - 1000 Followers" data-price="Rp12.000">
+                                <span class="service-name-wrapper"><span class="service-name">1000 Followers</span></span> <span class="price">Rp12.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="service-group" data-platform="Followers Facebook (Profile)">
+                        <h3>Followers Facebook (Profile)</h3>
+                        <ul class="price-list">
+                            <div class="price-item" data-service="Followers Facebook (Profile) - 100 Followers" data-price="Rp1.000">
+                                <span class="service-name-wrapper"><span class="service-name">100 Followers</span></span> <span class="price">Rp1.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Followers Facebook (Profile) - 200 Followers" data-price="Rp2.000">
+                                <span class="service-name-wrapper"><span class="service-name">200 Followers</span></span> <span class="price">Rp2.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Followers Facebook (Profile) - 300 Followers" data-price="Rp3.000">
+                                <span class="service-name-wrapper"><span class="service-name">300 Followers</span></span> <span class="price">Rp3.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Followers Facebook (Profile) - 500 Followers" data-price="Rp5.000">
+                                <span class="service-name-wrapper"><span class="service-name">500 Followers</span></span> <span class="price">Rp5.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Followers Facebook (Profile) - 1000 Followers" data-price="Rp10.000">
+                                <span class="service-name-wrapper"><span class="service-name">1000 Followers</span></span> <span class="price">Rp10.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="disclaimer">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span><strong>Catatan:</strong> Setiap harga layanan tidak bersifat tetap, bisa berubah-ubah setiap waktu mengikuti server.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <div class="category-header">
+                    <i class="fas fa-video"></i>
+                    <h2>Layanan Snack Video</h2>
+                </div>
+                <div class="service-list">
+                    <div class="service-group" data-platform="Like Snack Video">
+                        <h3>Like Snack Video</h3>
+                        <ul class="price-list">
+                            <div class="price-item" data-service="Like Snack Video - 100 Likes" data-price="Rp2.500">
+                                <span class="service-name-wrapper"><span class="service-name">100 Likes</span></span> <span class="price">Rp2.500</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Like Snack Video - 200 Likes" data-price="Rp4.500">
+                                <span class="service-name-wrapper"><span class="service-name">200 Likes</span></span> <span class="price">Rp4.500</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Like Snack Video - 300 Likes" data-price="Rp7.000">
+                                <span class="service-name-wrapper"><span class="service-name">300 Likes</span></span> <span class="price">Rp7.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Like Snack Video - 500 Likes" data-price="Rp11.000">
+                                <span class="service-name-wrapper"><span class="service-name">500 Likes</span></span> <span class="price">Rp11.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Like Snack Video - 1.000 Likes" data-price="Rp20.000">
+                                <span class="service-name-wrapper"><span class="service-name">1.000 Likes</span></span> <span class="price">Rp20.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="service-group" data-platform="View Snack Video">
+                        <h3>View Snack Video</h3>
+                        <ul class="price-list">
+                            <div class="price-item" data-service="View Snack Video - 10.000 View" data-price="Rp1.000">
+                                <span class="service-name-wrapper"><span class="service-name">10.000 View</span></span> <span class="price">Rp1.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="View Snack Video - 20.000 View" data-price="Rp2.000">
+                                <span class="service-name-wrapper"><span class="service-name">20.000 View</span></span> <span class="price">Rp2.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="View Snack Video - 30.000 View" data-price="Rp3.000">
+                                <span class="service-name-wrapper"><span class="service-name">30.000 View</span></span> <span class="price">Rp3.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="View Snack Video - 50.000 View" data-price="Rp5.000">
+                                <span class="service-name-wrapper"><span class="service-name">50.000 View</span></span> <span class="price">Rp5.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="View Snack Video - 100.000 View" data-price="Rp10.000">
+                                <span class="service-name-wrapper"><span class="service-name">100.000 View</span></span> <span class="price">Rp10.000</span> <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="disclaimer">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span><strong>Catatan:</strong> Setiap harga layanan tidak bersifat tetap, bisa berubah-ubah setiap waktu mengikuti server.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="premium-content" class="main-store-content" style="display: none;">
+        <h2 style="text-align: center; color: var(--premium-color); margin-bottom: 25px;">Daftar Harga Aplikasi Premium</h2>
+        <div class="update-info">
+            <i class="fas fa-calendar-alt"></i>
+            <span><strong>Update Harga Terakhir:</strong> 18.54 WIB, Senin, 10/11/2025</span>
+        </div>
+        <div class="grid-container">
+
+            <div class="category">
+                <div class="category-header">
+                    <i class="fas fa-tv"></i>
+                    <h2>Streaming & Media</h2>
+                </div>
+                <div class="service-list">
+                    <div class="service-group" data-platform="Netflix">
+                        <h3>Netflix</h3>
+                        <ul class="price-list">
+                            <div class="price-item sold-out" data-service="🌟Netflix 1P1U -1 Bulan" data-price="Rp32.000" data-stock="0" data-code="net1u1b" data-desc="Fullgar - All Device">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name"><i class="fas fa-times-circle" style="color: #D35400; margin-right: 5px;"></i>🌟Netflix 1P1U -1 Bulan</span>
+                                    <span class="service-desc" style="margin-left: 20px;">Fullgar - All Device</span>
+                                </span>
+                                <span class="stock">Habis</span>
+                                <span class="price">Rp32.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item sold-out" data-service="🌟Netflix Semi Private 1B" data-price="Rp38.000" data-stock="0" data-code="netsempriv" data-desc="1 Akun hanya diisi 4 Profil dan 1 admin">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name"><i class="fas fa-times-circle" style="color: #D35400; margin-right: 5px;"></i>🌟Netflix Semi Private 1B</span>
+                                    <span class="service-desc" style="margin-left: 20px;">1 Akun hanya diisi 4 Profil dan 1 admin</span>
+                                </span>
+                                <span class="stock">Habis</span>
+                                <span class="price">Rp38.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item sold-out" data-service="🚨Netflix 2U - 1 Bulan" data-price="Rp17.000" data-stock="0" data-code="net2u" data-desc="Garansi sesuai snk">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name"><i class="fas fa-times-circle" style="color: #D35400; margin-right: 5px;"></i>🚨Netflix 2U - 1 Bulan</span>
+                                    <span class="service-desc" style="margin-left: 20px;">Garansi sesuai snk</span>
+                                </span>
+                                <span class="stock">Habis</span>
+                                <span class="price">Rp17.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                        </ul>
+                    </div>
+
+                    <div class="service-group" data-platform="Vidio & Viu">
+                        <h3>Vidio & Viu</h3>
+                        <ul class="price-list">
+                            <div class="price-item" data-service="Vidio Platinum Mobile" data-price="Rp23.000" data-stock="2" data-code="vidplatm" data-desc="Private - 1 Bulan">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name">Vidio Platinum Mobile</span>
+                                    <span class="service-desc">Private - 1 Bulan</span>
+                                </span>
+                                <span class="stock">Stok: 2</span>
+                                <span class="price">Rp23.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Vidio TV Only - 1 Tahun" data-price="Rp5.000" data-stock="1" data-code="vidtv" data-desc="Garansi 1 Bulan">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name">Vidio TV Only - 1 Tahun</span>
+                                    <span class="service-desc">Garansi 1 Bulan</span>
+                                </span>
+                                <span class="stock">Stok: 1</span>
+                                <span class="price">Rp5.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Viu 1 Bulan" data-price="Rp1.000" data-stock="42" data-code="viu1b" data-desc="Private">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name">Viu 1 Bulan</span>
+                                    <span class="service-desc">Private</span>
+                                </span>
+                                <span class="stock">Stok: 42</span>
+                                <span class="price">Rp1.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Viu 1 Tahun" data-price="Rp2.000" data-stock="122" data-code="viu1t" data-desc="Private, Gar 6 B">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name">Viu 1 Tahun</span>
+                                    <span class="service-desc">Private, Gar 6 B</span>
+                                </span>
+                                <span class="stock">Stok: 122</span>
+                                <span class="price">Rp2.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-group" data-platform="Media Lainnya">
+                        <h3>Media Lainnya</h3>
+                        <ul class="price-list">
+                            <div class="price-item" data-service="Dramabox 1 Bulan" data-price="Rp22.000" data-stock="6" data-code="dbox" data-desc="Nonton Via Website Bukan Aplikasi">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name">Dramabox 1 Bulan</span>
+                                    <span class="service-desc">Nonton Via Website Bukan Aplikasi</span>
+                                </span>
+                                <span class="stock">Stok: 6</span>
+                                <span class="price">Rp22.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Prime Video 1B" data-price="Rp14.000" data-stock="1" data-code="prime1b" data-desc="Garansi Login">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name">Prime Video 1B</span>
+                                    <span class="service-desc">Garansi Login</span>
+                                </span>
+                                <span class="stock">Stok: 1</span>
+                                <span class="price">Rp14.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Reel Short 1 Bulan" data-price="Rp20.000" data-stock="3" data-code="reelshort" data-desc="Full Garansi - Wajib Send Proof">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name">Reel Short 1 Bulan</span>
+                                    <span class="service-desc">Full Garansi - Wajib Send Proof</span>
+                                </span>
+                                <span class="stock">Stok: 3</span>
+                                <span class="price">Rp20.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Spotify 1 Bulan" data-price="Rp7.000" data-stock="3" data-code="spostu" data-desc="Non Garansi">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name">Spotify 1 Bulan</span>
+                                    <span class="service-desc">Non Garansi</span>
+                                </span>
+                                <span class="stock">Stok: 3</span>
+                                <span class="price">Rp7.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Stardust TV" data-price="Rp18.000" data-stock="5" data-code="stardust" data-desc="Login Web-Sharing">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name">Stardust TV</span>
+                                    <span class="service-desc">Login Web-Sharing</span>
+                                </span>
+                                <span class="stock">Stok: 5</span>
+                                <span class="price">Rp18.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Youtube 1 Bulan" data-price="Rp10.000" data-stock="1" data-code="ytind" data-desc="Individual - FullGar">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name">Youtube 1 Bulan</span>
+                                    <span class="service-desc">Individual - FullGar</span>
+                                </span>
+                                <span class="stock">Stok: 1</span>
+                                <span class="price">Rp10.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <div class="category-header">
+                    <i class="fas fa-magic"></i>
+                    <h2>Creative & Utility</h2>
+                </div>
+                <div class="service-list">
+                    <div class="service-group" data-platform="Canva">
+                        <h3>Canva</h3>
+                        <ul class="price-list">
+                            <div class="price-item" data-service="Canva Edu Lifetime" data-price="Rp4.500" data-stock="14" data-code="canedu" data-desc="Non Garansi">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name">Canva Edu Lifetime</span>
+                                    <span class="service-desc">Non Garansi</span>
+                                </span>
+                                <span class="stock">Stok: 14</span>
+                                <span class="price">Rp4.500</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item sold-out" data-service="Canva Head 1B" data-price="Rp7.000" data-stock="0" data-code="canhead" data-desc="Bisa Invite 100 Member">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name"><i class="fas fa-times-circle" style="color: #D35400; margin-right: 5px;"></i>Canva Head 1B</span>
+                                    <span class="service-desc" style="margin-left: 20px;">Bisa Invite 100 Member</span>
+                                </span>
+                                <span class="stock">Habis</span>
+                                <span class="price">Rp7.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Canva Pro Member 1B" data-price="Rp1.000" data-stock="19" data-code="canpro1b" data-desc="Fullgar - Gabung Via Invite Link">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name">Canva Pro Member 1B</span>
+                                    <span class="service-desc">Fullgar - Gabung Via Invite Link</span>
+                                </span>
+                                <span class="stock">Stok: 19</span>
+                                <span class="price">Rp1.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-group" data-platform="Capcut">
+                        <h3>Capcut</h3>
+                        <ul class="price-list">
+                            <div class="price-item sold-out" data-service="Capcut 28 Day" data-price="Rp8.000" data-stock="0" data-code="cc28d" data-desc="Private - Garansi Login">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name"><i class="fas fa-times-circle" style="color: #D35400; margin-right: 5px;"></i>Capcut 28 Day</span>
+                                    <span class="service-desc" style="margin-left: 20px;">Private - Garansi Login</span>
+                                </span>
+                                <span class="stock">Habis</span>
+                                <span class="price">Rp8.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Capcut 35 Day" data-price="Rp12.000" data-stock="2" data-code="cc1b" data-desc="Garansi Login">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name">Capcut 35 Day</span>
+                                    <span class="service-desc">Garansi Login</span>
+                                </span>
+                                <span class="stock">Stok: 2</span>
+                                <span class="price">Rp12.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Capcut 7 Day" data-price="Rp5.000" data-stock="2" data-code="cc7d" data-desc="Private">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name">Capcut 7 Day</span>
+                                    <span class="service-desc">Private</span>
+                                </span>
+                                <span class="stock">Stok: 2</span>
+                                <span class="price">Rp5.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                        </ul>
+                    </div>
+
+                    <div class="service-group" data-platform="Creative & Lainnya">
+                        <h3>Creative & Lainnya</h3>
+                        <ul class="price-list">
+                            <div class="price-item" data-service="Alight Motion - Android" data-price="Rp6.000" data-stock="3" data-code="amndro" data-desc="Android Only - Private">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name">Alight Motion - Android</span>
+                                    <span class="service-desc">Android Only - Private</span>
+                                </span>
+                                <span class="stock">Stok: 3</span>
+                                <span class="price">Rp6.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="ChatGPT Private 1Bulan" data-price="Rp10.000" data-stock="1" data-code="gpteam" data-desc="Plan Team, Gar Login">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name">ChatGPT Private 1Bulan</span>
+                                    <span class="service-desc">Plan Team, Gar Login</span>
+                                </span>
+                                <span class="stock">Stok: 1</span>
+                                <span class="price">Rp10.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item sold-out" data-service="Get Contact 1 Bulan" data-price="Rp5.000" data-stock="0" data-code="gtc" data-desc="Proses manual, Jam 10.00-21.00, Chat admin">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name"><i class="fas fa-times-circle" style="color: #D35400; margin-right: 5px;"></i>Get Contact 1 Bulan</span>
+                                    <span class="service-desc" style="margin-left: 20px;">Proses manual, Jam 10.00-21.00, Chat admin</span>
+                                </span>
+                                <span class="stock">Habis</span>
+                                <span class="price">Rp5.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-group" data-platform="VPN & Utility">
+                        <h3>VPN & Utility</h3>
+                        <ul class="price-list">
+                            <div class="price-item" data-service="VPN Express 1 Bulan" data-price="Rp8.000" data-stock="1" data-code="vexpres" data-desc="Private">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name">VPN Express 1 Bulan</span>
+                                    <span class="service-desc">Private</span>
+                                </span>
+                                <span class="stock">Stok: 1</span>
+                                <span class="price">Rp8.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item sold-out" data-service="VPN Express 3 Bulan" data-price="Rp15.000" data-stock="0" data-code="vexpres3b" data-desc="Private">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name"><i class="fas fa-times-circle" style="color: #D35400; margin-right: 5px;"></i>VPN Express 3 Bulan</span>
+                                    <span class="service-desc" style="margin-left: 20px;">Private</span>
+                                </span>
+                                <span class="stock">Habis</span>
+                                <span class="price">Rp15.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                            <div class="price-item" data-service="Zoom Pro - 14 Hari" data-price="Rp5.000" data-stock="4" data-code="zoom14d" data-desc="Private - Garansi">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name">Zoom Pro - 14 Hari</span>
+                                    <span class="service-desc">Private - Garansi</span>
+                                </span>
+                                <span class="stock">Stok: 4</span>
+                                <span class="price">Rp5.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <div class="category-header">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h2>Layanan Akademik & Lainnya</h2>
+                </div>
+                <div class="service-list">
+                    <div class="service-group" data-platform="Layanan Akademik">
+                        <h3>Layanan Akademik</h3>
+                        <ul class="price-list">
+                            <div class="price-item" data-service="Cek Turnitin📝" data-price="Rp3.000" data-stock="9" data-code="turnitcek" data-desc="Manual -Jam 10.00-21.00, Chat Worker">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name">Cek Turnitin📝</span>
+                                    <span class="service-desc">Manual -Jam 10.00-21.00, Chat Worker</span>
+                                </span>
+                                <span class="stock">Stok: 9</span>
+                                <span class="price">Rp3.000</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                        </ul>
+                    </div>
+
+                    <div class="service-group" data-platform="Testing">
+                        <h3>Testing</h3>
+                        <ul class="price-list">
+                            <div class="price-item" data-service="Tes Produk" data-price="Rp100" data-stock="50" data-code="testing" data-desc="desk">
+                                <span class="service-name-wrapper">
+                                    <span class="service-name">Tes Produk</span>
+                                    <span class="service-desc">desk</span>
+                                </span>
+                                <span class="stock">Stok: 50</span>
+                                <span class="price">Rp100</span>
+                                <span class="buy-button">Beli Sekarang</span>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="disclaimer">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span><strong>Catatan:</strong> Garansi dan Syarat & Ketentuan berlaku. Harap baca S&K sebelum membeli.</span>
+        </div>
+    </div>
+
+</div>
+
+<input type="checkbox" id="contact-overlay-toggle" class="overlay-toggle">
+<div class="overlay" id="contact-info-overlay">
+    <div class="overlay-content">
+        <label for="contact-overlay-toggle" class="overlay-close">×</label>
+        <h2 style="color: var(--dark-color); border-bottom: 2px solid var(--accent-color); padding-bottom: 10px;">Kontak Kami</h2>
+        <p><strong>Hubungi Admin untuk Pemesanan & Bantuan:</strong></p>
+        <ul>
+            <li style="margin-bottom: 10px;"><i class="fab fa-whatsapp" style="color: var(--buy-button-color);"></i> WhatsApp: <a href="https://wa.me/6287715125270" target="_blank" style="color: var(--buy-button-color); text-decoration: none; font-weight: 600;">+6287715125270 (Fast Respon)</a></li>
+            <li style="margin-bottom: 10px;"><i class="fab fa-instagram" style="color: var(--premium-color);"></i> Instagram: <a href="https://instagram.com/fiqiptra_08" target="_blank" style="color: var(--premium-color); text-decoration: none; font-weight: 600;">@fiqiptra_08</a></li>
+        </ul>
+        <p style="margin-top: 20px; font-size: 0.9em; color: #888;">Jam Operasional: 10.00 - 21.00 WIB (Senin - Minggu)</p>
+    </div>
+</div>
+
+<input type="checkbox" id="terms-overlay-toggle" class="overlay-toggle">
+<div class="overlay" id="terms-conditions-overlay">
+    <div class="overlay-content">
+        <label for="terms-overlay-toggle" class="overlay-close">×</label>
+        <h2 style="color: var(--dark-color); border-bottom: 2px solid var(--accent-color); padding-bottom: 10px;">Syarat & Ketentuan (S&K)</h2>
+        
+        <h3 style="color: var(--premium-color); margin-top: 20px; padding-left: 10px; border-left: 4px solid var(--premium-color);">Ketentuan Umum</h3>
+        <ul style="list-style-type: disc; padding-left: 30px;">
+            <li>Harga produk Premium Apps dan Layanan SMM dapat berubah sewaktu-waktu tanpa pemberitahuan sebelumnya.</li>
+            <li>Pembayaran dilakukan secara penuh di awal (full payment).</li>
+            <li>Kesalahan input data pemesanan (link/username/produk) yang mengakibatkan kegagalan pesanan adalah tanggung jawab pembeli, tidak ada pengembalian dana (refund).</li>
+            <li>Layanan akan diproses setelah pembayaran dikonfirmasi.</li>
+        </ul>
+        
+        <h3 style="color: var(--premium-color); margin-top: 20px; padding-left: 10px; border-left: 4px solid var(--premium-color);">Ketentuan Premium Apps (Akun)</h3>
+        <ul style="list-style-type: disc; padding-left: 30px;">
+            <li>Garansi berlaku sesuai durasi yang disebutkan pada deskripsi produk.</li>
+            <li>Garansi hangus jika:
+                <ul>
+                    <li>Mengubah data akun (password, email, dll.) tanpa izin admin.</li>
+                    <li>Melanggar Syarat & Ketentuan yang berlaku pada platform yang dibeli (misalnya, menggunakan VPN di platform tertentu jika dilarang).</li>
+                    <li>Melakukan tindakan yang merugikan akun (seperti sharing akun di luar ketentuan).</li>
+                </ul>
+            </li>
+            <li>Jika akun bermasalah dalam masa garansi, akan diberikan akun pengganti (replacement). Tidak ada pengembalian dana (refund) jika penggantian akun dapat dilakukan.</li>
+            <li>Proses penggantian akun maksimal 1x24 jam.</li>
+        </ul>
+        
+        <h3 style="color: var(--smm-color); margin-top: 20px; padding-left: 10px; border-left: 4px solid var(--smm-color);">Ketentuan Layanan SMM (Non-Garansi)</h3>
+        <ul style="list-style-type: disc; padding-left: 30px;">
+            <li>Semua layanan SMM bersifat **NON-GARANSI** kecuali ada keterangan khusus.</li>
+            <li>Layanan SMM memerlukan link atau username yang benar dan TIDAK PRIVATE.</li>
+            <li>Kami tidak bertanggung jawab atas penurunan (drop) Followers/Likes/Views setelah pesanan selesai.</li>
+            <li>Waktu proses dapat bervariasi tergantung server dan antrian. Tidak ada pembatalan karena alasan "lama proses".</li>
+        </ul>
+        
+    </div>
+</div>
+
+<input type="checkbox" id="example-overlay-toggle" class="overlay-toggle">
+<div class="overlay" id="example-target-overlay">
+    <div class="overlay-content">
+        <label for="example-overlay-toggle" class="overlay-close">×</label>
+        <h2 style="color: var(--smm-color); border-bottom: 2px solid var(--accent-color); padding-bottom: 10px;">Contoh Pengisian Target/Link (Layanan SMM)</h2>
+        <p class="disclaimer smm-note">
+            <i class="fas fa-info-circle"></i>
+            <span>Penting! Pastikan Anda menyiapkan link atau username target pesanan Anda sebelum pesanan dibuat sehingga pesanan dapat diproses. Jika ada hal yang ingin anda tanyakan, bisa langsung tanyakan dengan cara masuk ke halaman <label for="contact-overlay-toggle" style="color: var(--smm-color); cursor: pointer; text-decoration: underline;">kontak</label> pada website kami ya. </span>
+        </p>
+        
+        <h3 style="color: var(--smm-color); margin-top: 20px; padding-left: 10px; border-left: 4px solid var(--smm-color);">Instagram</h3>
+        <ul style="list-style-type: none; padding: 0 0 0 10px; margin-bottom: 15px; border-left: 1px solid #eee;">
+            <li><i class="fab fa-instagram" style="color: var(--smm-color); margin-right: 5px;"></i> **Followers, Story, Live Video, Profile Visits:** Username akun Instagram tanpa tanda @ // Contoh: `fiqiptra_08`</li>
+            <li><i class="fab fa-instagram" style="color: var(--smm-color); margin-right: 5px;"></i> **Likes, Views, Comments, Impressions, Saves, TV:** Link postingan akun Instagram // Contoh: `https://www.instagram.com/p/xxxxx/`</li>
+            <li><i class="fab fa-instagram" style="color: var(--smm-color); margin-right: 5px;"></i> **Instagram Story:** Username akun // Contoh: `fiqiptra_08`</li>
+            <li><i class="fab fa-instagram" style="color: var(--smm-color); margin-right: 5px;"></i> **Instagram Reels:** Link postingan Reels // Contoh: `https://www.instagram.com/reel/xxxxx/`</li>
+        </ul>
+        
+        <h3 style="color: var(--smm-color); margin-top: 20px; padding-left: 10px; border-left: 4px solid var(--smm-color);">Youtube</h3>
+        <ul style="list-style-type: none; padding: 0 0 0 10px; margin-bottom: 15px; border-left: 1px solid #eee;">
+            <li><i class="fab fa-youtube" style="color: var(--smm-color); margin-right: 5px;"></i> **Likes, Views, Shares:** Link video youtube // Contoh: `https://www.youtube.com/watch?v=xxxxx`</li>
+            <li><i class="fab fa-youtube" style="color: var(--smm-color); margin-right: 5px;"></i> **Subscribers:** Link channel youtube // Contoh: `https://www.youtube.com/@fiqiptra_08`</li>
+        </ul>
+        
+        <h3 style="color: var(--smm-color); margin-top: 20px; padding-left: 10px; border-left: 4px solid var(--smm-color);">Twitter (X)</h3>
+        <ul style="list-style-type: none; padding: 0 0 0 10px; margin-bottom: 15px; border-left: 1px solid #eee;">
+            <li><i class="fab fa-twitter" style="color: var(--smm-color); margin-right: 5px;"></i> **Followers:** Username akun twitter tanpa tanda @ // Contoh: `fiqiptra_08`</li>
+            <li><i class="fab fa-twitter" style="color: var(--smm-color); margin-right: 5px;"></i> **Retweet, Favorite:** Link tweet atau postingan twitter // Contoh: `https://twitter.com/fiqiptra_08/status/xxxxx`</li>
+        </ul>
+        
+        <h3 style="color: var(--smm-color); margin-top: 20px; padding-left: 10px; border-left: 4px solid var(--smm-color);">Tik Tok</h3>
+        <ul style="list-style-type: none; padding: 0 0 0 10px; margin-bottom: 15px; border-left: 1px solid #eee;">
+            <li><i class="fab fa-tiktok" style="color: var(--smm-color); margin-right: 5px;"></i> **Followers:** Link profile tik tok atau username // Contoh: `https://tiktok.com/@fiqiptra_08`</li>
+            <li><i class="fab fa-tiktok" style="color: var(--smm-color); margin-right: 5px;"></i> **Likes / Views:** Link video tik tok // Contoh: `https://vt.tiktok.com/xxxxx/`</li>
+        </ul>
+        
+        <h3 style="color: var(--smm-color); margin-top: 20px; padding-left: 10px; border-left: 4px solid var(--smm-color);">Marketplace (Shopee & Tokopedia)</h3>
+        <ul style="list-style-type: none; padding: 0 0 0 10px; margin-bottom: 15px; border-left: 1px solid #eee;">
+            <li><i class="fas fa-shopping-cart" style="color: var(--smm-color); margin-right: 5px;"></i> **Shopee Followers/Favorite:** Link Toko Shopee // Contoh: `https://shopee.co.id/fiqiptra_08`</li>
+            <li><i class="fas fa-shopping-bag" style="color: var(--smm-color); margin-right: 5px;"></i> **Tokopedia Followers/Favorite:** Link Toko Tokopedia // Contoh: `https://tokopedia.com/fiqiptra_08`</li>
+        </ul>
+    </div>
+</div>
+
+<input type="checkbox" id="qris-overlay-toggle" class="overlay-toggle">
+<div class="overlay" id="qris-payment-overlay">
+    <div class="overlay-content qris-content">
+        <label for="qris-overlay-toggle" class="overlay-close">×</label>
+        <h2 style="color: var(--dark-color); border-bottom: 2px solid var(--accent-color); padding-bottom: 10px;">Pembayaran (QRIS)</h2>
+        <p>Scan kode QRIS di bawah untuk melakukan pembayaran.</p>
+        <div class="qris-image-container">
+            <img src="https://files.catbox.moe/g24419.webp" alt="Kode QRIS untuk Pembayaran" class="qris-image">
+        </div>
+        <p style="margin-top: 15px; font-weight: 600; color: var(--premium-color);">Pastikan nominal transfer sesuai dengan total belanja Anda.</p>
+        <p style="font-size: 0.9em; color: #888;">Setelah transfer, kirimkan bukti pembayaran ke WhatsApp admin untuk konfirmasi.</p>
+    </div>
+</div>
+
+<script>
+    const whatsappNumber = "6287715125270"; // Nomor WhatsApp admin (tanpa +)
+
+    function showContent(tab) {
+        document.getElementById('smm-content').style.display = 'none';
+        document.getElementById('premium-content').style.display = 'none';
+        
+        document.querySelector('.tab-smm').classList.remove('active');
+        document.querySelector('.tab-premium').classList.remove('active');
+
+        if (tab === 'smm') {
+            document.getElementById('smm-content').style.display = 'block';
+            document.querySelector('.tab-smm').classList.add('active');
+        } else if (tab === 'premium') {
+            document.getElementById('premium-content').style.display = 'block';
+            document.querySelector('.tab-premium').classList.add('active');
+        }
+
+        // Simpan status tab ke localStorage
+        localStorage.setItem('activeTab', tab);
+    }
+
+    function initializeContentDisplay() {
+        const activeTab = localStorage.getItem('activeTab') || 'smm';
+        showContent(activeTab);
+        
+        // Hapus class 'active' dari tab-smm jika tab-premium yang aktif saat load
+        if (activeTab === 'premium') {
+            document.querySelector('.tab-smm').classList.remove('active');
+            document.querySelector('.tab-premium').classList.add('active');
+        }
+        
+        // --- JAVASCRIPT BARU UNTUK POPUP RESELLER ---
+        var resellerModal = document.getElementById("resellerModal");
+        var closeResellerModal = document.getElementById("closeResellerModal");
+
+        function openResellerModal() {
+            resellerModal.style.opacity = '1';
+            resellerModal.style.visibility = 'visible';
+        }
+
+        function closeResellerModalFunc() {
+            resellerModal.style.opacity = '0';
+            resellerModal.style.visibility = 'hidden';
+            // Set cookie/localStorage agar pop-up tidak muncul lagi di sesi ini
+            sessionStorage.setItem('resellerPopupShown', 'true');
+        }
+
+        closeResellerModal.onclick = closeResellerModalFunc;
+
+        window.onclick = function(event) {
+            if (event.target == resellerModal) {
+                closeResellerModalFunc();
+            }
+        }
+
+        // Tampilkan pop-up secara otomatis 1 detik setelah halaman dimuat (jika belum pernah ditampilkan di sesi ini)
+        if (!sessionStorage.getItem('resellerPopupShown')) {
+            setTimeout(openResellerModal, 1000); 
+        }
+        // ------------------------------------------
+    }
+    
+    // Panggil saat halaman dimuat
+    if (window.location.hash === '#premium') {
+        showContent('premium');
+    } else {
+        showContent('smm');
+    }
+
+    window.addEventListener('load', initializeContentDisplay);
+    
+    document.querySelectorAll('.price-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const serviceName = item.getAttribute('data-service');
+            const servicePrice = item.getAttribute('data-price');
+            const isPremium = item.closest('#premium-content') !== null;
+            const isSoldOut = item.classList.contains('sold-out');
+            
+            if (isSoldOut) {
+                alert('Maaf, produk ini sedang habis (Sold Out). Silakan coba lagi nanti atau hubungi Admin.');
+                return;
+            }
+
+            let message = "";
+            
+            if (isPremium) {
+                const serviceCode = item.getAttribute('data-code');
+                const serviceDesc = item.getAttribute('data-desc');
+                const confirmation = confirm(`Anda akan membeli Produk Premium: "${serviceName}" dengan harga ${servicePrice}. \\n\\nKode Produk: ${serviceCode} \\nDeskripsi: ${serviceDesc} \\n\\nLanjutkan ke WhatsApp?`);
+                
+                if (!confirmation) {
+                    return;
+                }
+                
+                const serviceGroup = item.closest('.service-group').getAttribute('data-platform');
+                message = `Hallo Admin, saya mau pesan Produk Premium: *[${serviceCode}] - ${serviceName}* (${serviceDesc}) dengan harga *${servicePrice}*. Mohon informasinya untuk proses pembayaran dan langkah selanjutnya. Terima kasih.`;
+            } else {
+                 const confirmation = confirm(`Anda akan membeli layanan SMM: "${serviceName}" seharga ${servicePrice}. \n\nPenting: Layanan SMM adalah NON-GARANSI. Pastikan link target Anda sudah BENAR dan TIDAK PRIVATE. \n\nLanjutkan ke WhatsApp?`);
+                
+                if (!confirmation) {
+                    return;
+                }
+                
+                message = `Hallo Admin, saya mau pesan layanan SMM: *${serviceName}* dengan harga *${servicePrice}*. Link target/username saya adalah: [ISI LINK DISINI]. \n\nSaya sudah membaca dan memahami bahwa layanan SMM bersifat Non-Garansi. Mohon informasinya untuk proses selanjutnya. Terima kasih.`;
+            }
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+            window.open(whatsappLink, '_blank');
+        });
+    });
+
+    // --- PERLINDUNGAN 3: ANTI RIGHT CLICK GLOBAL ---
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        alert("Maaf, klik kanan (menu konteks) dinonaktifkan untuk mencegah penyalinan dan pengunduhan konten. Silakan hubungi admin untuk informasi lebih lanjut.");
+    });
+    // -----------------------------------------------
+
+</script>
+
+</body>
+</html>
