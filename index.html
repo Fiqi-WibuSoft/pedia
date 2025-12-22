@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMM PRO - Official Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --ig-grad: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            --tt-grad: linear-gradient(45deg, #000000, #25F4EE, #FE2C55);
+            --fb-grad: linear-gradient(45deg, #1877F2, #0056b3);
+            --yt-grad: linear-gradient(45deg, #FF0000, #b20000);
+            --tw-grad: linear-gradient(45deg, #1DA1F2, #000000);
+            --wa-color: #25D366;
+            --bg-body: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg-body); color: #1e293b; padding: 20px 10px 100px; }
+        .container { max-width: 500px; margin: 0 auto; }
+
+        .brand-header { text-align: center; margin-bottom: 25px; }
+        .brand-header h1 { font-weight: 800; font-size: 2.2rem; color: #0f172a; }
+        .brand-header span { color: #dc2743; }
+
+        /* WIDGET KALKULATOR CUSTOM (LAYOUT KECIL) */
+        .custom-widget {
+            background: #0f172a; color: white; padding: 20px; border-radius: 24px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2); margin-bottom: 30px;
+        }
+        .custom-widget h3 { font-size: 0.85rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; text-transform: uppercase; color: #facc15; }
+        .custom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .custom-grid label { display: block; font-size: 0.65rem; color: #94a3b8; margin-bottom: 4px; font-weight: 700; }
+        .custom-grid select, .custom-grid input {
+            width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #334155; 
+            background: #1e293b; color: white; font-size: 0.85rem; outline: none;
+        }
+        .calc-footer { display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; }
+        .calc-total { font-size: 1.3rem; font-weight: 800; color: #4ade80; }
+        .btn-request { background: #25D366; color: white; border: none; padding: 10px 15px; border-radius: 10px; font-weight: 700; font-size: 0.8rem; cursor: pointer; }
+
+        /* TARGET INPUT */
+        .target-box {
+            background: white; padding: 25px; border-radius: 24px;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1); margin-bottom: 30px;
+            border: 1px solid #e2e8f0; text-align: center;
+        }
+        .target-box label { display: block; font-weight: 800; margin-bottom: 12px; font-size: 0.85rem; color: #475569; text-transform: uppercase; }
+        .target-box input {
+            width: 100%; padding: 18px; border: 2px solid #f1f5f9; border-radius: 18px;
+            font-size: 1rem; outline: none; transition: 0.3s; background: #f8fafc; text-align: center;
+        }
+
+        /* KATALOG CARD UTAMA */
+        .catalog-card {
+            background: white; border-radius: 35px; overflow: hidden;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1); margin-bottom: 40px; border: 1px solid #e2e8f0;
+        }
+        .cat-visual { height: 150px; display: flex; align-items: center; justify-content: center; position: relative; }
+        .cat-visual i { font-size: 6rem; color: rgba(255, 255, 255, 0.95); z-index: 2; }
+        .visual-ig { background: var(--ig-grad); }
+        .visual-tt { background: var(--tt-grad); }
+        .visual-fb { background: var(--fb-grad); }
+        .visual-yt { background: var(--yt-grad); }
+        .visual-tw { background: var(--tw-grad); }
+
+        .cat-body { padding: 30px; }
+        .cat-body h2 { text-align: center; font-size: 1.4rem; font-weight: 800; margin-bottom: 25px; color: #0f172a; }
+        .select-group { margin-bottom: 20px; }
+        .select-label { display: block; font-size: 0.75rem; font-weight: 800; color: #94a3b8; margin-bottom: 8px; text-transform: uppercase; }
+        .select-wrapper { position: relative; }
+        .select-wrapper i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #64748b; }
+        
+        select {
+            width: 100%; padding: 16px 16px 16px 50px; border-radius: 18px;
+            border: 2px solid #f1f5f9; background: #fff; font-size: 0.95rem; font-weight: 600; appearance: none;
+        }
+
+        .price-tag { background: #f0fdf4; padding: 22px; border-radius: 20px; text-align: center; border: 1px solid #dcfce7; margin-top: 10px; display: none; }
+        .price-tag .amount { font-size: 2rem; font-weight: 800; color: #166534; }
+        
+        .btn-checkout { background: var(--wa-color); color: white; border: none; padding: 20px; border-radius: 20px; font-weight: 800; width: 100%; margin-top: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="brand-header">
+            <h1>SMM<span>PRO.</span></h1>
+            <p>Pusat Layanan Social Media Terbaik</p>
+        </div>
+
+        <div class="custom-widget">
+            <h3><i class="fas fa-magic"></i> Kalkulator Order Custom</h3>
+            <div class="custom-grid">
+                <div>
+                    <label>LAYANAN</label>
+                    <select id="custPlat" onchange="calcCust()">
+                        <option value="45000">IG Followers Indo</option>
+                        <option value="4000">IG Views Video</option>
+                        <option value="25000">TikTok Followers</option>
+                        <option value="15000">Twitter Followers</option>
+                        <option value="90000">YouTube Subs</option>
+                    </select>
+                </div>
+                <div>
+                    <label>JUMLAH</label>
+                    <input type="number" id="custQty" placeholder="Min. 100" oninput="calcCust()">
+                </div>
+            </div>
+            <div class="calc-footer">
+                <div class="calc-total" id="custTotal">Rp 0</div>
+                <button class="btn-request" onclick="orderCust()"><i class="fab fa-whatsapp"></i> REQUEST</button>
+            </div>
+        </div>
+
+        <div class="target-box">
+            <label><i class="fas fa-link"></i> Link Target / Username</label>
+            <input type="text" id="targetInput" placeholder="Contoh: @username atau link profil">
+        </div>
+
+        <div id="catalogList"></div>
+    </div>
+
+    <script>
+        const adminWA = "6287715125270"; 
+
+        // --- FUNGSI PESAN WHATSAPP MENARIK ---
+        function sendToWA(data) {
+            const separator = "───────────────────";
+            const header = "┏━━━━━━━━━━━━━━┓";
+            const footer = "┗━━━━━━━━━━━━━━┛";
+            
+            let message = `🚀 *KONFIRMASI ORDER - SMM PRO*\n${header}\n\n`;
+            
+            message += `🔹 *PLATFORM:* ${data.plat.toUpperCase()}\n`;
+            message += `🔹 *LAYANAN:* ${data.svc}\n`;
+            
+            if (data.pkg) {
+                message += `🔹 *PAKET:* ${data.pkg}\n`;
+            } else if (data.qty) {
+                message += `🔹 *JUMLAH:* ${data.qty}\n`;
+            }
+
+            message += `\n📍 *TARGET:* ${data.target}\n`;
+            message += `${separator}\n`;
+            message += `💰 *TOTAL BAYAR:* *${data.price}*\n`;
+            message += `${separator}\n\n`;
+            message += `💬 _Mohon Admin segera memproses pesanan saya. Terima kasih!_`;
+
+            window.open(`https://wa.me/${adminWA}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // Fungsi Kalkulator
+        function calcCust() {
+            const hrgSeribu = document.getElementById('custPlat').value;
+            const qty = document.getElementById('custQty').value;
+            const res = document.getElementById('custTotal');
+            if(qty > 0) {
+                const tot = Math.ceil((hrgSeribu / 1000) * qty);
+                res.innerText = 'Rp ' + tot.toLocaleString('id-ID');
+            } else { res.innerText = 'Rp 0'; }
+        }
+
+        function orderCust() {
+            const target = document.getElementById('targetInput').value;
+            const plat = document.getElementById('custPlat').options[document.getElementById('custPlat').selectedIndex].text;
+            const qty = document.getElementById('custQty').value;
+            const hrg = document.getElementById('custTotal').innerText;
+            if(!target || !qty) { alert("Isi Target & Jumlah!"); return; }
+            sendToWA({ plat: plat, svc: "Request Custom Amount", qty: qty, target: target, price: hrg });
+        }
+
+        // DATABASE LENGKAP (IG, TIKTOK, FB, YT, TWITTER)
+        const db = {
+            instagram: {
+                name: "Instagram", icon: "fab fa-instagram", visual: "visual-ig",
+                services: {
+                    "Followers Instagram Indonesia (Refill 7 Hari)": [["100 Followers", 5000], ["200 Followers", 10000], ["300 Followers", 15000], ["500 Followers", 25000], ["1.000 Followers", 45000]],
+                    "Followers Instagram Update (High Quality)": [["100 Followers", 4000], ["200 Followers", 8000], ["300 Followers", 12000], ["500 Followers", 20000], ["1.000 Followers (VIP)", 30000]],
+                    "Instagram Video Views (Fast)": [["100.000 View", 4000], ["200.000 View", 8000], ["300.000 View", 12000], ["500.000 View", 20000], ["1.000.000 View (VIP)", 35000]],
+                    "Instagram Likes Bule (No Refill)": [["1.000 Likes", 5000], ["2.000 Likes", 10000], ["3.000 Likes", 15000], ["5.000 Likes", 20000], ["10.000 Likes (VIP)", 35000]],
+                    "Instagram Saves": [["1.000 Save", 3000], ["2.000 Save", 5000], ["10.000 Save (VIP)", 25000]]
+                }
+            },
+            tiktok: {
+                name: "TikTok", icon: "fab fa-tiktok", visual: "visual-tt",
+                services: {
+                    "TikTok Followers Update (High Quality)": [["100 Followers", 3000], ["500 Followers", 15000], ["1.000 Followers (VIP)", 25000]],
+                    "TikTok Likes Indonesia (Refill 30 Hari)": [["100 Likes", 4000], ["500 Likes", 20000], ["1.000 Likes (VIP)", 25000]],
+                    "TikTok Views (Termurah)": [["10.000 View", 3000], ["50.000 View", 10000], ["100.000 View", 15000]],
+                    "TikTok Favorit/Save (High Quality)": [["100 Save", 2000], ["1.000 Save (VIP)", 16500]]
+                }
+            },
+            facebook: {
+                name: "Facebook", icon: "fab fa-facebook-f", visual: "visual-fb",
+                services: {
+                    "Facebook Followers (Refill 30 Hari)": [["100 Subscribe", 10000], ["500 Subscribe", 50000], ["1.000 Subscribe (VIP)", 100000]],
+                    "Facebook Post Likes (Instant)": [["100 Like", 3000], ["1.000 Like (VIP)", 25000]]
+                }
+            },
+            youtube: {
+                name: "YouTube", icon: "fab fa-youtube", visual: "visual-yt",
+                services: {
+                    "YouTube Subscribers (Refill 365 Hari)": [["100 Subscribe", 10000], ["500 Subscribe", 45000], ["1.000 Subscribe", 90000]],
+                    "YouTube Views (Refill Selamanya)": [["1.000 View", 15000], ["3.000 View", 45000]]
+                }
+            },
+            twitter: {
+                name: "Twitter (X)", icon: "fab fa-twitter", visual: "visual-tw",
+                services: {
+                    "Twitter Followers": [["100 Followers", 2000], ["1.000 Followers", 15000]],
+                    "Twitter View Video": [["1.000 View", 3000], ["5.000 View", 10000]]
+                }
+            }
+        };
+
+        const listContainer = document.getElementById('catalogList');
+        Object.keys(db).forEach(key => {
+            const platform = db[key];
+            const card = document.createElement('div');
+            card.className = 'catalog-card';
+            card.innerHTML = `
+                <div class="cat-visual ${platform.visual}"><i class="${platform.icon}"></i></div>
+                <div class="cat-body">
+                    <h2>${platform.name.toUpperCase()}</h2>
+                    <div class="select-group">
+                        <span class="select-label">Layanan</span>
+                        <div class="select-wrapper"><i class="fas fa-star"></i><select id="${key}Svc" onchange="loadPkgs('${key}')"><option value="">-- Pilih --</option>${Object.keys(platform.services).map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
+                    </div>
+                    <div class="select-group">
+                        <span class="select-label">Paket</span>
+                        <div class="select-wrapper"><i class="fas fa-box-open"></i><select id="${key}Pkg" onchange="showPrice('${key}')"><option value="">-- Pilih Paket --</option></select></div>
+                    </div>
+                    <div class="price-tag" id="${key}PriceBox"><span class="amount" id="${key}PriceVal">Rp 0</span></div>
+                    <button class="btn-checkout" onclick="checkout('${key}')"><i class="fab fa-whatsapp"></i> BELI SEKARANG</button>
+                </div>`;
+            listContainer.appendChild(card);
+        });
+
+        function loadPkgs(key) {
+            const svc = document.getElementById(key + 'Svc').value;
+            const pkg = document.getElementById(key + 'Pkg');
+            pkg.innerHTML = '<option value="">-- Pilih Paket --</option>';
+            if (svc) { db[key].services[svc].forEach((p, i) => { let o = document.createElement('option'); o.value = i; o.text = p[0]; pkg.add(o); }); }
+        }
+
+        function showPrice(key) {
+            const svc = document.getElementById(key + 'Svc').value;
+            const idx = document.getElementById(key + 'Pkg').value;
+            const box = document.getElementById(key + 'PriceBox');
+            if (svc && idx !== "") { document.getElementById(key + 'PriceVal').innerText = 'Rp ' + db[key].services[svc][idx][1].toLocaleString('id-ID'); box.style.display = 'block'; } else { box.style.display = 'none'; }
+        }
+
+        function checkout(key) {
+            const target = document.getElementById('targetInput').value;
+            const svc = document.getElementById(key + 'Svc').value;
+            const idx = document.getElementById(key + 'Pkg').value;
+            if (!target) { alert("Isi Target!"); return; }
+            if (!svc || idx === "") { alert("Pilih paket!"); return; }
+            const pkgName = db[key].services[svc][idx][0];
+            const price = 'Rp ' + db[key].services[svc][idx][1].toLocaleString('id-ID');
+            sendToWA({ plat: db[key].name, svc: svc, pkg: pkgName, target: target, price: price });
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMM PRO - Official Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --ig-grad: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            --tt-grad: linear-gradient(45deg, #000000, #25F4EE, #FE2C55);
+            --fb-grad: linear-gradient(45deg, #1877F2, #0056b3);
+            --yt-grad: linear-gradient(45deg, #FF0000, #b20000);
+            --tw-grad: linear-gradient(45deg, #1DA1F2, #000000);
+            --wa-color: #25D366;
+            --bg-body: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg-body); color: #1e293b; padding: 20px 10px 100px; }
+        .container { max-width: 500px; margin: 0 auto; }
+
+        .brand-header { text-align: center; margin-bottom: 25px; }
+        .brand-header h1 { font-weight: 800; font-size: 2.2rem; color: #0f172a; }
+        .brand-header span { color: #dc2743; }
+
+        /* WIDGET KALKULATOR CUSTOM (LAYOUT KECIL) */
+        .custom-widget {
+            background: #0f172a; color: white; padding: 20px; border-radius: 24px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2); margin-bottom: 30px;
+        }
+        .custom-widget h3 { font-size: 0.85rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; text-transform: uppercase; color: #facc15; }
+        .custom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .custom-grid label { display: block; font-size: 0.65rem; color: #94a3b8; margin-bottom: 4px; font-weight: 700; }
+        .custom-grid select, .custom-grid input {
+            width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #334155; 
+            background: #1e293b; color: white; font-size: 0.85rem; outline: none;
+        }
+        .calc-footer { display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; }
+        .calc-total { font-size: 1.3rem; font-weight: 800; color: #4ade80; }
+        .btn-request { background: #25D366; color: white; border: none; padding: 10px 15px; border-radius: 10px; font-weight: 700; font-size: 0.8rem; cursor: pointer; }
+
+        /* TARGET INPUT */
+        .target-box {
+            background: white; padding: 25px; border-radius: 24px;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1); margin-bottom: 30px;
+            border: 1px solid #e2e8f0; text-align: center;
+        }
+        .target-box label { display: block; font-weight: 800; margin-bottom: 12px; font-size: 0.85rem; color: #475569; text-transform: uppercase; }
+        .target-box input {
+            width: 100%; padding: 18px; border: 2px solid #f1f5f9; border-radius: 18px;
+            font-size: 1rem; outline: none; transition: 0.3s; background: #f8fafc; text-align: center;
+        }
+
+        /* KATALOG CARD UTAMA */
+        .catalog-card {
+            background: white; border-radius: 35px; overflow: hidden;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1); margin-bottom: 40px; border: 1px solid #e2e8f0;
+        }
+        .cat-visual { height: 150px; display: flex; align-items: center; justify-content: center; position: relative; }
+        .cat-visual i { font-size: 6rem; color: rgba(255, 255, 255, 0.95); z-index: 2; }
+        .visual-ig { background: var(--ig-grad); }
+        .visual-tt { background: var(--tt-grad); }
+        .visual-fb { background: var(--fb-grad); }
+        .visual-yt { background: var(--yt-grad); }
+        .visual-tw { background: var(--tw-grad); }
+
+        .cat-body { padding: 30px; }
+        .cat-body h2 { text-align: center; font-size: 1.4rem; font-weight: 800; margin-bottom: 25px; color: #0f172a; }
+        .select-group { margin-bottom: 20px; }
+        .select-label { display: block; font-size: 0.75rem; font-weight: 800; color: #94a3b8; margin-bottom: 8px; text-transform: uppercase; }
+        .select-wrapper { position: relative; }
+        .select-wrapper i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #64748b; }
+        
+        select {
+            width: 100%; padding: 16px 16px 16px 50px; border-radius: 18px;
+            border: 2px solid #f1f5f9; background: #fff; font-size: 0.95rem; font-weight: 600; appearance: none;
+        }
+
+        .price-tag { background: #f0fdf4; padding: 22px; border-radius: 20px; text-align: center; border: 1px solid #dcfce7; margin-top: 10px; display: none; }
+        .price-tag .amount { font-size: 2rem; font-weight: 800; color: #166534; }
+        
+        .btn-checkout { background: var(--wa-color); color: white; border: none; padding: 20px; border-radius: 20px; font-weight: 800; width: 100%; margin-top: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="brand-header">
+            <h1>FIQI<span>PEDIA.</span></h1>
+            <p>Pusat Layanan Social Media Terbaik</p>
+        </div>
+
+        <div class="custom-widget">
+            <h3><i class="fas fa-magic"></i> Kalkulator Order Custom</h3>
+            <div class="custom-grid">
+                <div>
+                    <label>LAYANAN</label>
+                    <select id="custPlat" onchange="calcCust()">
+                        <option value="45000">IG Followers Indo</option>
+                        <option value="4000">IG Views Video</option>
+                        <option value="25000">TikTok Followers</option>
+                        <option value="15000">Twitter Followers</option>
+                        <option value="90000">YouTube Subs</option>
+                    </select>
+                </div>
+                <div>
+                    <label>JUMLAH</label>
+                    <input type="number" id="custQty" placeholder="Min. 100" oninput="calcCust()">
+                </div>
+            </div>
+            <div class="calc-footer">
+                <div class="calc-total" id="custTotal">Rp 0</div>
+                <button class="btn-request" onclick="orderCust()"><i class="fab fa-whatsapp"></i> REQUEST</button>
+            </div>
+        </div>
+
+        <div class="target-box">
+            <label><i class="fas fa-link"></i> Link Target / Username</label>
+            <input type="text" id="targetInput" placeholder="Contoh: @username atau link profil">
+        </div>
+
+        <div id="catalogList"></div>
+    </div>
+
+    <script>
+        const adminWA = "628123456789"; 
+
+        // --- FUNGSI PESAN WHATSAPP MENARIK ---
+        function sendToWA(data) {
+            const separator = "───────────────────";
+            const header = "┏━━━━━━━━━━━━━━┓";
+            const footer = "┗━━━━━━━━━━━━━━┛";
+            
+            let message = `🚀 *KONFIRMASI ORDER - SMM PRO*\n${header}\n\n`;
+            
+            message += `🔹 *PLATFORM:* ${data.plat.toUpperCase()}\n`;
+            message += `🔹 *LAYANAN:* ${data.svc}\n`;
+            
+            if (data.pkg) {
+                message += `🔹 *PAKET:* ${data.pkg}\n`;
+            } else if (data.qty) {
+                message += `🔹 *JUMLAH:* ${data.qty}\n`;
+            }
+
+            message += `\n📍 *TARGET:* ${data.target}\n`;
+            message += `${separator}\n`;
+            message += `💰 *TOTAL BAYAR:* *${data.price}*\n`;
+            message += `${separator}\n\n`;
+            message += `💬 _Mohon Admin segera memproses pesanan saya. Terima kasih!_`;
+
+            window.open(`https://wa.me/${adminWA}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // Fungsi Kalkulator
+        function calcCust() {
+            const hrgSeribu = document.getElementById('custPlat').value;
+            const qty = document.getElementById('custQty').value;
+            const res = document.getElementById('custTotal');
+            if(qty > 0) {
+                const tot = Math.ceil((hrgSeribu / 1000) * qty);
+                res.innerText = 'Rp ' + tot.toLocaleString('id-ID');
+            } else { res.innerText = 'Rp 0'; }
+        }
+
+        function orderCust() {
+            const target = document.getElementById('targetInput').value;
+            const plat = document.getElementById('custPlat').options[document.getElementById('custPlat').selectedIndex].text;
+            const qty = document.getElementById('custQty').value;
+            const hrg = document.getElementById('custTotal').innerText;
+            if(!target || !qty) { alert("Isi Target & Jumlah!"); return; }
+            sendToWA({ plat: plat, svc: "Request Custom Amount", qty: qty, target: target, price: hrg });
+        }
+
+        // DATABASE LENGKAP (IG, TIKTOK, FB, YT, TWITTER)
+        const db = {
+            instagram: {
+                name: "Instagram", icon: "fab fa-instagram", visual: "visual-ig",
+                services: {
+                    "Followers Instagram Indonesia (Refill 7 Hari)": [["100 Followers", 5000], ["200 Followers", 10000], ["300 Followers", 15000], ["500 Followers", 25000], ["1.000 Followers", 45000]],
+                    "Followers Instagram Update (High Quality)": [["100 Followers", 4000], ["200 Followers", 8000], ["300 Followers", 12000], ["500 Followers", 20000], ["1.000 Followers (VIP)", 30000]],
+                    "Instagram Video Views (Fast)": [["100.000 View", 4000], ["200.000 View", 8000], ["300.000 View", 12000], ["500.000 View", 20000], ["1.000.000 View (VIP)", 35000]],
+                    "Instagram Likes Bule (No Refill)": [["1.000 Likes", 5000], ["2.000 Likes", 10000], ["3.000 Likes", 15000], ["5.000 Likes", 20000], ["10.000 Likes (VIP)", 35000]],
+                    "Instagram Saves": [["1.000 Save", 3000], ["2.000 Save", 5000], ["10.000 Save (VIP)", 25000]]
+                }
+            },
+            tiktok: {
+                name: "TikTok", icon: "fab fa-tiktok", visual: "visual-tt",
+                services: {
+                    "TikTok Followers Update (High Quality)": [["100 Followers", 3000], ["500 Followers", 15000], ["1.000 Followers (VIP)", 25000]],
+                    "TikTok Likes Indonesia (Refill 30 Hari)": [["100 Likes", 4000], ["500 Likes", 20000], ["1.000 Likes (VIP)", 25000]],
+                    "TikTok Views (Termurah)": [["10.000 View", 3000], ["50.000 View", 10000], ["100.000 View", 15000]],
+                    "TikTok Favorit/Save (High Quality)": [["100 Save", 2000], ["1.000 Save (VIP)", 16500]]
+                }
+            },
+            facebook: {
+                name: "Facebook", icon: "fab fa-facebook-f", visual: "visual-fb",
+                services: {
+                    "Facebook Followers (Refill 30 Hari)": [["100 Subscribe", 10000], ["500 Subscribe", 50000], ["1.000 Subscribe (VIP)", 100000]],
+                    "Facebook Post Likes (Instant)": [["100 Like", 3000], ["1.000 Like (VIP)", 25000]]
+                }
+            },
+            youtube: {
+                name: "YouTube", icon: "fab fa-youtube", visual: "visual-yt",
+                services: {
+                    "YouTube Subscribers (Refill 365 Hari)": [["100 Subscribe", 10000], ["500 Subscribe", 45000], ["1.000 Subscribe", 90000]],
+                    "YouTube Views (Refill Selamanya)": [["1.000 View", 15000], ["3.000 View", 45000]]
+                }
+            },
+            twitter: {
+                name: "Twitter (X)", icon: "fab fa-twitter", visual: "visual-tw",
+                services: {
+                    "Twitter Followers": [["100 Followers", 2000], ["1.000 Followers", 15000]],
+                    "Twitter View Video": [["1.000 View", 3000], ["5.000 View", 10000]]
+                }
+            }
+        };
+
+        const listContainer = document.getElementById('catalogList');
+        Object.keys(db).forEach(key => {
+            const platform = db[key];
+            const card = document.createElement('div');
+            card.className = 'catalog-card';
+            card.innerHTML = `
+                <div class="cat-visual ${platform.visual}"><i class="${platform.icon}"></i></div>
+                <div class="cat-body">
+                    <h2>${platform.name.toUpperCase()}</h2>
+                    <div class="select-group">
+                        <span class="select-label">Layanan</span>
+                        <div class="select-wrapper"><i class="fas fa-star"></i><select id="${key}Svc" onchange="loadPkgs('${key}')"><option value="">-- Pilih --</option>${Object.keys(platform.services).map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
+                    </div>
+                    <div class="select-group">
+                        <span class="select-label">Paket</span>
+                        <div class="select-wrapper"><i class="fas fa-box-open"></i><select id="${key}Pkg" onchange="showPrice('${key}')"><option value="">-- Pilih Paket --</option></select></div>
+                    </div>
+                    <div class="price-tag" id="${key}PriceBox"><span class="amount" id="${key}PriceVal">Rp 0</span></div>
+                    <button class="btn-checkout" onclick="checkout('${key}')"><i class="fab fa-whatsapp"></i> BELI SEKARANG</button>
+                </div>`;
+            listContainer.appendChild(card);
+        });
+
+        function loadPkgs(key) {
+            const svc = document.getElementById(key + 'Svc').value;
+            const pkg = document.getElementById(key + 'Pkg');
+            pkg.innerHTML = '<option value="">-- Pilih Paket --</option>';
+            if (svc) { db[key].services[svc].forEach((p, i) => { let o = document.createElement('option'); o.value = i; o.text = p[0]; pkg.add(o); }); }
+        }
+
+        function showPrice(key) {
+            const svc = document.getElementById(key + 'Svc').value;
+            const idx = document.getElementById(key + 'Pkg').value;
+            const box = document.getElementById(key + 'PriceBox');
+            if (svc && idx !== "") { document.getElementById(key + 'PriceVal').innerText = 'Rp ' + db[key].services[svc][idx][1].toLocaleString('id-ID'); box.style.display = 'block'; } else { box.style.display = 'none'; }
+        }
+
+        function checkout(key) {
+            const target = document.getElementById('targetInput').value;
+            const svc = document.getElementById(key + 'Svc').value;
+            const idx = document.getElementById(key + 'Pkg').value;
+            if (!target) { alert("Isi Target!"); return; }
+            if (!svc || idx === "") { alert("Pilih paket!"); return; }
+            const pkgName = db[key].services[svc][idx][0];
+            const price = 'Rp ' + db[key].services[svc][idx][1].toLocaleString('id-ID');
+            sendToWA({ plat: db[key].name, svc: svc, pkg: pkgName, target: target, price: price });
+        }
+    </script>
+</body>
+</html>
