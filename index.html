@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIQI PEDIA | Digital Store Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="https://files.catbox.moe/6asxwx.png">
+    
+    <style>
+        :root {
+            --primary: #6366f1;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-dark: #1e293b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg); color: var(--text-dark); padding-bottom: 40px; }
+
+        header {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 4rem 1rem 6rem;
+            text-align: center;
+            clip-path: ellipse(150% 100% at 50% 0%);
+        }
+
+        header h1 { font-size: 2.8rem; font-weight: 800; letter-spacing: -1px; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        .search-container {
+            margin: -40px auto 40px;
+            position: relative;
+            max-width: 600px;
+            z-index: 10;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 20px 25px 20px 60px;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 25px;
+            border: 1px solid #edf2f7;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            border-color: var(--primary);
+        }
+
+        .app-icon {
+            width: 55px;
+            height: 55px;
+            background: #f1f5f9;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .card-title { font-weight: 800; font-size: 1.05rem; margin-bottom: 5px; color: #0f172a; height: 2.8rem; display: flex; align-items: center; }
+        .price { font-size: 1.4rem; font-weight: 800; color: var(--primary); margin-bottom: 12px; }
+
+        .badge-stock {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-weight: 700;
+        }
+
+        .instock { background: #dcfce7; color: #166534; }
+        .outstock { background: #fee2e2; color: #991b1b; }
+
+        .desc { font-size: 0.8rem; color: #64748b; margin-bottom: 15px; flex-grow: 1; line-height: 1.4; }
+
+        .buy-btn {
+            background: #0f172a;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            padding: 12px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+
+        .buy-btn:hover { background: var(--primary); transform: scale(1.02); }
+        .buy-btn.disabled { background: #e2e8f0; color: #94a3b8; pointer-events: none; }
+
+        .admin-note {
+            background: #fff;
+            margin-top: 40px;
+            padding: 25px;
+            border-radius: 20px;
+            border-left: 5px solid #ef4444;
+        }
+
+        footer { text-align: center; padding: 40px 0; color: #94a3b8; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>FIQI PEDIA</h1>
+        <p>Toko Layanan Digital Terpercaya</p>
+    </div>
+</header>
+
+<div class="container">
+    <div class="search-container">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Cari Netflix, Youtube, Canva..." oninput="search()">
+    </div>
+
+    <div class="product-grid" id="productGrid"></div>
+
+    <div class="admin-note">
+        <h3><i class="fas fa-info-circle"></i> Catatan Admin</h3>
+        <p>WhatsApp: <strong>087715125270</strong></p>
+        <p style="color: #ef4444; font-size: 0.85rem; margin-top: 10px; font-weight: 600;">Note : Harga belum update ke yang terbaru, silahkan tanya terlebih dahulu</p>
+    </div>
+</div>
+
+<footer>&copy; 2026 FIQI PEDIA</footer>
+
+<script>
+    const products = [
+        { name: "Alight Motion - Andro 1Th", code: "amndro", price: "5.000", stock: 22, desc: "Private Account", icon: "fa-video", color: "#6366f1" },
+        { name: "Bstation - Sharing 1Bln", code: "bst1b", price: "8.000", stock: 0, desc: "Sharing Account", icon: "fa-play-circle", color: "#fb7299" },
+        { name: "Canva - Edu Lifetime", code: "canedu", price: "4.500", stock: 1, desc: "Non Garansi", icon: "fa-palette", color: "#00c4cc" },
+        { name: "Canva - Owner Pro 1Bln", code: "canhead", price: "7.000", stock: 4, desc: "Invite 100 Member", icon: "fa-crown", color: "#00c4cc" },
+        { name: "Canva - Pro Member 1Bln", code: "canpro1b", price: "1.000", stock: 59, desc: "Join Via Link", icon: "fa-user-plus", color: "#00c4cc" },
+        { name: "CapCut Pro - 28 Hari", code: "cc28d", price: "6.500", stock: 8, desc: "Private Account", icon: "fa-scissors", color: "#000000" },
+        { name: "CapCut Pro - 35 Hari", code: "cc35d", price: "8.500", stock: 6, desc: "Private Account", icon: "fa-scissors", color: "#000000" },
+        { name: "CapCut Pro - 7 Hari", code: "cc7d", price: "2.000", stock: 3, desc: "Private Account", icon: "fa-scissors", color: "#000000" },
+        { name: "Chat GPT - Bussines 1Bln", code: "gpteam", price: "15.000", stock: 2, desc: "No Garansi, Private", icon: "fa-robot", color: "#10a37f" },
+        { name: "Chat GPT - Plus 1Bln", code: "gptplus", price: "10.000", stock: 3, desc: "No Garansi, Private", icon: "fa-bolt", color: "#10a37f" },
+        { name: "Dramaboss - Web 1Th", code: "dbosson", price: "20.000", stock: 1, desc: "Nonton Via Website", icon: "fa-film", color: "#f97316" },
+        { name: "Dramabox - 1Bln", code: "dbox", price: "20.000", stock: 2, desc: "Nonton Via Website", icon: "fa-mobile-alt", color: "#f97316" },
+        { name: "Gemini Ai - 1 Tahun", code: "gemstu", price: "25.000", stock: 0, desc: "Private Account", icon: "fa-brain", color: "#4285f4" },
+        { name: "IQIYI - Premium 1Bln", code: "iqprem1b", price: "10.000", stock: 1, desc: "Sharing Account", icon: "fa-play-circle", color: "#00d26a" },
+        { name: "IQIYI - Standart 1Bln", code: "iqstand1b", price: "9.000", stock: 0, desc: "Sharing Account", icon: "fa-play-circle", color: "#00d26a" },
+        { name: "Meitu - 20 Hari", code: "mei20d", price: "15.000", stock: 1, desc: "Garansi Login", icon: "fa-camera-retro", color: "#ff4d8d" },
+        { name: "Netflix - 1P1U 1Bln", code: "net1u1b", price: "36.000", stock: 0, desc: "Sharing 5 Orang", icon: "fa-tv", color: "#e50914" },
+        { name: "Netflix - 1P2U 1Bln", code: "net2u", price: "18.500", stock: 0, desc: "Sharing 10 Orang, No TV", icon: "fa-tv", color: "#e50914" },
+        { name: "Netflix - SEMPRIV 1Bln", code: "netsempriv", price: "37.500", stock: 0, desc: "Sharing 4 Orang", icon: "fa-tv", color: "#e50914" },
+        { name: "Prime Video - 1Bln", code: "prime1b", price: "14.000", stock: 0, desc: "Garansi Login", icon: "fa-amazon", color: "#00a8e1" },
+        { name: "Reelshort - 1Bln", code: "reelshort", price: "20.000", stock: 3, desc: "Nonton di APK", icon: "fa-clapperboard", color: "#f43f5e" },
+        { name: "SCRIBD - Premium 1Bln", code: "scrprem1b", price: "8.000", stock: 1, desc: "Paket Premium", icon: "fa-book", color: "#1a7b85" },
+        { name: "Spotify - Premium 3Bln", code: "spo3b", price: "20.000", stock: 1, desc: "Tanpa Garansi", icon: "fa-spotify", color: "#1db954" },
+        { name: "Spotify - Student 1Bln", code: "spostu", price: "7.500", stock: 0, desc: "No Garansi", icon: "fa-spotify", color: "#1db954" },
+        { name: "Testing Bot", code: "testing", price: "150", stock: 61, desc: "Jangan Dibeli!", icon: "fa-terminal", color: "#64748b" },
+        { name: "Vidio Plat - Mobile 1B", code: "vidplatm", price: "23.000", stock: 0, desc: "Only Mobile/Tab", icon: "fa-play", color: "#e91e63" },
+        { name: "Vidio Plat - Stream TV", code: "vidtv", price: "5.000", stock: 1, desc: "Private, Garansi 1B", icon: "fa-desktop", color: "#e91e63" },
+        { name: "Viu Premium - 1Bln", code: "viu1b", price: "1.000", stock: 13, desc: "Private Account", icon: "fa-star", color: "#ffc107" },
+        { name: "Viu Premium - 1 Tahun", code: "viu1t", price: "2.000", stock: 90, desc: "Private Account", icon: "fa-star", color: "#ffc107" },
+        { name: "Viu Premium - 6Bln", code: "viu6b", price: "1.500", stock: 0, desc: "Private Account", icon: "fa-star", color: "#ffc107" },
+        { name: "VPN - Express 1Bln", code: "vexpres", price: "8.000", stock: 0, desc: "Private Account", icon: "fa-shield-alt", color: "#e11d48" },
+        { name: "VPN - HMA 1Bln", code: "vhma", price: "8.000", stock: 1, desc: "Private Account", icon: "fa-shield-alt", color: "#ffc62d" },
+        { name: "Youku - Sharing 1Bln", code: "youk1b", price: "8.000", stock: 1, desc: "Sharing, Login HP!", icon: "fa-play-circle", color: "#2979ff" },
+        { name: "YT Premium - Famhead", code: "ytfam", price: "15.000", stock: 0, desc: "Private Account", icon: "fa-youtube", color: "#ff0000" },
+        { name: "YT Premium - Indplan 3B", code: "ytind3b", price: "25.000", stock: 0, desc: "Garansi backfree 1B", icon: "fa-youtube", color: "#ff0000" },
+        { name: "Zoom - 1Bln", code: "zoom1b", price: "10.000", stock: 0, desc: "Private Account", icon: "fa-video", color: "#2d8cff" },
+        { name: "Zoom - 14 Hari", code: "zoom14d", price: "5.000", stock: 0, desc: "Private Account", icon: "fa-video", color: "#2d8cff" }
+    ];
+
+    function render(list) {
+        const grid = document.getElementById('productGrid');
+        grid.innerHTML = list.map(p => {
+            const isOut = p.stock === 0;
+            const wa = `https://wa.me/6287715125270?text=Order%20${encodeURIComponent(p.name)}%20(Kode:%20${p.code})`;
+            return `
+                <div class="card">
+                    <span class="badge-stock ${isOut ? 'outstock' : 'instock'}">
+                        ${isOut ? 'Stok Habis' : 'Stok: ' + p.stock}
+                    </span>
+                    <div class="app-icon" style="color: ${p.color}">
+                        <i class="fas ${p.icon}"></i>
+                    </div>
+                    <div class="card-title">${p.name}</div>
+                    <div class="price">Rp ${p.price}</div>
+                    <div class="desc">${p.desc}</div>
+                    <a href="${isOut ? '#' : wa}" class="buy-btn ${isOut ? 'disabled' : ''}">
+                        <i class="fab fa-whatsapp"></i> ${isOut ? 'Sold Out' : 'Beli Sekarang'}
+                    </a>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function search() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = products.filter(p => p.name.toLowerCase().includes(query) || p.code.toLowerCase().includes(query));
+        render(filtered);
+    }
+
+    render(products);
+</script>
+
+</body>
+</html>
