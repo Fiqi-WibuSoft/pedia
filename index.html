@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIQI PEDIA | Official Digital Store Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-deep: #05070a;
+            --gold-primary: #c5a059;
+            --gold-secondary: #8e6d2f;
+            --text-light: #e2e8f0;
+        }
+
+        body { 
+        
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--bg-deep); 
+            color: var(--text-light); 
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, .logo { font-family: 'Marcellus', serif; }
+
+        .glass-nav {
+            background: rgba(5, 7, 10, 0.9);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+        }
+
+        .premium-card {
+            background: linear-gradient(145deg, #0a0d14 0%, #111827 100%);
+            border: 1px solid rgba(197, 160, 89, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+        }
+
+        .premium-card:hover {
+            border-color: var(--gold-primary);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(197, 160, 89, 0.1);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-secondary) 100%);
+            color: #000;
+            transition: all 0.3s ease;
+        }
+
+        .btn-gold:hover:not(:disabled) {
+            filter: brightness(1.2);
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
+            transform: scale(1.02);
+        }
+
+        .tab-active {
+            background: var(--gold-primary) !important;
+            color: #000 !important;
+            font-weight: 800;
+        }
+
+        .gold-text {
+            background: linear-gradient(135deg, #c5a059 0%, #8e6d2f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+
+    <div class="bg-[#c5a059] py-1.5 text-center">
+        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-black">Update Harga Terkini: 27 April 2026</p>
+    </div>
+
+    <nav class="sticky top-0 z-50 glass-nav px-6 md:px-16 py-5 flex justify-between items-center">
+        <div class="text-3xl font-bold tracking-widest gold-text">FIQI PEDIA</div>
+        <div class="hidden md:flex gap-10 text-[11px] font-bold uppercase tracking-widest">
+            <a href="#home" class="hover:text-[#c5a059] transition">Home</a>
+            <a href="#katalog" class="hover:text-[#c5a059] transition">Katalog</a>
+            <a href="#tentang" class="hover:text-[#c5a059] transition">Tentang</a>
+        </div>
+        <a href="https://wa.me/6287715125270" class="btn-gold px-7 py-2.5 rounded-full text-[10px] font-black uppercase tracking-wider shadow-xl">Chat Admin</a>
+    </nav>
+
+    <header id="home" class="relative py-24 md:py-40 px-6 text-center">
+        <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at center, #c5a059 0%, transparent 70%);"></div>
+        <h1 class="text-5xl md:text-8xl font-medium mb-6 reveal active">Elegansi <span class="gold-text">Layanan Digital</span></h1>
+        <p class="text-slate-400 max-w-2xl mx-auto text-sm md:text-lg mb-12 tracking-wide leading-relaxed reveal active">Menyediakan akses premium dan optimasi media sosial dengan standar kualitas tertinggi dan keamanan terjamin.</p>
+        <div class="flex justify-center gap-4 reveal active">
+            <a href="#katalog" class="btn-gold px-10 py-4 rounded-full font-bold text-sm">Pilih Katalog 😮‍💨</a>
+        </div>
+    </header>
+
+    <section class="py-12 px-6 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <div class="premium-card p-8 rounded-2xl text-center reveal">
+            <i class="fas fa-crown gold-text text-3xl mb-4"></i>
+            <h3 class="text-xs font-black uppercase tracking-widest mb-2">Original</h3>
+            <p class="text-[10px] text-slate-500">Kualitas akun premium resmi & legal.</p>
+        </div>
+        <div class="premium-card p-8 rounded-2xl text-center reveal">
+            <i class="fas fa-bolt gold-text text-3xl mb-4"></i>
+            <h3 class="text-xs font-black uppercase tracking-widest mb-2">Instan</h3>
+            <p class="text-[10px] text-slate-500">Proses kilat tanpa hambatan.</p>
+        </div>
+        <div class="premium-card p-8 rounded-2xl text-center reveal">
+            <i class="fas fa-shield-halved gold-text text-3xl mb-4"></i>
+            <h3 class="text-xs font-black uppercase tracking-widest mb-2">Terjamin</h3>
+            <p class="text-[10px] text-slate-500">Dukungan garansi purna jual penuh.</p>
+        </div>
+        <div class="premium-card p-8 rounded-2xl text-center reveal">
+            <i class="fas fa-gem gold-text text-3xl mb-4"></i>
+            <h3 class="text-xs font-black uppercase tracking-widest mb-2">Terbaik</h3>
+            <p class="text-[10px] text-slate-500">Harga kompetitif di pasar digital.</p>
+        </div>
+    </section>
+
+    <section id="katalog" class="py-20 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16 reveal">
+            <h2 class="text-4xl font-medium mb-4">Katalog <span class="gold-text">Eksklusif</span></h2>
+            <div class="w-24 h-1 bg-[#c5a059] mx-auto"></div>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-3 mb-16 reveal">
+            <button onclick="renderKatalog('premium')" id="btn-premium" class="tab-btn tab-active bg-[#111827] border border-[#c5a059]/20 px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all">Aplikasi Premium</button>
+            <button onclick="renderKatalog('ig')" id="btn-ig" class="tab-btn bg-[#111827] border border-[#c5a059]/20 px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all">Instagram Booster</button>
+            <button onclick="renderKatalog('tt')" id="btn-tt" class="tab-btn bg-[#111827] border border-[#c5a059]/20 px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all">TikTok Booster</button>
+        </div>
+
+        <div id="produk-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+    </section>
+
+    <section id="tentang" class="py-32 bg-[#0a0d14] px-6 border-y border-[#c5a059]/10">
+        <div class="max-w-4xl mx-auto text-center reveal">
+            <h2 class="text-3xl font-medium mb-10 gold-text uppercase tracking-widest">Tentang FIQI PEDIA</h2>
+            <p class="text-slate-400 leading-[2] text-sm md:text-base italic">"Menghadirkan kemewahan akses digital tanpa batas. Kami percaya bahwa teknologi premium harus dapat dinikmati oleh semua orang dengan rasa aman dan kualitas yang tak tertandingi."</p>
+        </div>
+    </section>
+
+    <footer class="py-16 px-6 text-center">
+        <div class="text-4xl font-bold gold-text mb-8">FIQI PEDIA</div>
+        <div class="flex justify-center gap-8 mb-10 opacity-60">
+            <a href="https://wa.me/6287715125270" class="hover:text-[#c5a059]"><i class="fab fa-whatsapp text-2xl"></i></a>
+            <a href="https://instagram.com/queensha_2kg" class="hover:text-[#c5a059]"><i class="fab fa-instagram text-2xl"></i></a>
+            <a href="syahdev.suport@gmail.com" class="hover:text-[#c5a059]"><i class="fas fa-envelope text-2xl"></i></a>
+        </div>
+        <p class="text-[9px] uppercase tracking-[0.4em] text-slate-600">&copy; 2026 FIQI PEDIA - Premium Digital Excellence</p>
+    </footer>
+
+    <script>
+        /* =========================================
+           DATABASE PRODUK FIQI PEDIA 
+           Edit bagian ini untuk update produk/stok
+           =========================================
+        */
+        const DATABASE_PRODUK = {
+            premium: [
+                { name: "Alight Motion - 1 Tahun", price: "Rp 10.000", stock: 6, desc: "Private - Android Only", wa: "6287715125270" },
+                { name: "Bstation - 1 Bulan", price: "Rp 10.000", stock: 1, desc: "Full Garansi - Sharing", wa: "6287715125270" },
+                { name: "Canva Pro Member 1 Bulan", price: "Rp 3.000", stock: 18, desc: "Private - Join Via Link", wa: "6287715125270" },
+                { name: "Canva Owner Pro 1 Bulan", price: "Rp 10.000", stock: 0, desc: "Private Account", wa: "6287715125270" },
+                { name: "CapCut Team Pro 7 Hari", price: "Rp 5.000", stock: 0, desc: "Private", wa: "6287715125270" },
+                { name: "CapCut Team 35 Hari", price: "Rp 10.000", stock: 4, desc: "Private - No Garansi", wa: "6287715125270" },
+                { name: "Chat GPT Plus 1 Bulan", price: "Rp 15.000", stock: 4, desc: "Private - No Garansi", wa: "6287715125270" },
+                { name: "Dramabox 1 Bulan", price: "Rp 20.000", stock: 6, desc: "Drama China - Via Web", wa: "6287715125270" },
+                { name: "FlickReels 1 Bulan", price: "Rp 20.000", stock: 2, desc: "Drama China - Via Web", wa: "6287715125270" },
+                { name: "GoodShort 1 Bulan", price: "Rp 20.000", stock: 4, desc: "Drama China - Via Web", wa: "6287715125270" },
+                { name: "Melolo 1 Bulan", price: "Rp 20.000", stock: 5, desc: "Drama China - Via Web", wa: "6287715125270" },
+                { name: "Dramawave 1 Bulan", price: "Rp 20.000", stock: 4, desc: "Drama China - Via Web", wa: "6287715125270" },
+                { name: "ReelShort 1 Bulan", price: "Rp 20.000", stock: 3, desc: "Drama China - Via Web", wa: "6287715125270" },
+                { name: "iQIYI Premium 1 Bulan", price: "Rp 12.000", stock: 1, desc: "Premium Account", wa: "6287715125270" },
+                { name: "iQIYI Standard 1 Bulan", price: "Rp 10.000", stock: 1, desc: "Standard Account", wa: "6287715125270" },
+                { name: "Microsoft 365 Famhead", price: "Rp 25.000", stock: 1, desc: "Private 1 Bulan", wa: "6287715125270" },
+                { name: "Netflix 1P1U 1 Bulan", price: "Rp 40.000", stock: 3, desc: "Full Garansi - Ask Admin", wa: "6287715125270" },
+                { name: "Prime Video 1 Bulan", price: "Rp 17.000", stock: 1, desc: "Non Garansi", wa: "6287715125270" },
+                { name: "Vidio Platinum Mobile", price: "Rp 26.000", stock: 1, desc: "Plan Platinum 1 Bulan", wa: "6287715125270" },
+                { name: "Vidio Stream TV", price: "Rp 10.000", stock: 4, desc: "Plan Platinum", wa: "6287715125270" },
+                { name: "Viu Platinum 1 Tahun", price: "Rp 5.000", stock: 31, desc: "Only Indonesia", wa: "6287715125270" }
+            ],
+            ig: [
+                { name: "IG Followers FP 14 [Real]", price: "1000 Foll - Rp 25.000", stock: 999, desc: "Speed 100K/Day | No Refill", wa: "6285199127603" },
+                { name: "IG Followers Indonesia", price: "1000 Foll - Rp 45.000", stock: 10, desc: "Profile Account | Low Drop", wa: "6285199127603" },
+                { name: "Instagram Likes Bot", price: "1000 Likes - Rp 10.000", stock: 500, desc: "Instant Delivery", wa: "6285199127603" }
+            ],
+            tt: [
+                { name: "TikTok Followers FP 56", price: "1000 Foll - Rp 35.000", stock: 50, desc: "High Speed Delivery", wa: "6285199127603" }
+            ]
+        };
+
+        // Fungsi Render Katalog Otomatis
+        function renderKatalog(kategori) {
+            const container = document.getElementById('produk-container');
+            const products = DATABASE_PRODUK[kategori];
+            
+            // Update Tab Active
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('tab-active'));
+            document.getElementById('btn-' + kategori).classList.add('tab-active');
+
+            container.innerHTML = ''; // Clear container
+
+            products.forEach(item => {
+                const isOut = item.stock <= 0;
+                const card = document.createElement('div');
+                card.className = 'premium-card p-8 rounded-[2.5rem] flex flex-col reveal active';
+                
+                card.innerHTML = `
+                    <div class="flex-grow">
+                        <span class="text-[9px] font-black ${isOut ? 'bg-red-600' : 'bg-[#c5a059]'} text-black px-3 py-1 rounded-full w-fit mb-6 block uppercase">
+                            ${isOut ? 'Sold Out' : 'Available'}
+                        </span>
+                        <h3 class="text-xl font-bold mb-1 italic">${item.name}</h3>
+                        <p class="text-[10px] text-slate-500 mb-4 uppercase tracking-widest">${item.desc}</p>
+                        <p class="text-[10px] font-black ${isOut ? 'text-red-500' : 'text-[#c5a059]'}">STOCK: ${item.stock}</p>
+                    </div>
+                    <div class="mt-10">
+                        <p class="text-2xl font-bold mb-6 gold-text">${item.price}</p>
+                        <button onclick="order('${item.wa}', '${item.name}')" ${isOut ? 'disabled' : ''} 
+                            class="btn-gold w-full py-4 rounded-2xl font-black text-xs uppercase tracking-widest ${isOut ? 'opacity-20 grayscale cursor-not-allowed' : ''}">
+                            ${isOut ? 'Habis Terjual' : 'Dapatkan Sekarang'}
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Fungsi WhatsApp Link
+        function order(wa, name) {
+            const text = `Halo FIQI PEDIA, saya ingin memesan layanan eksklusif: *${name}*`;
+            window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        // Animasi Scroll
+        function reveal() {
+            document.querySelectorAll(".reveal").forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add("active");
+            });
+        }
+
+        window.onload = () => {
+            renderKatalog('premium'); // Load default
+            reveal();
+        };
+
+        window.addEventListener("scroll", reveal);
+    </script>
+</body>
+</html>
